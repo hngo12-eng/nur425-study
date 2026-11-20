@@ -192,6 +192,15 @@ html,body{min-height:100%;background:var(--bg);font-family:'Inter',system-ui,san
 .exploding .gauge-outer{animation:explode .7s ease}
 #flash-overlay{position:fixed;inset:0;background:white;pointer-events:none;opacity:0;z-index:999}
 
+/* ── SATA / CHAIN ─────────────────────────────────────────────────── */
+.sata-instr{text-align:center;font-size:9px;font-weight:900;letter-spacing:4px;color:var(--cyan);border:1px solid rgba(34,211,238,.3);border-radius:6px;padding:5px 12px;margin-bottom:12px;display:none}
+.sata-instr.show{display:block}
+.chain-scenario{background:rgba(124,58,237,.07);border:1px solid rgba(124,58,237,.3);border-radius:12px;padding:14px 15px;margin-bottom:14px;display:none}
+.chain-scenario.show{display:block}
+.chain-label{font-size:9px;font-weight:800;letter-spacing:3px;text-transform:uppercase;color:var(--p-mid);margin-bottom:8px}
+.chain-text{font-size:13px;line-height:1.75;color:var(--dim)}
+.opt.sata-sel{border-color:var(--cyan);background:rgba(34,211,238,.08)}
+
 /* scrollbar */
 ::-webkit-scrollbar{width:4px}
 ::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
@@ -268,6 +277,13 @@ html,body{min-height:100%;background:var(--bg);font-family:'Inter',system-ui,san
   <div class="battle-label">
     <div class="battle-title">Psychic Battle — Encounter</div>
   </div>
+
+  <div class="chain-scenario" id="chain-scenario">
+    <div class="chain-label">◈ Patient Scenario</div>
+    <div class="chain-text" id="chain-text"></div>
+  </div>
+
+  <div class="sata-instr" id="sata-instr">Select all that apply</div>
 
   <div class="qcard">
     <div class="q-concept-tag" id="q-concept"></div>
@@ -360,7 +376,7 @@ const REIGEN_QUOTES = {
 };
 
 // ═══ STATE ════════════════════════════════════════════════════════════════════
-let CUR_MOD = null, CUR_QS = [], CUR_IDX = 0, SEL_OPT = null, ANSWERED = false, RESULTS = [];
+let CUR_MOD = null, CUR_QS = [], CUR_IDX = 0, SEL_OPTS = new Set(), ANSWERED = false, RESULTS = [];
 
 // ═══ STORAGE ══════════════════════════════════════════════════════════════════
 const store = () => { try{return JSON.parse(localStorage.getItem("mob_v2")||"{}")}catch{return{}} };
@@ -473,11 +489,21 @@ function startModule(key) {
 
 function loadQ(i) {
   const q = CUR_QS[i];
-  SEL_OPT = null; ANSWERED = false;
+  SEL_OPTS = new Set(); ANSWERED = false;
   document.getElementById("q-concept").textContent = q.concept;
   document.getElementById("q-stem").textContent = q.stem;
   document.getElementById("enc-counter").textContent = `${i+1}/${CUR_QS.length}`;
   document.getElementById("drill-pbar").style.width = (i/CUR_QS.length*100)+"%";
+
+  const chainEl = document.getElementById("chain-scenario");
+  const chainText = document.getElementById("chain-text");
+  if (q.type === "CHAIN" && q.chain_scenario) {
+    chainText.textContent = q.chain_scenario;
+    chainEl.className = "chain-scenario show";
+  } else {
+    chainEl.className = "chain-scenario";
+  }
+  document.getElementById("sata-instr").className = q.type === "SATA" ? "sata-instr show" : "sata-instr";
 
   const opts = document.getElementById("options");
   opts.innerHTML = "";
@@ -497,24 +523,44 @@ function loadQ(i) {
 
 function selectOpt(btn, idx) {
   if (ANSWERED) return;
-  document.querySelectorAll(".opt").forEach(b=>b.classList.remove("sel"));
-  btn.classList.add("sel");
-  SEL_OPT = idx;
-  document.getElementById("action-btn").disabled = false;
+  const q = CUR_QS[CUR_IDX];
+  if (q.type === "SATA") {
+    if (SEL_OPTS.has(idx)) {
+      SEL_OPTS.delete(idx);
+      btn.classList.remove("sata-sel");
+    } else {
+      SEL_OPTS.add(idx);
+      btn.classList.add("sata-sel");
+    }
+    document.getElementById("action-btn").disabled = SEL_OPTS.size === 0;
+  } else {
+    document.querySelectorAll(".opt").forEach(b=>b.classList.remove("sel"));
+    btn.classList.add("sel");
+    SEL_OPTS = new Set([idx]);
+    document.getElementById("action-btn").disabled = false;
+  }
 }
 
 function submitAnswer() {
-  if (SEL_OPT===null||ANSWERED) return;
+  if (SEL_OPTS.size===0||ANSWERED) return;
   ANSWERED = true;
   const q = CUR_QS[CUR_IDX];
-  const letter = String.fromCharCode(65+SEL_OPT);
-  const isCorrect = q.correct.includes(letter);
+
+  let isCorrect;
+  if (q.type === "SATA") {
+    const correctSet = new Set(q.correct);
+    const selectedLetters = new Set([...SEL_OPTS].map(i=>String.fromCharCode(65+i)));
+    isCorrect = correctSet.size===selectedLetters.size && [...correctSet].every(l=>selectedLetters.has(l));
+  } else {
+    const letter = String.fromCharCode(65+[...SEL_OPTS][0]);
+    isCorrect = q.correct.includes(letter);
+  }
 
   document.querySelectorAll(".opt").forEach((b,idx) => {
     b.disabled = true;
     const l = String.fromCharCode(65+idx);
     if (q.correct.includes(l)) b.classList.add("correct-ans");
-    else if (idx===SEL_OPT&&!isCorrect) b.classList.add("wrong-ans");
+    else if (SEL_OPTS.has(idx)&&!q.correct.includes(l)) b.classList.add("wrong-ans");
   });
 
   const banner = document.getElementById("result-banner");
@@ -525,7 +571,7 @@ function submitAnswer() {
   document.getElementById("trap-text").textContent = q.trap;
   document.getElementById("intel-box").className = "intel-box show";
 
-  RESULTS.push({id:q.id, concept:q.concept, correct:isCorrect, letter});
+  RESULTS.push({id:q.id, concept:q.concept, correct:isCorrect, type:q.type||"MCQ"});
 
   const ab = document.getElementById("action-btn");
   if (CUR_IDX+1 < CUR_QS.length) {
