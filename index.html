@@ -1,699 +1,595 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-theme="night">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 <title>NUR425 — Peds Final Prep</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
 <style>
-:root {
-  --bg:             #0d0f18;
-  --surface:        #151826;
-  --card:           #1c2035;
-  --elevated:       #232740;
-  --border:         rgba(255,255,255,0.07);
-  --border-mid:     rgba(255,255,255,0.13);
-  --accent:         #818cf8;
-  --accent-mid:     #a5b4fc;
-  --accent-light:   #c7d2fe;
-  --accent-bg:      rgba(129,140,248,0.09);
-  --accent-border:  rgba(129,140,248,0.35);
-  --correct:        #22c55e;
-  --correct-bg:     rgba(34,197,94,0.09);
-  --correct-border: rgba(34,197,94,0.4);
-  --wrong:          #ef4444;
-  --wrong-bg:       rgba(239,68,68,0.09);
-  --wrong-border:   rgba(239,68,68,0.4);
-  --warn:           #f59e0b;
-  --text:           #f1f5f9;
-  --dim:            #94a3b8;
-  --muted:          #475569;
-  /* back-compat aliases used in JS */
-  --purple:         #818cf8;
-  --p-mid:          #a5b4fc;
-  --p-light:        #c7d2fe;
-  --cyan:           #67e8f9;
-}
-
-*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
-html,body{min-height:100%;background:var(--bg);font-family:'Inter',system-ui,sans-serif;color:var(--text);overscroll-behavior:none}
-
-.screen{display:none;min-height:100vh}
-.screen.active{display:block}
-
-/* ══════════════════════════════════════════════════════════════
-   HOME
-══════════════════════════════════════════════════════════════ */
-#screen-home{padding:0 0 64px}
-
-.id-bar{padding:24px 20px 0;display:flex;align-items:flex-start;gap:14px}
-.mob-avatar{width:46px;height:46px;border-radius:12px;background:linear-gradient(135deg,#7c3aed,#4f46e5);display:flex;align-items:center;justify-content:center;font-size:22px;flex-shrink:0;box-shadow:0 4px 16px rgba(124,58,237,0.3)}
-.id-info{}
-.id-name{font-family:'Bebas Neue',sans-serif;font-size:26px;letter-spacing:2px;line-height:1}
-.id-role{font-size:11px;color:var(--dim);margin-top:3px;font-weight:500}
-.id-exam{font-size:11px;color:var(--warn);font-weight:600;margin-top:5px;letter-spacing:0.3px}
+body { font-family: 'Inter', system-ui, sans-serif; }
+.bebas { font-family: 'Bebas Neue', sans-serif; }
+.screen { display: none; }
+.screen.active { display: block; }
 
 /* Gauge */
-.gauge-section{padding:28px 20px 0;display:flex;flex-direction:column;align-items:center}
-.gauge-outer{position:relative;width:188px;height:188px}
-.gauge-svg{width:188px;height:188px;transform:rotate(-90deg)}
-.g-track{fill:none;stroke:var(--elevated);stroke-width:7}
-.g-fill{fill:none;stroke:url(#gGrad);stroke-width:7;stroke-linecap:round;stroke-dasharray:534;stroke-dashoffset:534;transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1)}
-.g-glow{fill:none;stroke:url(#gGrad);stroke-width:14;stroke-linecap:round;stroke-dasharray:534;stroke-dashoffset:534;opacity:0;filter:blur(8px);transition:stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1),opacity .5s}
-.gauge-inner{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.gauge-num{font-family:'Bebas Neue',sans-serif;font-size:62px;line-height:1;color:var(--text);transition:color .4s}
-.gauge-num.at100{color:var(--cyan);text-shadow:0 0 28px var(--cyan)}
-.emotion-label{font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-top:3px;font-weight:600}
-.emotion-value{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--accent-mid);font-weight:700;margin-top:2px;min-height:16px;transition:color .4s}
+.gauge-outer { position: relative; width: 180px; height: 180px; }
+.gauge-svg { width: 180px; height: 180px; transform: rotate(-90deg); }
+.g-track { fill: none; stroke: oklch(var(--b3)); stroke-width: 7; }
+.g-fill { fill: none; stroke: url(#gGrad); stroke-width: 7; stroke-linecap: round; stroke-dasharray: 534; stroke-dashoffset: 534; transition: stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1); }
+.g-glow { fill: none; stroke: url(#gGrad); stroke-width: 14; stroke-linecap: round; stroke-dasharray: 534; stroke-dashoffset: 534; opacity: 0; filter: blur(8px); transition: stroke-dashoffset 1.2s cubic-bezier(.4,0,.2,1), opacity .5s; }
+.gauge-inner { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+.gauge-num { font-family: 'Bebas Neue', sans-serif; font-size: 60px; line-height: 1; transition: color .4s; }
+.at100 { color: #67e8f9; text-shadow: 0 0 24px #67e8f9; }
 
-.streak-row{display:flex;align-items:center;justify-content:center;gap:10px;margin-top:16px}
-.streak-pill{background:var(--card);border:1px solid var(--border-mid);border-radius:20px;padding:6px 18px;font-size:12px;font-weight:600;color:var(--dim)}
+/* Score colors */
+.score-perfect { color: #67e8f9; text-shadow: 0 0 24px rgba(103,232,249,.5); }
+.score-good    { color: oklch(var(--su)); }
+.score-avg     { color: oklch(var(--wa)); }
+.score-low     { color: oklch(var(--er)); }
 
-/* Module grid */
-.incidents-header{padding:28px 20px 10px;display:flex;align-items:flex-end;justify-content:space-between}
-.incidents-title{font-size:13px;font-weight:700;color:var(--text);letter-spacing:0.3px}
-.incidents-sub{font-size:11px;color:var(--muted);margin-top:2px}
+/* UWorld-style option buttons */
+.opt {
+  display: flex; align-items: flex-start; gap: 12px;
+  width: 100%; padding: 12px 14px;
+  background: oklch(var(--b2));
+  border: 1.5px solid oklch(var(--b3));
+  border-radius: 10px;
+  cursor: pointer; text-align: left;
+  font-family: 'Inter', sans-serif;
+  transition: border-color .12s, background .12s;
+}
+.opt:active { background: oklch(var(--b3)); }
+.opt-letter {
+  flex-shrink: 0; width: 28px; height: 28px; border-radius: 50%;
+  border: 1.5px solid oklch(var(--bc)/0.18);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px; font-weight: 700; color: oklch(var(--bc)/0.45);
+  transition: all .12s; margin-top: 1px;
+}
+.opt-text { font-size: 14px; color: oklch(var(--bc)); line-height: 1.65; padding-top: 3px; flex: 1; }
+.opt.sel, .opt.sata-sel { border-color: oklch(var(--p)/0.5); background: oklch(var(--p)/0.1); }
+.opt.sel .opt-letter, .opt.sata-sel .opt-letter { background: oklch(var(--p)); border-color: oklch(var(--p)); color: white; }
+.opt.correct-ans { border-color: oklch(var(--su)/0.5); background: oklch(var(--su)/0.1); }
+.opt.correct-ans .opt-letter { background: oklch(var(--su)); border-color: oklch(var(--su)); color: white; }
+.opt.correct-ans .opt-text { color: oklch(var(--su)); }
+.opt.wrong-ans { border-color: oklch(var(--er)/0.5); background: oklch(var(--er)/0.1); }
+.opt.wrong-ans .opt-letter { background: oklch(var(--er)); border-color: oklch(var(--er)); color: white; }
+.opt.wrong-ans .opt-text { color: oklch(var(--er)); }
+.opt:disabled { cursor: default; }
 
-.modules-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;padding:0 20px}
-.mod-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 15px;cursor:pointer;transition:border-color .2s,transform .15s,background .15s}
-.mod-card:active{transform:scale(.97)}
-.mod-card.mastered{border-color:var(--correct-border)}
-.mod-card.active-mod{border-color:var(--accent-border);background:var(--accent-bg)}
-.mod-num{font-family:'Bebas Neue',sans-serif;font-size:30px;line-height:1;color:var(--accent-light);margin-bottom:4px}
-.mod-name{font-size:12px;font-weight:600;color:var(--text);line-height:1.4;margin-bottom:12px}
-.mod-status{font-size:9px;font-weight:700;letter-spacing:1.2px;text-transform:uppercase;margin-bottom:8px}
-.mod-status.dormant{color:var(--muted)}
-.mod-status.active-status{color:var(--accent-mid)}
-.mod-status.mastered-status{color:var(--correct)}
-.power-bar-wrap{background:var(--elevated);border-radius:3px;height:3px}
-.power-bar{background:linear-gradient(90deg,var(--purple),var(--cyan));border-radius:3px;height:3px;width:0%;transition:width .8s cubic-bezier(.4,0,.2,1)}
-.power-stat{font-size:10px;color:var(--muted);margin-top:7px;line-height:1.4}
+/* Action button (JS-controlled classes) */
+.action-btn { width: 100%; padding: 14px; border-radius: 10px; border: none; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity .15s, transform .1s; margin-top: 10px; }
+.action-btn:active { transform: scale(.99); }
+.action-btn.primary { background: oklch(var(--p)); color: oklch(var(--pc)); }
+.action-btn.secondary { background: transparent; color: oklch(var(--p)); border: 1.5px solid oklch(var(--p)/0.4); }
+.action-btn:disabled { opacity: 0.3; cursor: default; transform: none; }
 
-/* ══════════════════════════════════════════════════════════════
-   DRILL
-══════════════════════════════════════════════════════════════ */
-#screen-drill{padding:0 0 80px}
-
-.drill-topbar{display:flex;align-items:center;gap:12px;padding:16px 16px 0}
-.back-btn{width:36px;height:36px;border-radius:10px;background:var(--card);border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;font-size:17px;flex-shrink:0;color:var(--dim);transition:border-color .15s,color .15s;line-height:1}
-.back-btn:active{border-color:var(--accent);color:var(--accent)}
-.drill-mod-name{font-size:12px;font-weight:700;color:var(--dim);flex:1;letter-spacing:0.3px}
-.enc-counter{font-size:12px;font-weight:600;color:var(--muted);white-space:nowrap}
-
-.drill-pbar-wrap{background:var(--elevated);height:2px;margin:14px 0 0}
-.drill-pbar{background:linear-gradient(90deg,var(--purple),var(--accent));height:2px;width:0%;transition:width .4s ease}
-
-.drill-body{padding:18px 16px 0}
+/* Result banner */
+.result-banner { display: flex; align-items: center; gap: 10px; padding: 8px 2px 4px; }
+.result-icon { width: 30px; height: 30px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 800; flex-shrink: 0; }
+.result-banner.win .result-icon { background: oklch(var(--su)/0.1); border: 1.5px solid oklch(var(--su)/0.4); color: oklch(var(--su)); }
+.result-banner.win .result-label { color: oklch(var(--su)); font-weight: 700; font-size: 14px; }
+.result-banner.lose .result-icon { background: oklch(var(--er)/0.1); border: 1.5px solid oklch(var(--er)/0.4); color: oklch(var(--er)); }
+.result-banner.lose .result-label { color: oklch(var(--er)); font-weight: 700; font-size: 14px; }
 
 /* Chain scenario */
-.chain-scenario{background:rgba(99,102,241,0.07);border:1px solid rgba(99,102,241,0.22);border-radius:12px;padding:16px;margin-bottom:14px;display:none}
-.chain-scenario.show{display:block}
-.chain-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--accent-mid);margin-bottom:8px}
-.chain-text{font-size:14px;line-height:1.75;color:var(--dim)}
+.chain-scenario { background: oklch(var(--p)/0.07); border: 1px solid oklch(var(--p)/0.2); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
 
-/* SATA */
-.sata-instr{text-align:center;font-size:10px;font-weight:700;letter-spacing:3px;color:var(--cyan);border:1px solid rgba(103,232,249,0.28);border-radius:8px;padding:7px 14px;margin-bottom:12px;display:none;background:rgba(103,232,249,0.05)}
-.sata-instr.show{display:block}
+/* SM-2 block */
+.sm2-block { font-family: 'SF Mono', 'Fira Code', monospace; font-size: 11px; line-height: 2; white-space: pre-wrap; overflow-x: auto; max-height: 240px; overflow-y: auto; }
 
-/* Question card */
-.qcard{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 18px;margin-bottom:14px}
-.q-concept-tag{display:inline-flex;align-items:center;gap:6px;font-size:10px;font-weight:700;color:var(--accent-mid);letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px;background:var(--accent-bg);padding:4px 10px;border-radius:6px;border:1px solid var(--accent-border)}
-.q-stem{font-size:15px;line-height:1.78;color:var(--text);font-weight:400}
-
-/* Options — UWorld style */
-.options{display:flex;flex-direction:column;gap:9px;margin-bottom:14px}
-.opt{
-  display:flex;align-items:flex-start;gap:13px;
-  width:100%;padding:13px 15px;
-  background:var(--card);border:1.5px solid var(--border);border-radius:11px;
-  cursor:pointer;text-align:left;
-  font-family:'Inter',sans-serif;
-  transition:border-color .12s,background .12s;
-}
-.opt:active{background:var(--elevated)}
-.opt-letter{
-  flex-shrink:0;width:28px;height:28px;border-radius:50%;
-  border:1.5px solid var(--border-mid);
-  display:flex;align-items:center;justify-content:center;
-  font-size:12px;font-weight:700;color:var(--dim);
-  transition:all .12s;margin-top:1px;
-}
-.opt-text{font-size:14.5px;color:var(--text);line-height:1.65;padding-top:3px;flex:1}
-
-/* option states */
-.opt.sel,
-.opt.sata-sel{border-color:var(--accent-border);background:var(--accent-bg)}
-.opt.sel .opt-letter,
-.opt.sata-sel .opt-letter{background:var(--accent);border-color:var(--accent);color:#fff}
-.opt.correct-ans{border-color:var(--correct-border);background:var(--correct-bg)}
-.opt.correct-ans .opt-letter{background:var(--correct);border-color:var(--correct);color:#fff}
-.opt.correct-ans .opt-text{color:var(--correct)}
-.opt.wrong-ans{border-color:var(--wrong-border);background:var(--wrong-bg)}
-.opt.wrong-ans .opt-letter{background:var(--wrong);border-color:var(--wrong);color:#fff}
-.opt.wrong-ans .opt-text{color:var(--wrong)}
-.opt:disabled{cursor:default}
-
-/* Result feedback */
-.result-banner{display:none;align-items:center;gap:10px;padding:8px 2px 4px}
-.result-banner.show{display:flex}
-.result-icon{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;font-weight:800;flex-shrink:0}
-.result-banner.win .result-icon{background:var(--correct-bg);border:1.5px solid var(--correct-border);color:var(--correct)}
-.result-banner.lose .result-icon{background:var(--wrong-bg);border:1.5px solid var(--wrong-border);color:var(--wrong)}
-.result-label{font-size:14px;font-weight:700;letter-spacing:0.3px}
-.result-banner.win .result-label{color:var(--correct)}
-.result-banner.lose .result-label{color:var(--wrong)}
-
-/* Rationale */
-.intel-box{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:18px;margin-top:14px;display:none}
-.intel-box.show{display:block}
-.intel-header{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--dim);margin-bottom:14px;display:flex;align-items:center;gap:8px}
-.intel-header::before{content:'';width:12px;height:2px;background:var(--accent);border-radius:1px;display:inline-block}
-.intel-text{font-size:14px;line-height:1.78;color:var(--dim);margin-bottom:14px}
-.trap-block{background:var(--card);border-left:3px solid var(--wrong);padding:12px 14px;border-radius:0 10px 10px 0}
-.trap-header{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--wrong);display:block;margin-bottom:5px}
-.trap-text{font-size:13px;line-height:1.7;color:#fca5a5}
-
-/* Action button */
-.action-btn{width:100%;padding:15px;border-radius:12px;border:none;font-family:'Inter',sans-serif;font-size:15px;font-weight:700;cursor:pointer;letter-spacing:0.3px;transition:opacity .15s,transform .1s;margin-top:10px}
-.action-btn:active{transform:scale(.99)}
-.action-btn.primary{background:var(--accent);color:#fff;box-shadow:0 4px 16px rgba(129,140,248,0.3)}
-.action-btn.secondary{background:var(--card);color:var(--accent-mid);border:1.5px solid var(--accent-border)}
-.action-btn:disabled{opacity:0.3;cursor:default;box-shadow:none}
-
-/* ══════════════════════════════════════════════════════════════
-   SUMMARY
-══════════════════════════════════════════════════════════════ */
-#screen-summary{padding:28px 20px 72px}
-
-.sum-top{text-align:center;margin-bottom:28px}
-.battle-complete{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
-.sum-score-num{font-family:'Bebas Neue',sans-serif;font-size:84px;line-height:1}
-.score-perfect{color:var(--cyan);text-shadow:0 0 28px rgba(103,232,249,0.5)}
-.score-good{color:var(--correct)}
-.score-avg{color:var(--warn)}
-.score-low{color:var(--wrong)}
-.sum-pct{font-size:14px;color:var(--dim);margin-top:5px;font-weight:400}
-.sum-modname{font-size:11px;color:var(--accent-mid);font-weight:600;letter-spacing:0.5px;margin-top:5px}
-
-.reigen-box{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:14px}
-.reigen-label{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.reigen-quote{font-size:14px;line-height:1.75;color:var(--dim);font-style:italic}
-.reigen-sig{font-size:11px;color:var(--accent-mid);font-weight:600;margin-top:10px}
-
-.sum-section{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:18px;margin-bottom:12px}
-.sum-section-hdr{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
-.sum-row{display:flex;align-items:flex-start;justify-content:space-between;gap:12px;padding:10px 0;border-bottom:1px solid var(--border)}
-.sum-row:last-child{border-bottom:none;padding-bottom:0}
-.sum-concept-name{font-size:13.5px;color:var(--text);flex:1;line-height:1.45}
-.result-pill{font-size:10px;font-weight:700;border-radius:20px;padding:4px 11px;white-space:nowrap;letter-spacing:0.3px}
-.result-pill.win{background:var(--correct-bg);color:var(--correct);border:1px solid var(--correct-border)}
-.result-pill.lose{background:var(--wrong-bg);color:var(--wrong);border:1px solid var(--wrong-border)}
-
-.sm2-block{background:#0a0c14;border:1px solid var(--border);border-radius:10px;padding:16px;font-family:'SF Mono','Fira Code','Courier New',monospace;font-size:11px;line-height:2;color:#64748b;white-space:pre-wrap;overflow-x:auto;max-height:260px;overflow-y:auto}
-.sm2-block .hi{color:var(--accent-mid)}
-.sm2-block .ok{color:var(--correct)}
-.sm2-block .err{color:var(--wrong)}
-
-.btn-row{display:flex;gap:10px;margin-top:12px}
-.btn-sm{flex:1;padding:13px 10px;border-radius:11px;border:none;font-family:'Inter',sans-serif;font-size:13.5px;font-weight:700;cursor:pointer;transition:all .15s}
-.btn-copy{background:var(--accent-bg);color:var(--accent-light);border:1px solid var(--accent-border)}
-.btn-copy.copied{background:var(--correct-bg);color:var(--correct);border-color:var(--correct-border)}
-.btn-home{background:var(--accent);color:white;box-shadow:0 4px 16px rgba(129,140,248,0.25)}
-.btn-retry{background:var(--card);color:var(--dim);border:1px solid var(--border)}
-
-/* ── EXPLOSION ─────────────────────────────────────────────── */
-@keyframes explode{0%{transform:scale(1);filter:brightness(1)}25%{transform:scale(1.08);filter:brightness(2.5)drop-shadow(0 0 24px var(--accent-light))}55%{transform:scale(.97);filter:brightness(1.5)}100%{transform:scale(1);filter:brightness(1)}}
-@keyframes screenFlash{0%,100%{opacity:0}10%,90%{opacity:.08}}
-.exploding .gauge-outer{animation:explode .7s ease}
-#flash-overlay{position:fixed;inset:0;background:white;pointer-events:none;opacity:0;z-index:999}
-
-/* scrollbar */
-::-webkit-scrollbar{width:4px}
-::-webkit-scrollbar-thumb{background:var(--border-mid);border-radius:2px}
+/* Explosion */
+@keyframes explode { 0%{transform:scale(1)} 25%{transform:scale(1.08);filter:brightness(2.5)} 55%{transform:scale(.97)} 100%{transform:scale(1)} }
+@keyframes screenFlash { 0%,100%{opacity:0} 10%,90%{opacity:.08} }
+.exploding .gauge-outer { animation: explode .7s ease; }
+#flash-overlay { position: fixed; inset: 0; background: white; pointer-events: none; opacity: 0; z-index: 999; }
 </style>
 </head>
-<body>
-
+<body class="min-h-screen overscroll-none">
 <div id="flash-overlay"></div>
 
-<!-- ══ HOME ═══════════════════════════════════════════════════════════ -->
+<!-- HOME -->
 <div class="screen active" id="screen-home">
-
-  <div class="id-bar">
-    <div class="mob-avatar">🌀</div>
-    <div class="id-info">
-      <div class="id-name">NUR425</div>
-      <div class="id-role">Peds Final Prep · Block 3 · FA26</div>
-      <div class="id-exam" id="exam-countdown"></div>
-    </div>
-  </div>
-
-  <div class="gauge-section">
-    <div class="gauge-outer" id="gauge-outer">
-      <svg class="gauge-svg" viewBox="0 0 200 200">
-        <defs>
-          <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-            <stop offset="0%" style="stop-color:#7c3aed"/>
-            <stop offset="100%" style="stop-color:#22d3ee"/>
-          </linearGradient>
-        </defs>
-        <circle class="g-track" cx="100" cy="100" r="85"/>
-        <circle class="g-glow" id="g-glow" cx="100" cy="100" r="85"/>
-        <circle class="g-fill" id="g-fill" cx="100" cy="100" r="85"/>
-      </svg>
-      <div class="gauge-inner">
-        <div class="gauge-num" id="gauge-num">0%</div>
-        <div class="emotion-label">emotion</div>
-        <div class="emotion-value" id="emotion-value">???</div>
+  <div class="pb-24">
+    <div class="flex items-start gap-4 px-5 pt-6">
+      <div class="w-12 h-12 rounded-xl bg-gradient-to-br from-purple-700 to-indigo-600 flex items-center justify-center text-2xl shadow-lg flex-shrink-0">🌀</div>
+      <div>
+        <div class="bebas tracking-widest leading-tight" style="font-size:26px">NUR425</div>
+        <div class="text-xs text-base-content/50 font-medium mt-0.5">Peds Final Prep · Block 3 · FA26</div>
+        <div class="text-xs text-warning font-semibold mt-1" id="exam-countdown"></div>
       </div>
     </div>
-    <div class="streak-row">
-      <div class="streak-pill" id="streak-pill">🔥 0 day streak</div>
+
+    <div class="flex flex-col items-center pt-7">
+      <div class="gauge-outer" id="gauge-outer">
+        <svg class="gauge-svg" viewBox="0 0 200 200">
+          <defs>
+            <linearGradient id="gGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#7c3aed"/>
+              <stop offset="100%" style="stop-color:#22d3ee"/>
+            </linearGradient>
+          </defs>
+          <circle class="g-track" cx="100" cy="100" r="85"/>
+          <circle class="g-glow" id="g-glow" cx="100" cy="100" r="85"/>
+          <circle class="g-fill" id="g-fill" cx="100" cy="100" r="85"/>
+        </svg>
+        <div class="gauge-inner">
+          <div class="gauge-num" id="gauge-num">0%</div>
+          <div class="text-base-content/30 font-semibold mt-1" style="font-size:9px;letter-spacing:3px;text-transform:uppercase">emotion</div>
+          <div class="text-primary font-bold mt-0.5 min-h-4" id="emotion-value" style="font-size:11px;letter-spacing:2px;text-transform:uppercase">???</div>
+        </div>
+      </div>
+      <div class="mt-4">
+        <div class="badge badge-outline font-semibold text-base-content/40" id="streak-pill">🔥 0 day streak</div>
+      </div>
+    </div>
+
+    <div class="px-5 pt-7">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-sm font-bold">Modules</span>
+        <span class="text-xs text-base-content/30">195 questions</span>
+      </div>
+      <div class="grid grid-cols-2 gap-3" id="modules-grid"></div>
     </div>
   </div>
-
-  <div class="incidents-header">
-    <div>
-      <div class="incidents-title">Modules</div>
-      <div class="incidents-sub">Select a module to study</div>
-    </div>
-  </div>
-  <div class="modules-grid" id="modules-grid"></div>
-
 </div>
 
-<!-- ══ DRILL ══════════════════════════════════════════════════════════ -->
+<!-- STATS -->
+<div class="screen" id="screen-stats">
+  <div class="pb-24 px-5 pt-6">
+    <div class="text-xs font-bold tracking-widest uppercase text-base-content/40 mb-5" style="font-size:10px;letter-spacing:3px">Performance</div>
+    <div class="stats stats-vertical shadow w-full mb-5 bg-base-200">
+      <div class="stat">
+        <div class="stat-title text-xs">Overall Accuracy</div>
+        <div class="stat-value text-primary bebas text-4xl" id="stats-overall-pct">0%</div>
+        <div class="stat-desc" id="stats-overall-desc">0 questions answered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-title text-xs">Session Streak</div>
+        <div class="stat-value bebas text-4xl" id="stats-streak">🔥 0</div>
+        <div class="stat-desc">consecutive study days</div>
+      </div>
+    </div>
+    <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Module Breakdown</div>
+    <div class="flex flex-col gap-3" id="stats-breakdown"></div>
+  </div>
+</div>
+
+<!-- DRILL -->
 <div class="screen" id="screen-drill">
-
-  <div class="drill-topbar">
-    <div class="back-btn" onclick="goHome()">←</div>
-    <div class="drill-mod-name" id="drill-mod-name">M7 — Fluids &amp; Electrolytes</div>
-    <div class="enc-counter" id="enc-counter">1/8</div>
+  <div class="flex items-center gap-3 px-4 pt-4">
+    <button class="btn btn-ghost btn-sm btn-square text-base" onclick="goHome()">←</button>
+    <div class="text-xs font-bold text-base-content/50 flex-1 truncate tracking-wide" id="drill-mod-name">M7 — Fluids &amp; Electrolytes</div>
+    <div class="badge badge-ghost badge-sm font-semibold tabular-nums" id="enc-counter">1 / 33</div>
   </div>
 
-  <div class="drill-pbar-wrap">
-    <div class="drill-pbar" id="drill-pbar"></div>
-  </div>
+  <progress class="progress progress-primary w-full h-1 mt-3 rounded-none" id="drill-pbar" value="0" max="100"></progress>
 
-  <div class="drill-body">
-
-    <div class="chain-scenario" id="chain-scenario">
-      <div class="chain-label">◈ Patient Scenario</div>
-      <div class="chain-text" id="chain-text"></div>
+  <div class="px-4 pt-5 pb-24">
+    <div class="chain-scenario hidden" id="chain-scenario">
+      <div class="text-xs font-bold tracking-widest uppercase text-primary mb-2" style="font-size:9px;letter-spacing:2px">◈ Patient Scenario</div>
+      <div class="text-sm leading-relaxed text-base-content/70" id="chain-text"></div>
     </div>
 
-    <div class="sata-instr" id="sata-instr">Select all that apply</div>
-
-    <div class="qcard">
-      <div class="q-concept-tag" id="q-concept"></div>
-      <div class="q-stem" id="q-stem"></div>
+    <div class="hidden mb-3" id="sata-instr">
+      <div class="alert py-2 px-4" style="background:oklch(var(--in)/0.1);border:1px solid oklch(var(--in)/0.3)">
+        <span class="text-xs font-bold tracking-widest text-info" style="letter-spacing:3px">SELECT ALL THAT APPLY</span>
+      </div>
     </div>
 
-    <div class="options" id="options"></div>
+    <div class="card bg-base-200 shadow-sm mb-4">
+      <div class="card-body p-5">
+        <div class="badge badge-outline badge-sm font-semibold text-primary border-primary/30 mb-3 self-start" id="q-concept"></div>
+        <p class="text-base-content font-normal leading-relaxed" id="q-stem" style="font-size:15px;line-height:1.78"></p>
+      </div>
+    </div>
 
-    <div class="result-banner" id="result-banner"></div>
+    <div class="flex flex-col gap-2.5 mb-3" id="options"></div>
+
+    <div class="result-banner hidden" id="result-banner"></div>
 
     <button class="action-btn primary" id="action-btn" disabled onclick="submitAnswer()">Submit</button>
 
-    <div class="intel-box" id="intel-box">
-      <div class="intel-header">Rationale</div>
-      <div class="intel-text" id="intel-text"></div>
-      <div class="trap-block">
-        <span class="trap-header">Exam Trap</span>
-        <span class="trap-text" id="trap-text"></span>
+    <div class="card bg-base-200 shadow-sm mt-4 hidden" id="intel-box">
+      <div class="card-body p-5">
+        <div class="text-xs font-bold tracking-widest uppercase text-base-content/40 mb-3" style="font-size:9px;letter-spacing:2px">— Rationale</div>
+        <p class="text-sm leading-relaxed text-base-content/65 mb-4" id="intel-text"></p>
+        <div class="border-l-2 border-error pl-4 py-1 rounded-r-lg" style="background:oklch(var(--er)/0.05)">
+          <div class="text-xs font-bold tracking-widest uppercase text-error mb-1.5" style="font-size:9px;letter-spacing:2px">Exam Trap</div>
+          <p class="text-xs leading-relaxed" style="color:oklch(var(--er)/0.75)" id="trap-text"></p>
+        </div>
       </div>
     </div>
-
   </div>
 </div>
 
-<!-- ══ SUMMARY ════════════════════════════════════════════════════════ -->
+<!-- SUMMARY -->
 <div class="screen" id="screen-summary">
+  <div class="pb-24 px-5 pt-7">
+    <div class="text-center mb-8">
+      <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:3px">Session Complete</div>
+      <div class="bebas mb-1" id="sum-score" style="font-size:88px;line-height:1"></div>
+      <div class="text-sm text-base-content/50" id="sum-pct"></div>
+      <div class="text-xs text-primary font-semibold mt-1 tracking-wide" id="sum-modname"></div>
+    </div>
 
-  <div class="sum-top">
-    <div class="battle-complete">Session Complete</div>
-    <div class="sum-score-num" id="sum-score">0/8</div>
-    <div class="sum-pct" id="sum-pct">0% accurate this session</div>
-    <div class="sum-modname" id="sum-modname"></div>
-  </div>
+    <div class="card bg-base-200 shadow-sm mb-4">
+      <div class="card-body p-5">
+        <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Reigen Arataka · Chief Advisor</div>
+        <p class="text-sm italic leading-relaxed text-base-content/60" id="reigen-quote"></p>
+        <p class="text-xs font-semibold text-primary mt-3">— Reigen Arataka, Salt Mid Spirits &amp; Counseling</p>
+      </div>
+    </div>
 
-  <div class="reigen-box">
-    <div class="reigen-label">Reigen Arataka · Chief Advisor</div>
-    <div class="reigen-quote" id="reigen-quote"></div>
-    <div class="reigen-sig">— Reigen Arataka, Salt Mid Spirits &amp; Counseling</div>
-  </div>
+    <div class="card bg-base-200 shadow-sm mb-4">
+      <div class="card-body p-5">
+        <div class="text-xs font-bold tracking-widest uppercase text-base-content/40 mb-4" style="font-size:9px;letter-spacing:2px">Question Breakdown</div>
+        <div id="sum-breakdown"></div>
+      </div>
+    </div>
 
-  <div class="sum-section">
-    <div class="sum-section-hdr">Question Breakdown</div>
-    <div id="sum-breakdown"></div>
-  </div>
+    <div class="card bg-base-200 shadow-sm mb-4">
+      <div class="card-body p-5">
+        <div class="text-xs font-bold tracking-widest uppercase text-base-content/40 mb-3" style="font-size:9px;letter-spacing:2px">SM-2 Update — Paste to Claude</div>
+        <div class="bg-base-300 rounded-lg p-4 sm2-block text-base-content/40" id="sm2-block"></div>
+        <button class="btn btn-outline btn-primary btn-sm mt-3 font-bold" id="copy-btn" onclick="copyBlock()">📋 Copy Block</button>
+      </div>
+    </div>
 
-  <div class="sum-section">
-    <div class="sum-section-hdr">SM-2 Update Block — Paste to Claude</div>
-    <div class="sm2-block" id="sm2-block"></div>
-    <div class="btn-row">
-      <button class="btn-sm btn-copy" id="copy-btn" onclick="copyBlock()">📋 Copy Block</button>
+    <div class="flex gap-3 mt-2">
+      <button class="btn btn-primary flex-1 font-bold" onclick="goHome()">Home</button>
+      <button class="btn btn-ghost flex-1 font-bold border border-base-300" id="retry-btn">Retry</button>
     </div>
   </div>
+</div>
 
-  <div class="btn-row" style="margin-top:4px">
-    <button class="btn-sm btn-home" onclick="goHome()">Home</button>
-    <button class="btn-sm btn-retry" id="retry-btn">Retry</button>
-  </div>
-
+<!-- BOTTOM NAV -->
+<div class="btm-nav btm-nav-sm z-50 border-t border-base-300 bg-base-100" id="main-nav">
+  <button id="nav-home" onclick="goHome()" class="active">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
+    <span class="btm-nav-label text-xs">Home</span>
+  </button>
+  <button id="nav-stats" onclick="showStats()">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
+    <span class="btm-nav-label text-xs">Stats</span>
+  </button>
 </div>
 
 <script src="questions.js"></script>
 <script>
-// ═══ CONFIG ═══════════════════════════════════════════════════════════════════
 const MODULES = [
-  {key:"M7",  num:"07", name:"Fluids & Electrolytes",   sub:"M7 · 33 questions"},
-  {key:"M8",  num:"08", name:"Elimination",             sub:"M8 · 33 questions"},
-  {key:"M9",  num:"09", name:"Cardiac CHD & GI Meds",   sub:"M9 · 33 questions"},
-  {key:"M10", num:"10", name:"Heart Failure",           sub:"M10 · 30 questions"},
-  {key:"M11", num:"11", name:"Intracranial Regulation", sub:"M11 · 33 questions"},
-  {key:"M12", num:"12", name:"Surgical Issues",         sub:"M12 · 33 questions"},
+  {key:"M7",  name:"Fluids & Electrolytes",   sub:"M7 · 33 questions"},
+  {key:"M8",  name:"Elimination",             sub:"M8 · 33 questions"},
+  {key:"M9",  name:"Cardiac CHD & GI Meds",   sub:"M9 · 33 questions"},
+  {key:"M10", name:"Heart Failure",           sub:"M10 · 30 questions"},
+  {key:"M11", name:"Intracranial Regulation", sub:"M11 · 33 questions"},
+  {key:"M12", name:"Surgical Issues",         sub:"M12 · 33 questions"},
 ];
 
 const EMOTIONS = [
-  [0,  "???"],
-  [5,  "Dormant"],
-  [15, "Stirring"],
-  [30, "Focused"],
-  [45, "Determined"],
-  [60, "Intense"],
-  [75, "Overflowing"],
-  [90, "Critical Mass"],
-  [99, "EXPLOSION!!!"],
+  [0,"???"],[5,"Dormant"],[15,"Stirring"],[30,"Focused"],
+  [45,"Determined"],[60,"Intense"],[75,"Overflowing"],[90,"Critical Mass"],[99,"EXPLOSION!!!"],
 ];
 
 const REIGEN_QUOTES = {
-  100: "Incredible. This is exactly why I hired you as my assistant. Well, you're not my assistant here, but the point stands.",
-  87:  "Not bad at all. A few rough edges — that's what training is for. Keep this up and you'll make me look good.",
-  75:  "You're growing, kid. I can see it. The gaps will close if you keep showing up.",
-  50:  "The psychic pressure got to you today. Identify the weak points. Return tomorrow with more preparation.",
-  0:   "Everyone starts somewhere. Even I had to study at some point. These concepts need repair mode — back to basics.",
+  100:"Incredible. This is exactly why I hired you as my assistant. Well, you're not my assistant here, but the point stands.",
+  87: "Not bad at all. A few rough edges — that's what training is for. Keep this up and you'll make me look good.",
+  75: "You're growing, kid. I can see it. The gaps will close if you keep showing up.",
+  50: "The psychic pressure got to you today. Identify the weak points. Return tomorrow with more preparation.",
+  0:  "Everyone starts somewhere. Even I had to study at some point. These concepts need repair mode — back to basics.",
 };
 
-// ═══ STATE ════════════════════════════════════════════════════════════════════
-let CUR_MOD = null, CUR_QS = [], CUR_IDX = 0, SEL_OPTS = new Set(), ANSWERED = false, RESULTS = [];
+let CUR_MOD=null, CUR_QS=[], CUR_IDX=0, SEL_OPTS=new Set(), ANSWERED=false, RESULTS=[];
 
-// ═══ STORAGE ══════════════════════════════════════════════════════════════════
-const store = () => { try{return JSON.parse(localStorage.getItem("mob_v2")||"{}")}catch{return{}} };
-const save  = d => { try{localStorage.setItem("mob_v2",JSON.stringify(d))}catch{} };
-const modStats = k => { const s=store(); return s[k]||{correct:0,total:0,sessions:[]} };
+const store = ()=>{ try{return JSON.parse(localStorage.getItem("mob_v2")||"{}")}catch{return{}} };
+const save  = d=>{ try{localStorage.setItem("mob_v2",JSON.stringify(d))}catch{} };
+const modStats = k=>{ const s=store(); return s[k]||{correct:0,total:0,sessions:[]} };
 
-function saveSession(key, results) {
-  const s = store();
-  if (!s[key]) s[key] = {correct:0,total:0,sessions:[]};
-  const c = results.filter(r=>r.correct).length;
-  s[key].correct += c; s[key].total += results.length;
+function saveSession(key,results){
+  const s=store();
+  if(!s[key]) s[key]={correct:0,total:0,sessions:[]};
+  const c=results.filter(r=>r.correct).length;
+  s[key].correct+=c; s[key].total+=results.length;
   s[key].sessions.push({date:today(),correct:c,total:results.length});
-  if (s[key].sessions.length > 30) s[key].sessions.shift();
-  const t = today(), y = yesterday();
-  if (s.lastStudy !== t) {
-    s.streak = (s.lastStudy === y) ? (s.streak||0)+1 : 1;
-    s.lastStudy = t;
-  }
+  if(s[key].sessions.length>30) s[key].sessions.shift();
+  const t=today(),y=yesterday();
+  if(s.lastStudy!==t){ s.streak=(s.lastStudy===y)?(s.streak||0)+1:1; s.lastStudy=t; }
   save(s);
 }
 
-const today = () => new Date().toISOString().slice(0,10);
-const yesterday = () => new Date(Date.now()-86400000).toISOString().slice(0,10);
+const today=()=>new Date().toISOString().slice(0,10);
+const yesterday=()=>new Date(Date.now()-86400000).toISOString().slice(0,10);
 
-// ═══ GAUGE ════════════════════════════════════════════════════════════════════
-function overallPct() {
+function overallPct(){
   let c=0,t=0;
   MODULES.forEach(m=>{const s=modStats(m.key);c+=s.correct;t+=s.total});
   return t===0?0:Math.round((c/t)*100);
 }
-function getEmotion(pct) {
-  let label = EMOTIONS[0][1];
-  for (const [threshold, em] of EMOTIONS) { if (pct >= threshold) label = em; else break; }
+function getEmotion(pct){
+  let label=EMOTIONS[0][1];
+  for(const[thr,em] of EMOTIONS){if(pct>=thr)label=em;else break;}
   return label;
 }
-function setGauge(pct) {
-  const circumference = 534;
-  const offset = circumference - (pct/100)*circumference;
-  document.getElementById("g-fill").style.strokeDashoffset = offset;
-  const glow = document.getElementById("g-glow");
-  glow.style.strokeDashoffset = offset;
-  glow.style.opacity = pct > 50 ? Math.min((pct-50)/50*0.6,0.6) : 0;
-  const numEl = document.getElementById("gauge-num");
-  numEl.textContent = pct + "%";
-  numEl.className = "gauge-num" + (pct===100?" at100":"");
-  document.getElementById("emotion-value").textContent = getEmotion(pct);
-  if (pct === 100) triggerExplosion();
+function setGauge(pct){
+  const offset=534-(pct/100)*534;
+  document.getElementById("g-fill").style.strokeDashoffset=offset;
+  const glow=document.getElementById("g-glow");
+  glow.style.strokeDashoffset=offset;
+  glow.style.opacity=pct>50?Math.min((pct-50)/50*0.6,0.6):0;
+  const numEl=document.getElementById("gauge-num");
+  numEl.textContent=pct+"%";
+  numEl.className="gauge-num "+(pct===100?"at100":"");
+  document.getElementById("emotion-value").textContent=getEmotion(pct);
+  if(pct===100) triggerExplosion();
 }
-function triggerExplosion() {
+function triggerExplosion(){
   document.getElementById("gauge-outer").classList.add("exploding");
-  const fl = document.getElementById("flash-overlay");
-  fl.style.animation = "screenFlash .4s ease";
-  setTimeout(()=>{ document.getElementById("gauge-outer").classList.remove("exploding"); fl.style.animation=""; }, 2000);
+  const fl=document.getElementById("flash-overlay");
+  fl.style.animation="screenFlash .4s ease";
+  setTimeout(()=>{document.getElementById("gauge-outer").classList.remove("exploding");fl.style.animation="";},2000);
+}
+function setCountdown(){
+  const days=Math.ceil((new Date("2026-12-07")-new Date())/86400000);
+  const el=document.getElementById("exam-countdown");
+  el.textContent=days>0?`Peds Final in ${days} day${days!==1?"s":""}`:(days===0?"Peds Final — TODAY":"");
 }
 
-// ═══ EXAM COUNTDOWN ═══════════════════════════════════════════════════════════
-function setCountdown() {
-  const exam = new Date("2026-12-07");
-  const now = new Date();
-  const days = Math.ceil((exam - now) / 86400000);
-  const el = document.getElementById("exam-countdown");
-  if (days > 0) el.textContent = `Peds Final in ${days} day${days!==1?"s":""}`;
-  else if (days === 0) el.textContent = "Peds Final — TODAY";
-}
-
-// ═══ HOME ══════════════════════════════════════════════════════════════════════
-function renderHome() {
+function renderHome(){
   setCountdown();
-  const pct = overallPct();
-  setGauge(pct);
-  const s = store();
-  const streak = s.streak || 0;
-  document.getElementById("streak-pill").textContent = streak > 0 ? `🔥 ${streak} day streak` : "Start your streak";
+  setGauge(overallPct());
+  const s=store();
+  document.getElementById("streak-pill").textContent=(s.streak||0)>0?`🔥 ${s.streak} day streak`:"Start your streak";
 
-  const grid = document.getElementById("modules-grid");
-  grid.innerHTML = "";
-  MODULES.forEach(m => {
-    const st = modStats(m.key);
-    const modPct = st.total > 0 ? Math.round((st.correct/st.total)*100) : 0;
-    const statusClass = st.total === 0 ? "dormant" : modPct >= 80 ? "mastered-status" : "active-status";
-    const statusLabel = st.total === 0 ? "Not started" : modPct >= 80 ? "▲ Mastered" : "● In progress";
-    const cardClass = st.total === 0 ? "" : modPct >= 80 ? " mastered" : " active-mod";
+  const grid=document.getElementById("modules-grid");
+  grid.innerHTML="";
+  MODULES.forEach(m=>{
+    const st=modStats(m.key);
+    const pct=st.total>0?Math.round((st.correct/st.total)*100):0;
+    const statusLabel=st.total===0?"Not started":pct>=80?"▲ Mastered":"● In progress";
+    const statusClass=st.total===0?"badge-ghost":pct>=80?"badge-success badge-outline":"badge-primary badge-outline";
+    const progColor=pct>=80?"progress-success":"progress-primary";
+    const borderClass=pct>=80?"border border-success/20":st.total>0?"border border-primary/15":"";
 
-    const card = document.createElement("div");
-    card.className = "mod-card" + cardClass;
-    card.innerHTML = `
-      <div class="mod-num">${m.key}</div>
-      <div class="mod-name">${m.name}</div>
-      <div class="mod-status ${statusClass}">${statusLabel}</div>
-      <div class="power-bar-wrap"><div class="power-bar" style="width:${modPct}%"></div></div>
-      <div class="power-stat">${st.total > 0 ? modPct+"% · "+st.correct+"/"+st.total+" correct" : m.sub}</div>
-    `;
-    card.addEventListener("click", () => startModule(m.key));
+    const card=document.createElement("div");
+    card.className=`card bg-base-200 cursor-pointer hover:bg-base-300 transition-colors shadow-sm ${borderClass}`;
+    card.innerHTML=`
+      <div class="card-body p-4">
+        <div class="bebas text-primary leading-none mb-1" style="font-size:30px">${m.key}</div>
+        <div class="text-xs font-semibold text-base-content leading-snug mb-3">${m.name}</div>
+        <div class="badge ${statusClass} badge-xs font-semibold mb-2 self-start">${statusLabel}</div>
+        <progress class="progress ${progColor} h-1.5 w-full" value="${pct}" max="100"></progress>
+        <div class="text-xs text-base-content/35 mt-1.5">${st.total>0?pct+"% · "+st.correct+"/"+st.total:m.sub}</div>
+      </div>`;
+    card.addEventListener("click",()=>startModule(m.key));
     grid.appendChild(card);
   });
 }
 
-// ═══ DRILL ════════════════════════════════════════════════════════════════════
-function startModule(key) {
-  CUR_MOD = key; CUR_IDX = 0; RESULTS = [];
-  CUR_QS = [...(QUESTIONS[key]||[])];
-  for (let i=CUR_QS.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[CUR_QS[i],CUR_QS[j]]=[CUR_QS[j],CUR_QS[i]];}
-  const mod = MODULES.find(m=>m.key===key);
-  document.getElementById("drill-mod-name").textContent = (mod ? mod.key+" — "+mod.name : key);
+function showStats(){
+  let totalC=0,totalT=0;
+  const s=store();
+  MODULES.forEach(m=>{const st=modStats(m.key);totalC+=st.correct;totalT+=st.total;});
+  const oPct=totalT>0?Math.round((totalC/totalT)*100):0;
+  document.getElementById("stats-overall-pct").textContent=oPct+"%";
+  document.getElementById("stats-overall-desc").textContent=totalT+" questions answered";
+  document.getElementById("stats-streak").textContent="🔥 "+(s.streak||0);
+
+  const bd=document.getElementById("stats-breakdown");
+  bd.innerHTML="";
+  MODULES.forEach(m=>{
+    const st=modStats(m.key);
+    const pct=st.total>0?Math.round((st.correct/st.total)*100):0;
+    const sessions=st.sessions?st.sessions.length:0;
+    const progColor=pct>=80?"progress-success":"progress-primary";
+    const pctColor=pct>=80?"text-success":st.total>0?"text-primary":"text-base-content/25";
+    const card=document.createElement("div");
+    card.className="card bg-base-200 shadow-sm";
+    card.innerHTML=`
+      <div class="card-body p-4">
+        <div class="flex items-center justify-between mb-2">
+          <div class="flex items-baseline gap-2">
+            <span class="bebas text-primary" style="font-size:18px">${m.key}</span>
+            <span class="text-xs text-base-content/50">${m.name}</span>
+          </div>
+          <span class="text-sm font-bold ${pctColor}">${st.total>0?pct+"%":"—"}</span>
+        </div>
+        <progress class="progress ${progColor} h-1.5 w-full" value="${pct}" max="100"></progress>
+        <div class="text-xs text-base-content/35 mt-1.5">${st.total>0?st.correct+"/"+st.total+" correct · "+sessions+" session"+(sessions!==1?"s":""):"Not started"}</div>
+      </div>`;
+    bd.appendChild(card);
+  });
+  switchTo("screen-stats");
+}
+
+function startModule(key){
+  CUR_MOD=key; CUR_IDX=0; RESULTS=[];
+  CUR_QS=[...(QUESTIONS[key]||[])];
+  for(let i=CUR_QS.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[CUR_QS[i],CUR_QS[j]]=[CUR_QS[j],CUR_QS[i]];}
+  const mod=MODULES.find(m=>m.key===key);
+  document.getElementById("drill-mod-name").textContent=mod?mod.key+" — "+mod.name:key;
   switchTo("screen-drill");
   loadQ(0);
 }
 
-function loadQ(i) {
-  const q = CUR_QS[i];
-  SEL_OPTS = new Set(); ANSWERED = false;
-  document.getElementById("q-concept").textContent = q.concept;
-  document.getElementById("q-stem").textContent = q.stem;
-  document.getElementById("enc-counter").textContent = `${i+1} / ${CUR_QS.length}`;
-  document.getElementById("drill-pbar").style.width = (i/CUR_QS.length*100)+"%";
+function loadQ(i){
+  const q=CUR_QS[i];
+  SEL_OPTS=new Set(); ANSWERED=false;
+  document.getElementById("q-concept").textContent=q.concept;
+  document.getElementById("q-stem").textContent=q.stem;
+  document.getElementById("enc-counter").textContent=`${i+1} / ${CUR_QS.length}`;
+  document.getElementById("drill-pbar").value=Math.round((i/CUR_QS.length)*100);
 
-  const chainEl = document.getElementById("chain-scenario");
-  const chainText = document.getElementById("chain-text");
-  if (q.type === "CHAIN" && q.chain_scenario) {
-    chainText.textContent = q.chain_scenario;
-    chainEl.className = "chain-scenario show";
-  } else {
-    chainEl.className = "chain-scenario";
-  }
-  document.getElementById("sata-instr").className = q.type === "SATA" ? "sata-instr show" : "sata-instr";
+  const chainEl=document.getElementById("chain-scenario");
+  if(q.type==="CHAIN"&&q.chain_scenario){
+    document.getElementById("chain-text").textContent=q.chain_scenario;
+    chainEl.classList.remove("hidden");
+  } else { chainEl.classList.add("hidden"); }
 
-  const opts = document.getElementById("options");
-  opts.innerHTML = "";
-  q.options.forEach((o, idx) => {
-    const b = document.createElement("button");
-    b.className = "opt";
-    const letter = o.charAt(0);
-    const content = o.slice(3);
-    b.innerHTML = `<span class="opt-letter">${letter}</span><span class="opt-text">${content}</span>`;
-    b.dataset.idx = idx;
-    b.addEventListener("click", () => selectOpt(b, idx));
+  const sataEl=document.getElementById("sata-instr");
+  if(q.type==="SATA") sataEl.classList.remove("hidden");
+  else sataEl.classList.add("hidden");
+
+  const opts=document.getElementById("options");
+  opts.innerHTML="";
+  q.options.forEach((o,idx)=>{
+    const b=document.createElement("button");
+    b.className="opt";
+    b.innerHTML=`<span class="opt-letter">${o.charAt(0)}</span><span class="opt-text">${o.slice(3)}</span>`;
+    b.dataset.idx=idx;
+    b.addEventListener("click",()=>selectOpt(b,idx));
     opts.appendChild(b);
   });
 
-  const ab = document.getElementById("action-btn");
-  ab.disabled = true; ab.textContent = "Submit";
-  ab.className = "action-btn primary"; ab.onclick = submitAnswer;
-  document.getElementById("result-banner").className = "result-banner";
-  document.getElementById("intel-box").className = "intel-box";
+  const banner=document.getElementById("result-banner");
+  banner.classList.add("hidden"); banner.classList.remove("win","lose");
+  document.getElementById("intel-box").classList.add("hidden");
+
+  const ab=document.getElementById("action-btn");
+  ab.disabled=true; ab.textContent="Submit";
+  ab.className="action-btn primary"; ab.onclick=submitAnswer;
 }
 
-function selectOpt(btn, idx) {
-  if (ANSWERED) return;
-  const q = CUR_QS[CUR_IDX];
-  if (q.type === "SATA") {
-    if (SEL_OPTS.has(idx)) {
-      SEL_OPTS.delete(idx);
-      btn.classList.remove("sata-sel");
-    } else {
-      SEL_OPTS.add(idx);
-      btn.classList.add("sata-sel");
-    }
-    document.getElementById("action-btn").disabled = SEL_OPTS.size === 0;
+function selectOpt(btn,idx){
+  if(ANSWERED) return;
+  const q=CUR_QS[CUR_IDX];
+  if(q.type==="SATA"){
+    if(SEL_OPTS.has(idx)){SEL_OPTS.delete(idx);btn.classList.remove("sata-sel");}
+    else{SEL_OPTS.add(idx);btn.classList.add("sata-sel");}
+    document.getElementById("action-btn").disabled=SEL_OPTS.size===0;
   } else {
     document.querySelectorAll(".opt").forEach(b=>b.classList.remove("sel"));
     btn.classList.add("sel");
-    SEL_OPTS = new Set([idx]);
-    document.getElementById("action-btn").disabled = false;
+    SEL_OPTS=new Set([idx]);
+    document.getElementById("action-btn").disabled=false;
   }
 }
 
-function submitAnswer() {
-  if (SEL_OPTS.size===0||ANSWERED) return;
-  ANSWERED = true;
-  const q = CUR_QS[CUR_IDX];
-
+function submitAnswer(){
+  if(SEL_OPTS.size===0||ANSWERED) return;
+  ANSWERED=true;
+  const q=CUR_QS[CUR_IDX];
   let isCorrect;
-  if (q.type === "SATA") {
-    const correctSet = new Set(q.correct);
-    const selectedLetters = new Set([...SEL_OPTS].map(i=>String.fromCharCode(65+i)));
-    isCorrect = correctSet.size===selectedLetters.size && [...correctSet].every(l=>selectedLetters.has(l));
+  if(q.type==="SATA"){
+    const correctSet=new Set(q.correct);
+    const selLetters=new Set([...SEL_OPTS].map(i=>String.fromCharCode(65+i)));
+    isCorrect=correctSet.size===selLetters.size&&[...correctSet].every(l=>selLetters.has(l));
   } else {
-    const letter = String.fromCharCode(65+[...SEL_OPTS][0]);
-    isCorrect = q.correct.includes(letter);
+    isCorrect=q.correct.includes(String.fromCharCode(65+[...SEL_OPTS][0]));
   }
 
-  document.querySelectorAll(".opt").forEach((b,idx) => {
-    b.disabled = true;
-    const l = String.fromCharCode(65+idx);
-    if (q.correct.includes(l)) b.classList.add("correct-ans");
-    else if (SEL_OPTS.has(idx)&&!q.correct.includes(l)) b.classList.add("wrong-ans");
+  document.querySelectorAll(".opt").forEach((b,idx)=>{
+    b.disabled=true;
+    const l=String.fromCharCode(65+idx);
+    if(q.correct.includes(l)) b.classList.add("correct-ans");
+    else if(SEL_OPTS.has(idx)&&!q.correct.includes(l)) b.classList.add("wrong-ans");
   });
 
-  const banner = document.getElementById("result-banner");
-  banner.className = "result-banner show " + (isCorrect?"win":"lose");
-  banner.innerHTML = `<div class="result-icon">${isCorrect?"✓":"✗"}</div><div class="result-label">${isCorrect?"Correct":"Incorrect"}</div>`;
+  const banner=document.getElementById("result-banner");
+  banner.classList.remove("hidden");
+  banner.classList.add(isCorrect?"win":"lose");
+  banner.innerHTML=`<div class="result-icon">${isCorrect?"✓":"✗"}</div><div class="result-label">${isCorrect?"Correct":"Incorrect"}</div>`;
 
-  document.getElementById("intel-text").textContent = q.rationale;
-  document.getElementById("trap-text").textContent = q.trap;
-  document.getElementById("intel-box").className = "intel-box show";
+  document.getElementById("intel-text").textContent=q.rationale;
+  document.getElementById("trap-text").textContent=q.trap;
+  document.getElementById("intel-box").classList.remove("hidden");
 
-  RESULTS.push({id:q.id, concept:q.concept, correct:isCorrect, type:q.type||"MCQ"});
+  RESULTS.push({id:q.id,concept:q.concept,correct:isCorrect,type:q.type||"MCQ"});
 
-  const ab = document.getElementById("action-btn");
-  if (CUR_IDX+1 < CUR_QS.length) {
-    ab.textContent = "Next Question →";
-    ab.className = "action-btn secondary";
-    ab.onclick = ()=>{CUR_IDX++;loadQ(CUR_IDX)};
+  const ab=document.getElementById("action-btn");
+  ab.disabled=false;
+  if(CUR_IDX+1<CUR_QS.length){
+    ab.textContent="Next Question →";
+    ab.className="action-btn secondary";
+    ab.onclick=()=>{CUR_IDX++;loadQ(CUR_IDX);};
   } else {
-    ab.textContent = "View Results";
-    ab.className = "action-btn primary";
-    ab.onclick = showSummary;
+    ab.textContent="View Results";
+    ab.className="action-btn primary";
+    ab.onclick=showSummary;
   }
 }
 
-// ═══ SUMMARY ══════════════════════════════════════════════════════════════════
-function showSummary() {
-  saveSession(CUR_MOD, RESULTS);
-  const correct = RESULTS.filter(r=>r.correct).length;
-  const total = RESULTS.length;
-  const pct = Math.round((correct/total)*100);
-  const mod = MODULES.find(m=>m.key===CUR_MOD);
+function showSummary(){
+  saveSession(CUR_MOD,RESULTS);
+  const correct=RESULTS.filter(r=>r.correct).length;
+  const total=RESULTS.length;
+  const pct=Math.round((correct/total)*100);
+  const mod=MODULES.find(m=>m.key===CUR_MOD);
 
-  const scoreEl = document.getElementById("sum-score");
-  scoreEl.textContent = correct+"/"+total;
-  const cls = pct===100?"score-perfect":pct>=75?"score-good":pct>=50?"score-avg":"score-low";
-  scoreEl.className = "sum-score-num "+cls;
+  const scoreEl=document.getElementById("sum-score");
+  scoreEl.textContent=correct+"/"+total;
+  scoreEl.className="bebas mb-1 "+(pct===100?"score-perfect":pct>=75?"score-good":pct>=50?"score-avg":"score-low");
 
-  document.getElementById("sum-pct").textContent = pct+"% accurate this session";
-  document.getElementById("sum-modname").textContent = mod ? mod.key+" — "+mod.name : CUR_MOD;
+  document.getElementById("sum-pct").textContent=pct+"% accurate this session";
+  document.getElementById("sum-modname").textContent=mod?mod.key+" — "+mod.name:CUR_MOD;
 
-  let quote = REIGEN_QUOTES[0];
-  for (const [threshold, q] of Object.entries(REIGEN_QUOTES).sort((a,b)=>a[0]-b[0])) {
-    if (pct >= parseInt(threshold)) quote = q;
+  let quote=REIGEN_QUOTES[0];
+  for(const[thr,q] of Object.entries(REIGEN_QUOTES).sort((a,b)=>a[0]-b[0])){
+    if(pct>=parseInt(thr)) quote=q;
   }
-  document.getElementById("reigen-quote").textContent = `"${quote}"`;
+  document.getElementById("reigen-quote").textContent=`"${quote}"`;
 
-  const bd = document.getElementById("sum-breakdown");
-  bd.innerHTML = "";
+  const bd=document.getElementById("sum-breakdown");
+  bd.innerHTML="";
   RESULTS.forEach(r=>{
-    const row = document.createElement("div");
-    row.className = "sum-row";
-    row.innerHTML = `<div class="sum-concept-name">${r.concept}</div><div class="result-pill ${r.correct?"win":"lose"}">${r.correct?"✓ Correct":"✗ Wrong"}</div>`;
+    const row=document.createElement("div");
+    row.className="flex items-start justify-between gap-3 py-2.5 border-b border-base-300 last:border-0 last:pb-0";
+    row.innerHTML=`<div class="text-sm text-base-content leading-snug flex-1">${r.concept}</div><div class="badge ${r.correct?"badge-success":"badge-error"} badge-outline badge-sm font-bold whitespace-nowrap">${r.correct?"✓ Correct":"✗ Wrong"}</div>`;
     bd.appendChild(row);
   });
 
   buildSM2();
-  document.getElementById("retry-btn").onclick = ()=>startModule(CUR_MOD);
+  document.getElementById("retry-btn").onclick=()=>startModule(CUR_MOD);
   switchTo("screen-summary");
   setGauge(overallPct());
 }
 
-function buildSM2() {
-  const dateStr = new Date().toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
-  const mod = MODULES.find(m=>m.key===CUR_MOD);
-  const c = RESULTS.filter(r=>r.correct).length;
-  const t = RESULTS.length;
-  const pct = Math.round((c/t)*100);
-  const wrongs = RESULTS.filter(r=>!r.correct);
-  const rights = RESULTS.filter(r=>r.correct);
-
-  let lines = [];
+function buildSM2(){
+  const dateStr=new Date().toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
+  const mod=MODULES.find(m=>m.key===CUR_MOD);
+  const c=RESULTS.filter(r=>r.correct).length;
+  const t=RESULTS.length;
+  const pct=Math.round((c/t)*100);
+  const wrongs=RESULTS.filter(r=>!r.correct);
+  const rights=RESULTS.filter(r=>r.correct);
+  let lines=[];
   lines.push(`SESSION: ${dateStr} | ${CUR_MOD} — ${mod?mod.name:CUR_MOD}`);
   lines.push(`SCORE: ${c}/${t} (${pct}%)`);
   lines.push(`─────────────────────────────────────`);
   lines.push(`CONCEPT RESULTS:`);
-  RESULTS.forEach(r => {
-    lines.push(`  ${r.correct?"✓":"✗"} ${r.concept}`);
-  });
+  RESULTS.forEach(r=>lines.push(`  ${r.correct?"✓":"✗"} ${r.concept}`));
   lines.push(`─────────────────────────────────────`);
-  if (wrongs.length > 0) {
-    lines.push(`WRONG → lower confidence, reset interval to 1 day:`);
-    wrongs.forEach(r=>lines.push(`  · ${r.concept}`));
-  }
-  if (rights.length > 0) {
-    lines.push(`CORRECT → advance SM-2 per current EF:`);
-    rights.forEach(r=>lines.push(`  · ${r.concept}`));
-  }
+  if(wrongs.length>0){lines.push(`WRONG → lower confidence, reset interval to 1 day:`);wrongs.forEach(r=>lines.push(`  · ${r.concept}`));}
+  if(rights.length>0){lines.push(`CORRECT → advance SM-2 per current EF:`);rights.forEach(r=>lines.push(`  · ${r.concept}`));}
   lines.push(`─────────────────────────────────────`);
   lines.push(`PASTE TO CLAUDE → update weakness-tracker.md`);
-
-  document.getElementById("sm2-block").textContent = lines.join("\n");
+  document.getElementById("sm2-block").textContent=lines.join("\n");
 }
 
-function copyBlock() {
+function copyBlock(){
   navigator.clipboard.writeText(document.getElementById("sm2-block").textContent).then(()=>{
-    const b = document.getElementById("copy-btn");
-    b.textContent = "✓ Copied"; b.classList.add("copied");
-    setTimeout(()=>{b.textContent="📋 Copy Block";b.classList.remove("copied")},2000);
+    const b=document.getElementById("copy-btn");
+    b.textContent="✓ Copied";
+    b.classList.replace("btn-primary","btn-success");
+    setTimeout(()=>{b.textContent="📋 Copy Block";b.classList.replace("btn-success","btn-primary");},2000);
   });
 }
 
-// ═══ NAV ══════════════════════════════════════════════════════════════════════
-function switchTo(id) {
+function switchTo(id){
   document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
   window.scrollTo(0,0);
+  const nav=document.getElementById("main-nav");
+  if(id==="screen-drill") nav.classList.add("hidden");
+  else nav.classList.remove("hidden");
+  document.getElementById("nav-home").classList.toggle("active",id==="screen-home");
+  document.getElementById("nav-stats").classList.toggle("active",id==="screen-stats");
 }
-function goHome() { renderHome(); switchTo("screen-home"); }
 
-// ═══ BOOT ════════════════════════════════════════════════════════════════════
+function goHome(){ renderHome(); switchTo("screen-home"); }
+
 renderHome();
 </script>
 </body>
