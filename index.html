@@ -3,7 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <title>NUR425 — Peds Final Prep</title>
+<link rel="manifest" href="manifest.json">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <link href="https://cdn.jsdelivr.net/npm/daisyui@4.12.14/dist/full.min.css" rel="stylesheet">
@@ -40,6 +43,7 @@ body { font-family: 'Inter', system-ui, sans-serif; }
   cursor: pointer; text-align: left;
   font-family: 'Inter', sans-serif;
   transition: border-color .12s, background .12s;
+  position: relative;
 }
 .opt:active { background: oklch(var(--b3)); }
 .opt-letter {
@@ -59,8 +63,23 @@ body { font-family: 'Inter', system-ui, sans-serif; }
 .opt.wrong-ans .opt-letter { background: oklch(var(--er)); border-color: oklch(var(--er)); color: white; }
 .opt.wrong-ans .opt-text { color: oklch(var(--er)); }
 .opt:disabled { cursor: default; }
+.opt.struck .opt-text { text-decoration: line-through; opacity: 0.4; }
+.opt.struck .opt-letter { opacity: 0.4; }
+.opt-locked { pointer-events: none; opacity: 0.4; }
 
-/* Action button (JS-controlled classes) */
+/* Strike button */
+.opt-strike-btn {
+  flex-shrink: 0; width: 22px; height: 22px; border-radius: 50%;
+  border: 1px solid oklch(var(--bc)/0.15);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 10px; color: oklch(var(--bc)/0.35);
+  cursor: pointer; margin-top: 3px; background: transparent;
+  transition: all .12s; padding: 0;
+}
+.opt-strike-btn:hover { border-color: oklch(var(--er)/0.5); color: oklch(var(--er)/0.7); }
+.opt.struck .opt-strike-btn { border-color: oklch(var(--er)/0.4); color: oklch(var(--er)/0.6); }
+
+/* Action button */
 .action-btn { width: 100%; padding: 14px; border-radius: 10px; border: none; font-family: 'Inter', sans-serif; font-size: 15px; font-weight: 700; cursor: pointer; transition: opacity .15s, transform .1s; margin-top: 10px; }
 .action-btn:active { transform: scale(.99); }
 .action-btn.primary { background: oklch(var(--p)); color: oklch(var(--pc)); }
@@ -86,12 +105,79 @@ body { font-family: 'Inter', system-ui, sans-serif; }
 @keyframes screenFlash { 0%,100%{opacity:0} 10%,90%{opacity:.08} }
 .exploding .gauge-outer { animation: explode .7s ease; }
 #flash-overlay { position: fixed; inset: 0; background: white; pointer-events: none; opacity: 0; z-index: 999; }
+
+/* Timer bar */
+.timer-bar-wrap { width: 100%; height: 3px; background: oklch(var(--b3)); position: relative; overflow: hidden; }
+.timer-bar { height: 100%; background: oklch(var(--p)); transition: width .9s linear, background .3s; }
+.timer-bar.danger { background: oklch(var(--er)); }
+
+/* Confidence chips */
+.conf-chip {
+  display: inline-flex; align-items: center; justify-content: center;
+  width: 48px; height: 48px; border-radius: 12px; font-weight: 800; font-size: 18px;
+  cursor: pointer; border: 2px solid transparent; transition: all .15s;
+}
+.conf-chip[data-v="1"] { background: oklch(0.35 0.12 15); color: oklch(0.85 0.15 15); }
+.conf-chip[data-v="2"] { background: oklch(0.35 0.1 50); color: oklch(0.85 0.12 50); }
+.conf-chip[data-v="3"] { background: oklch(var(--b3)); color: oklch(var(--bc)/0.7); }
+.conf-chip[data-v="4"] { background: oklch(0.3 0.1 145); color: oklch(0.75 0.14 145); }
+.conf-chip[data-v="5"] { background: oklch(0.32 0.14 160); color: oklch(0.8 0.18 160); }
+.conf-chip.active { border-color: white; transform: scale(1.12); box-shadow: 0 0 12px oklch(var(--p)/0.4); }
+
+/* Nav badge */
+.nav-badge { position: absolute; top: 6px; right: 50%; transform: translateX(10px); background: oklch(var(--er)); color: white; font-size: 9px; font-weight: 800; border-radius: 99px; padding: 1px 5px; min-width: 16px; text-align: center; line-height: 1.4; }
+
+/* Quick start chips */
+.qs-chip { display: inline-flex; align-items: center; gap: 6px; padding: 8px 14px; border-radius: 10px; background: oklch(var(--b2)); border: 1.5px solid oklch(var(--b3)); font-size: 13px; font-weight: 600; cursor: pointer; transition: all .12s; white-space: nowrap; }
+.qs-chip:active { background: oklch(var(--b3)); }
+
+/* Count / trend chips */
+.count-chip { padding: 8px 18px; border-radius: 10px; background: oklch(var(--b2)); border: 1.5px solid oklch(var(--b3)); font-weight: 700; font-size: 14px; cursor: pointer; transition: all .12s; }
+.count-chip.selected { border-color: oklch(var(--p)); background: oklch(var(--p)/0.15); color: oklch(var(--p)); }
+
+/* Setup module checkbox labels */
+.mod-cb-label { display: flex; align-items: center; gap: 10px; padding: 10px 14px; border-radius: 10px; background: oklch(var(--b2)); border: 1.5px solid oklch(var(--b3)); cursor: pointer; transition: all .12s; }
+.mod-cb-label.checked { border-color: oklch(var(--p)/0.5); background: oklch(var(--p)/0.08); }
+
+/* Heatmap */
+.heatmap-grid { display: grid; grid-template-columns: repeat(10, 1fr); gap: 3px; }
+.heatmap-cell { aspect-ratio: 1; border-radius: 3px; background: oklch(var(--b3)); }
+.heatmap-cell.active { background: oklch(var(--su)/0.6); }
+.heatmap-cell.today-cell { background: oklch(var(--p)/0.8); }
+
+/* Concept mastery rows */
+.mastery-row { display: flex; align-items: center; gap: 8px; padding: 8px 0; border-bottom: 1px solid oklch(var(--b3)/0.5); font-size: 12px; }
+.mastery-row:last-child { border-bottom: none; }
+
+/* Bookmarks */
+.bookmark-item { display: flex; align-items: flex-start; gap: 10px; padding: 12px 0; border-bottom: 1px solid oklch(var(--b3)); }
+.bookmark-item:last-child { border-bottom: none; }
+
+/* Trend SVG */
+.trend-svg { width: 100%; height: 140px; overflow: visible; }
+
+/* Lab modal */
+#lab-modal { position: fixed; inset: 0; z-index: 200; display: none; flex-direction: column; }
+#lab-modal.open { display: flex; }
+#lab-backdrop { position: absolute; inset: 0; background: rgba(0,0,0,0.6); }
+#lab-sheet { position: relative; margin-top: auto; background: oklch(var(--b1)); border-radius: 20px 20px 0 0; max-height: 80vh; overflow: hidden; display: flex; flex-direction: column; }
+#lab-tabs-row { display: flex; gap: 4px; padding: 16px 16px 0; overflow-x: auto; flex-shrink: 0; scrollbar-width: none; }
+#lab-tabs-row::-webkit-scrollbar { display: none; }
+.lab-tab { flex-shrink: 0; padding: 6px 14px; border-radius: 8px; font-size: 12px; font-weight: 700; cursor: pointer; background: oklch(var(--b2)); color: oklch(var(--bc)/0.5); transition: all .12s; }
+.lab-tab.active { background: oklch(var(--p)/0.2); color: oklch(var(--p)); }
+#lab-content { overflow-y: auto; padding: 16px; flex: 1; }
+.lab-row { display: flex; justify-content: space-between; align-items: baseline; padding: 8px 0; border-bottom: 1px solid oklch(var(--b3)/0.5); font-size: 13px; }
+.lab-row:last-child { border-bottom: none; }
+.lab-name { color: oklch(var(--bc)/0.7); flex: 1; }
+.lab-val { font-weight: 700; color: oklch(var(--p)); font-variant-numeric: tabular-nums; }
 </style>
 </head>
 <body class="min-h-screen overscroll-none">
 <div id="flash-overlay"></div>
 
-<!-- HOME -->
+<!-- ══════════════════════════════════════════════════════════
+     HOME SCREEN
+══════════════════════════════════════════════════════════ -->
 <div class="screen active" id="screen-home">
   <div class="pb-24">
     <div class="flex items-start gap-4 px-5 pt-6">
@@ -137,49 +223,130 @@ body { font-family: 'Inter', system-ui, sans-serif; }
   </div>
 </div>
 
-<!-- STATS -->
-<div class="screen" id="screen-stats">
-  <div class="pb-24 px-5 pt-6">
-    <div class="text-xs font-bold tracking-widest uppercase text-base-content/40 mb-5" style="font-size:10px;letter-spacing:3px">Performance</div>
-    <div class="stats stats-vertical shadow w-full mb-5 bg-base-200">
-      <div class="stat">
-        <div class="stat-title text-xs">Overall Accuracy</div>
-        <div class="stat-value text-primary bebas text-4xl" id="stats-overall-pct">0%</div>
-        <div class="stat-desc" id="stats-overall-desc">0 questions answered</div>
-      </div>
-      <div class="stat">
-        <div class="stat-title text-xs">Session Streak</div>
-        <div class="stat-value bebas text-4xl" id="stats-streak">🔥 0</div>
-        <div class="stat-desc">consecutive study days</div>
+<!-- ══════════════════════════════════════════════════════════
+     SETUP SCREEN
+══════════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-setup">
+  <div class="pb-28">
+    <div class="flex items-center gap-3 px-4 pt-4 mb-5">
+      <button class="btn btn-ghost btn-sm btn-square text-base" onclick="goHome()">←</button>
+      <div class="text-sm font-bold">Session Setup</div>
+    </div>
+
+    <!-- Quick start row -->
+    <div class="px-5 mb-6">
+      <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Quick Start</div>
+      <div class="flex gap-2 overflow-x-auto pb-1" style="scrollbar-width:none">
+        <button class="qs-chip" onclick="quickStart('weak')">🎯 Weak Areas</button>
+        <button class="qs-chip" onclick="quickStart('mix')">🔀 Mix All</button>
+        <button class="qs-chip" onclick="quickStart('missed')">🏁 Missed Only</button>
+        <button class="qs-chip" onclick="quickStart('flagged')">🔖 Flagged</button>
       </div>
     </div>
-    <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Module Breakdown</div>
-    <div class="flex flex-col gap-3" id="stats-breakdown"></div>
+
+    <!-- Module checkboxes -->
+    <div class="px-5 mb-5">
+      <div class="flex items-center justify-between mb-3">
+        <div class="text-xs font-bold tracking-widest uppercase text-base-content/30" style="font-size:9px;letter-spacing:2px">Modules</div>
+        <button class="btn btn-ghost btn-xs font-bold" onclick="toggleSelectAll()">Select All</button>
+      </div>
+      <div class="flex flex-col gap-2" id="setup-mod-list"></div>
+    </div>
+
+    <!-- Question count -->
+    <div class="px-5 mb-5">
+      <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Questions</div>
+      <div class="flex gap-2 flex-wrap" id="count-chips">
+        <button class="count-chip selected" data-count="10" onclick="setCount(this,10)">10</button>
+        <button class="count-chip" data-count="20" onclick="setCount(this,20)">20</button>
+        <button class="count-chip" data-count="30" onclick="setCount(this,30)">30</button>
+        <button class="count-chip" data-count="0" onclick="setCount(this,0)">All</button>
+      </div>
+    </div>
+
+    <!-- Options -->
+    <div class="px-5 mb-6">
+      <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Options</div>
+      <div class="flex flex-col gap-3">
+        <label class="flex items-center justify-between p-3 rounded-xl bg-base-200 cursor-pointer">
+          <div>
+            <div class="text-sm font-semibold">Timer</div>
+            <div class="text-xs text-base-content/40">90 seconds per question</div>
+          </div>
+          <input type="checkbox" class="toggle toggle-primary toggle-sm" id="setup-timer">
+        </label>
+        <label class="flex items-center justify-between p-3 rounded-xl bg-base-200 cursor-pointer">
+          <div>
+            <div class="text-sm font-semibold">Confidence Rating</div>
+            <div class="text-xs text-base-content/40">Predict before answering</div>
+          </div>
+          <input type="checkbox" class="toggle toggle-primary toggle-sm" id="setup-confidence" checked>
+        </label>
+      </div>
+    </div>
+
+    <div class="px-5">
+      <button class="action-btn primary" onclick="launchDrill()">Start Drill</button>
+    </div>
   </div>
 </div>
 
-<!-- DRILL -->
+<!-- ══════════════════════════════════════════════════════════
+     DRILL SCREEN
+══════════════════════════════════════════════════════════ -->
 <div class="screen" id="screen-drill">
-  <div class="flex items-center gap-3 px-4 pt-4">
+  <div class="flex items-center gap-2 px-4 pt-4">
     <button class="btn btn-ghost btn-sm btn-square text-base" onclick="goHome()">←</button>
     <div class="text-xs font-bold text-base-content/50 flex-1 truncate tracking-wide" id="drill-mod-name">M7 — Fluids &amp; Electrolytes</div>
-    <div class="badge badge-ghost badge-sm font-semibold tabular-nums" id="enc-counter">1 / 33</div>
+    <div class="flex items-center gap-1.5 flex-shrink-0">
+      <span class="text-xs font-bold text-base-content/40 tabular-nums" id="timer-display" style="display:none">1:30</span>
+      <div class="badge badge-ghost badge-sm font-semibold tabular-nums" id="enc-counter">1 / 33</div>
+      <button class="btn btn-ghost btn-xs btn-square" id="flag-btn" onclick="toggleFlag()" title="Flag (F)" style="opacity:0.4;font-size:14px">🔖</button>
+      <button class="btn btn-ghost btn-xs btn-square" onclick="openLabModal()" title="Lab values" style="font-size:14px">🧪</button>
+    </div>
   </div>
 
-  <progress class="progress progress-primary w-full h-1 mt-3 rounded-none" id="drill-pbar" value="0" max="100"></progress>
+  <progress class="progress progress-primary w-full h-1 mt-2 rounded-none" id="drill-pbar" value="0" max="100"></progress>
+  <div class="timer-bar-wrap" id="timer-bar-wrap" style="display:none">
+    <div class="timer-bar" id="timer-bar" style="width:100%"></div>
+  </div>
 
-  <div class="px-4 pt-5 pb-24">
+  <div class="px-4 pt-4 pb-28">
+
+    <!-- Chain scenario -->
     <div class="chain-scenario hidden" id="chain-scenario">
       <div class="text-xs font-bold tracking-widest uppercase text-primary mb-2" style="font-size:9px;letter-spacing:2px">◈ Patient Scenario</div>
       <div class="text-sm leading-relaxed text-base-content/70" id="chain-text"></div>
     </div>
 
+    <!-- SATA instruction -->
     <div class="hidden mb-3" id="sata-instr">
       <div class="alert py-2 px-4" style="background:oklch(var(--in)/0.1);border:1px solid oklch(var(--in)/0.3)">
         <span class="text-xs font-bold tracking-widest text-info" style="letter-spacing:3px">SELECT ALL THAT APPLY</span>
       </div>
     </div>
 
+    <!-- Confidence panel -->
+    <div class="hidden mb-4" id="conf-panel">
+      <div class="card bg-base-200 shadow-sm">
+        <div class="card-body p-4">
+          <div class="text-xs font-bold tracking-widest uppercase text-base-content/40 mb-3" style="font-size:9px;letter-spacing:2px">Predict your confidence</div>
+          <div class="flex items-center gap-2 justify-center mb-2">
+            <button class="conf-chip" data-v="1" onclick="setConfidence(1)">1</button>
+            <button class="conf-chip" data-v="2" onclick="setConfidence(2)">2</button>
+            <button class="conf-chip" data-v="3" onclick="setConfidence(3)">3</button>
+            <button class="conf-chip" data-v="4" onclick="setConfidence(4)">4</button>
+            <button class="conf-chip" data-v="5" onclick="setConfidence(5)">5</button>
+          </div>
+          <div class="flex items-center justify-between mt-1">
+            <span class="text-xs text-base-content/30">1 = blank &nbsp;·&nbsp; 5 = certain</span>
+            <button class="btn btn-ghost btn-xs text-base-content/40" onclick="setConfidence(null)">Skip →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Question card -->
     <div class="card bg-base-200 shadow-sm mb-4">
       <div class="card-body p-5">
         <div class="badge badge-outline badge-sm font-semibold text-primary border-primary/30 mb-3 self-start" id="q-concept"></div>
@@ -187,12 +354,16 @@ body { font-family: 'Inter', system-ui, sans-serif; }
       </div>
     </div>
 
+    <!-- Options -->
     <div class="flex flex-col gap-2.5 mb-3" id="options"></div>
 
+    <!-- Result banner -->
     <div class="result-banner hidden" id="result-banner"></div>
 
+    <!-- Action button -->
     <button class="action-btn primary" id="action-btn" disabled onclick="submitAnswer()">Submit</button>
 
+    <!-- Rationale / Intel box -->
     <div class="card bg-base-200 shadow-sm mt-4 hidden" id="intel-box">
       <div class="card-body p-5">
         <div class="text-xs font-bold tracking-widest uppercase text-base-content/40 mb-3" style="font-size:9px;letter-spacing:2px">— Rationale</div>
@@ -206,7 +377,9 @@ body { font-family: 'Inter', system-ui, sans-serif; }
   </div>
 </div>
 
-<!-- SUMMARY -->
+<!-- ══════════════════════════════════════════════════════════
+     SUMMARY SCREEN
+══════════════════════════════════════════════════════════ -->
 <div class="screen" id="screen-summary">
   <div class="pb-24 px-5 pt-7">
     <div class="text-center mb-8">
@@ -243,10 +416,159 @@ body { font-family: 'Inter', system-ui, sans-serif; }
       <button class="btn btn-primary flex-1 font-bold" onclick="goHome()">Home</button>
       <button class="btn btn-ghost flex-1 font-bold border border-base-300" id="retry-btn">Retry</button>
     </div>
+    <button class="btn btn-outline btn-error w-full mt-3 font-bold hidden" id="retry-wrong-btn">Retry Wrong</button>
   </div>
 </div>
 
-<!-- BOTTOM NAV -->
+<!-- ══════════════════════════════════════════════════════════
+     STATS SCREEN
+══════════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-stats">
+  <div class="pb-24 px-5 pt-6">
+    <div class="text-xs font-bold tracking-widest uppercase text-base-content/40 mb-5" style="font-size:10px;letter-spacing:3px">Performance</div>
+
+    <div class="stats stats-vertical shadow w-full mb-5 bg-base-200">
+      <div class="stat">
+        <div class="stat-title text-xs">Overall Accuracy</div>
+        <div class="stat-value text-primary bebas text-4xl" id="stats-overall-pct">0%</div>
+        <div class="stat-desc" id="stats-overall-desc">0 questions answered</div>
+      </div>
+      <div class="stat">
+        <div class="stat-title text-xs">Session Streak</div>
+        <div class="stat-value bebas text-4xl" id="stats-streak">🔥 0</div>
+        <div class="stat-desc">consecutive study days</div>
+      </div>
+    </div>
+
+    <!-- Trend chart -->
+    <div class="card bg-base-200 shadow-sm mb-4">
+      <div class="card-body p-4">
+        <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Session Trend</div>
+        <div class="flex gap-2 flex-wrap mb-3" id="trend-mod-chips"></div>
+        <svg class="trend-svg" id="trend-svg" viewBox="0 0 320 140" preserveAspectRatio="xMidYMid meet">
+          <text x="160" y="75" text-anchor="middle" fill="grey" font-size="12" font-family="Inter,sans-serif">Select a module above</text>
+        </svg>
+      </div>
+    </div>
+
+    <!-- Heatmap -->
+    <div class="card bg-base-200 shadow-sm mb-4">
+      <div class="card-body p-4">
+        <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Study Calendar (last 70 days)</div>
+        <div class="heatmap-grid" id="heatmap-grid"></div>
+        <div class="flex gap-4 mt-3 text-xs text-base-content/30">
+          <span><span class="inline-block w-3 h-3 rounded-sm bg-base-300 mr-1 align-middle"></span>None</span>
+          <span><span class="inline-block w-3 h-3 rounded-sm mr-1 align-middle" style="background:oklch(var(--su)/0.6)"></span>Studied</span>
+          <span><span class="inline-block w-3 h-3 rounded-sm mr-1 align-middle" style="background:oklch(var(--p)/0.8)"></span>Today</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Module breakdown -->
+    <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Module Breakdown</div>
+    <div class="flex flex-col gap-3 mb-4" id="stats-breakdown"></div>
+
+    <!-- Concept mastery -->
+    <div class="card bg-base-200 shadow-sm mb-4">
+      <div class="card-body p-4">
+        <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Weakest Concepts (top 15)</div>
+        <div id="concept-mastery-list"><div class="text-xs text-base-content/30 text-center py-4">No concept data yet.</div></div>
+      </div>
+    </div>
+
+    <!-- Confidence calibration -->
+    <div class="card bg-base-200 shadow-sm mb-4">
+      <div class="card-body p-4">
+        <div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">Overconfident Wrong (Highest Risk)</div>
+        <div id="conf-calibration-list"><div class="text-xs text-base-content/30 text-center py-4">No confidence data yet.</div></div>
+      </div>
+    </div>
+
+    <button class="btn btn-outline btn-sm w-full font-bold" onclick="exportCSV()">📥 Export CSV</button>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     BOOKMARKS SCREEN
+══════════════════════════════════════════════════════════ -->
+<div class="screen" id="screen-bookmarks">
+  <div class="pb-24 px-5 pt-6">
+    <div class="text-xs font-bold tracking-widest uppercase text-base-content/40 mb-5" style="font-size:10px;letter-spacing:3px">Bookmarks</div>
+    <div id="bookmarks-content"></div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     LAB VALUES MODAL
+══════════════════════════════════════════════════════════ -->
+<div id="lab-modal">
+  <div id="lab-backdrop" onclick="closeLabModal()"></div>
+  <div id="lab-sheet">
+    <div class="flex items-center justify-between px-5 pt-5 pb-2 flex-shrink-0">
+      <div class="text-sm font-bold">Lab Values</div>
+      <button class="btn btn-ghost btn-xs btn-circle" onclick="closeLabModal()">✕</button>
+    </div>
+    <div id="lab-tabs-row">
+      <button class="lab-tab active" onclick="switchLabTab(this,'bmp')">BMP</button>
+      <button class="lab-tab" onclick="switchLabTab(this,'cbc')">CBC</button>
+      <button class="lab-tab" onclick="switchLabTab(this,'coags')">Coags</button>
+      <button class="lab-tab" onclick="switchLabTab(this,'cardiac')">Cardiac</button>
+      <button class="lab-tab" onclick="switchLabTab(this,'peds')">Peds Vitals</button>
+    </div>
+    <div id="lab-content">
+      <div id="lab-bmp">
+        <div class="lab-row"><span class="lab-name">Na (Sodium)</span><span class="lab-val">135–145 mEq/L</span></div>
+        <div class="lab-row"><span class="lab-name">K (Potassium)</span><span class="lab-val">3.5–5.0 mEq/L</span></div>
+        <div class="lab-row"><span class="lab-name">K — Infant</span><span class="lab-val">4.1–5.3 mEq/L</span></div>
+        <div class="lab-row"><span class="lab-name">Cl (Chloride)</span><span class="lab-val">96–106 mEq/L</span></div>
+        <div class="lab-row"><span class="lab-name">CO2 (Bicarb)</span><span class="lab-val">22–28 mEq/L</span></div>
+        <div class="lab-row"><span class="lab-name">BUN</span><span class="lab-val">7–20 mg/dL</span></div>
+        <div class="lab-row"><span class="lab-name">Creatinine</span><span class="lab-val">0.5–1.2 mg/dL</span></div>
+        <div class="lab-row"><span class="lab-name">Cr — Child</span><span class="lab-val">0.3–0.7 mg/dL</span></div>
+        <div class="lab-row"><span class="lab-name">Glucose (fasting)</span><span class="lab-val">70–100 mg/dL</span></div>
+        <div class="lab-row"><span class="lab-name">Glucose — Neonate</span><span class="lab-val">40–60 mg/dL</span></div>
+        <div class="lab-row"><span class="lab-name">Ca (Calcium)</span><span class="lab-val">8.5–10.5 mg/dL</span></div>
+        <div class="lab-row"><span class="lab-name">Ca — Neonate</span><span class="lab-val">7–12 mg/dL</span></div>
+      </div>
+      <div id="lab-cbc" style="display:none">
+        <div class="lab-row"><span class="lab-name">WBC</span><span class="lab-val">4.5–11k /µL</span></div>
+        <div class="lab-row"><span class="lab-name">WBC — Child</span><span class="lab-val">5–10k /µL</span></div>
+        <div class="lab-row"><span class="lab-name">Hgb</span><span class="lab-val">12–17 g/dL</span></div>
+        <div class="lab-row"><span class="lab-name">Hgb — Child</span><span class="lab-val">11.5–14 g/dL</span></div>
+        <div class="lab-row"><span class="lab-name">Hgb — Infant</span><span class="lab-val">10–13 g/dL</span></div>
+        <div class="lab-row"><span class="lab-name">Hct</span><span class="lab-val">36–52%</span></div>
+        <div class="lab-row"><span class="lab-name">Hct — Child</span><span class="lab-val">35–45%</span></div>
+        <div class="lab-row"><span class="lab-name">Platelets</span><span class="lab-val">150–400k /µL</span></div>
+      </div>
+      <div id="lab-coags" style="display:none">
+        <div class="lab-row"><span class="lab-name">PT</span><span class="lab-val">11–13.5 sec</span></div>
+        <div class="lab-row"><span class="lab-name">aPTT</span><span class="lab-val">25–35 sec</span></div>
+        <div class="lab-row"><span class="lab-name">INR (normal)</span><span class="lab-val">0.8–1.2</span></div>
+        <div class="lab-row"><span class="lab-name">INR (therapeutic)</span><span class="lab-val">2–3</span></div>
+      </div>
+      <div id="lab-cardiac" style="display:none">
+        <div class="lab-row"><span class="lab-name">Troponin I</span><span class="lab-val">&lt;0.04 ng/mL</span></div>
+        <div class="lab-row"><span class="lab-name">BNP (normal)</span><span class="lab-val">&lt;100 pg/mL</span></div>
+        <div class="lab-row"><span class="lab-name">BNP (HF concern)</span><span class="lab-val">&gt;300 pg/mL</span></div>
+        <div class="lab-row"><span class="lab-name">pH</span><span class="lab-val">7.35–7.45</span></div>
+        <div class="lab-row"><span class="lab-name">PaO2</span><span class="lab-val">80–100 mmHg</span></div>
+        <div class="lab-row"><span class="lab-name">PaCO2</span><span class="lab-val">35–45 mmHg</span></div>
+      </div>
+      <div id="lab-peds" style="display:none">
+        <div class="lab-row"><span class="lab-name">HR — Infant</span><span class="lab-val">100–160 bpm</span></div>
+        <div class="lab-row"><span class="lab-name">HR — Toddler</span><span class="lab-val">90–140 bpm</span></div>
+        <div class="lab-row"><span class="lab-name">HR — School-age</span><span class="lab-val">70–110 bpm</span></div>
+        <div class="lab-row"><span class="lab-name">BP — Infant</span><span class="lab-val">65–85 / 45–55</span></div>
+        <div class="lab-row"><span class="lab-name">BP — Toddler</span><span class="lab-val">80–100 / 50–60</span></div>
+        <div class="lab-row"><span class="lab-name">BP — School-age</span><span class="lab-val">90–110 / 60–75</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════════════════
+     BOTTOM NAV
+══════════════════════════════════════════════════════════ -->
 <div class="btm-nav btm-nav-sm z-50 border-t border-base-300 bg-base-100" id="main-nav">
   <button id="nav-home" onclick="goHome()" class="active">
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6"/></svg>
@@ -256,10 +578,18 @@ body { font-family: 'Inter', system-ui, sans-serif; }
     <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"/></svg>
     <span class="btm-nav-label text-xs">Stats</span>
   </button>
+  <button id="nav-bookmarks" onclick="showBookmarks()" style="position:relative">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 5a2 2 0 012-2h10a2 2 0 012 2v16l-7-3.5L5 21V5z"/></svg>
+    <span class="btm-nav-label text-xs">Bookmarks</span>
+    <span class="nav-badge hidden" id="flag-badge">0</span>
+  </button>
 </div>
 
 <script src="questions.js"></script>
 <script>
+// ═══════════════════════════════════════════════════════════
+// CONSTANTS
+// ═══════════════════════════════════════════════════════════
 const MODULES = [
   {key:"M7",  name:"Fluids & Electrolytes",   sub:"M7 · 33 questions"},
   {key:"M8",  name:"Elimination",             sub:"M8 · 33 questions"},
@@ -282,314 +612,1103 @@ const REIGEN_QUOTES = {
   0:  "Everyone starts somewhere. Even I had to study at some point. These concepts need repair mode — back to basics.",
 };
 
-let CUR_MOD=null, CUR_QS=[], CUR_IDX=0, SEL_OPTS=new Set(), ANSWERED=false, RESULTS=[];
+// ═══════════════════════════════════════════════════════════
+// STATE
+// ═══════════════════════════════════════════════════════════
+let CUR_MOD = null;
+let CUR_QS = [];
+let CUR_IDX = 0;
+let SEL_OPTS = new Set();
+let ANSWERED = false;
+let RESULTS = [];
+let CUR_LABEL = "";
+let CONF_ACTIVE = false;
+let CUR_CONFIDENCE = null;
+let TIMER_INTERVAL = null;
+let TIME_LEFT = 90;
+let LAST_RESULTS = [];
+let TREND_MOD = null;
+let SETUP_SELECTED_MODS = new Set();
+let SETUP_COUNT = 10;
+let SETUP_TIMER = false;
+let SETUP_CONFIDENCE = true;
 
-const store = ()=>{ try{return JSON.parse(localStorage.getItem("mob_v2")||"{}")}catch{return{}} };
-const save  = d=>{ try{localStorage.setItem("mob_v2",JSON.stringify(d))}catch{} };
-const modStats = k=>{ const s=store(); return s[k]||{correct:0,total:0,sessions:[]} };
+// ═══════════════════════════════════════════════════════════
+// STORAGE HELPERS
+// ═══════════════════════════════════════════════════════════
+function store() {
+  try { return JSON.parse(localStorage.getItem("mob_v2") || "{}"); }
+  catch { return {}; }
+}
+function save(d) {
+  try { localStorage.setItem("mob_v2", JSON.stringify(d)); } catch {}
+}
+function modStats(k) {
+  const s = store();
+  return s[k] || {correct:0, total:0, sessions:[]};
+}
+function today() { return new Date().toISOString().slice(0,10); }
+function yesterday() { return new Date(Date.now()-86400000).toISOString().slice(0,10); }
 
-function saveSession(key,results){
-  const s=store();
-  if(!s[key]) s[key]={correct:0,total:0,sessions:[]};
-  const c=results.filter(r=>r.correct).length;
-  s[key].correct+=c; s[key].total+=results.length;
-  s[key].sessions.push({date:today(),correct:c,total:results.length});
-  if(s[key].sessions.length>30) s[key].sessions.shift();
-  const t=today(),y=yesterday();
-  if(s.lastStudy!==t){ s.streak=(s.lastStudy===y)?(s.streak||0)+1:1; s.lastStudy=t; }
+function getFlagged() {
+  return store().flagged || [];
+}
+function setFlagged(arr) {
+  const s = store();
+  s.flagged = arr;
   save(s);
 }
 
-const today=()=>new Date().toISOString().slice(0,10);
-const yesterday=()=>new Date(Date.now()-86400000).toISOString().slice(0,10);
+function saveSession(key, results) {
+  const s = store();
+  if (!s[key]) s[key] = {correct:0, total:0, sessions:[]};
+  const c = results.filter(r => r.correct).length;
+  s[key].correct += c;
+  s[key].total   += results.length;
+  s[key].sessions.push({date: today(), correct: c, total: results.length});
+  if (s[key].sessions.length > 30) s[key].sessions.shift();
 
-function overallPct(){
-  let c=0,t=0;
-  MODULES.forEach(m=>{const s=modStats(m.key);c+=s.correct;t+=s.total});
-  return t===0?0:Math.round((c/t)*100);
+  // Concept tracking
+  if (!s.concepts) s.concepts = {};
+  results.forEach(r => {
+    if (!s.concepts[r.concept]) s.concepts[r.concept] = {correct:0, total:0};
+    s.concepts[r.concept].total++;
+    if (r.correct) s.concepts[r.concept].correct++;
+  });
+
+  // Confidence history
+  if (!s.confidenceHistory) s.confidenceHistory = [];
+  results.forEach(r => {
+    if (r.predicted != null) {
+      s.confidenceHistory.push({
+        concept: r.concept,
+        predicted: r.predicted,
+        actual: r.correct ? 1 : 0,
+        date: today()
+      });
+    }
+  });
+  while (s.confidenceHistory.length > 500) s.confidenceHistory.shift();
+
+  // Streak
+  const t = today(), y = yesterday();
+  if (s.lastStudy !== t) {
+    s.streak = (s.lastStudy === y) ? (s.streak || 0) + 1 : 1;
+    s.lastStudy = t;
+  }
+
+  if (!s.settings) s.settings = {timer: false, timerSecs: 90, confidence: true};
+  save(s);
+  updateFlagBadge();
 }
-function getEmotion(pct){
-  let label=EMOTIONS[0][1];
-  for(const[thr,em] of EMOTIONS){if(pct>=thr)label=em;else break;}
+
+// ═══════════════════════════════════════════════════════════
+// GAUGE
+// ═══════════════════════════════════════════════════════════
+function overallPct() {
+  let c = 0, t = 0;
+  MODULES.forEach(m => { const s = modStats(m.key); c += s.correct; t += s.total; });
+  return t === 0 ? 0 : Math.round((c / t) * 100);
+}
+function getEmotion(pct) {
+  let label = EMOTIONS[0][1];
+  for (const [thr, em] of EMOTIONS) { if (pct >= thr) label = em; else break; }
   return label;
 }
-function setGauge(pct){
-  const offset=534-(pct/100)*534;
-  document.getElementById("g-fill").style.strokeDashoffset=offset;
-  const glow=document.getElementById("g-glow");
-  glow.style.strokeDashoffset=offset;
-  glow.style.opacity=pct>50?Math.min((pct-50)/50*0.6,0.6):0;
-  const numEl=document.getElementById("gauge-num");
-  numEl.textContent=pct+"%";
-  numEl.className="gauge-num "+(pct===100?"at100":"");
-  document.getElementById("emotion-value").textContent=getEmotion(pct);
-  if(pct===100) triggerExplosion();
+function setGauge(pct) {
+  const offset = 534 - (pct / 100) * 534;
+  document.getElementById("g-fill").style.strokeDashoffset = offset;
+  const glow = document.getElementById("g-glow");
+  glow.style.strokeDashoffset = offset;
+  glow.style.opacity = pct > 50 ? Math.min((pct - 50) / 50 * 0.6, 0.6) : 0;
+  const numEl = document.getElementById("gauge-num");
+  numEl.textContent = pct + "%";
+  numEl.className = "gauge-num" + (pct === 100 ? " at100" : "");
+  document.getElementById("emotion-value").textContent = getEmotion(pct);
+  if (pct === 100) triggerExplosion();
 }
-function triggerExplosion(){
+function triggerExplosion() {
   document.getElementById("gauge-outer").classList.add("exploding");
-  const fl=document.getElementById("flash-overlay");
-  fl.style.animation="screenFlash .4s ease";
-  setTimeout(()=>{document.getElementById("gauge-outer").classList.remove("exploding");fl.style.animation="";},2000);
+  const fl = document.getElementById("flash-overlay");
+  fl.style.animation = "screenFlash .4s ease";
+  setTimeout(() => {
+    document.getElementById("gauge-outer").classList.remove("exploding");
+    fl.style.animation = "";
+  }, 2000);
 }
-function setCountdown(){
-  const days=Math.ceil((new Date("2026-12-07")-new Date())/86400000);
-  const el=document.getElementById("exam-countdown");
-  el.textContent=days>0?`Peds Final in ${days} day${days!==1?"s":""}`:(days===0?"Peds Final — TODAY":"");
+function setCountdown() {
+  const days = Math.ceil((new Date("2026-12-07") - new Date()) / 86400000);
+  const el = document.getElementById("exam-countdown");
+  el.textContent = days > 0 ? `Peds Final in ${days} day${days !== 1 ? "s" : ""}` : (days === 0 ? "Peds Final — TODAY" : "");
 }
 
-function renderHome(){
+// ═══════════════════════════════════════════════════════════
+// HOME
+// ═══════════════════════════════════════════════════════════
+function renderHome() {
   setCountdown();
   setGauge(overallPct());
-  const s=store();
-  document.getElementById("streak-pill").textContent=(s.streak||0)>0?`🔥 ${s.streak} day streak`:"Start your streak";
+  const s = store();
+  document.getElementById("streak-pill").textContent = (s.streak || 0) > 0 ? `🔥 ${s.streak} day streak` : "Start your streak";
+  updateFlagBadge();
 
-  const grid=document.getElementById("modules-grid");
-  grid.innerHTML="";
-  MODULES.forEach(m=>{
-    const st=modStats(m.key);
-    const pct=st.total>0?Math.round((st.correct/st.total)*100):0;
-    const statusLabel=st.total===0?"Not started":pct>=80?"▲ Mastered":"● In progress";
-    const statusClass=st.total===0?"badge-ghost":pct>=80?"badge-success badge-outline":"badge-primary badge-outline";
-    const progColor=pct>=80?"progress-success":"progress-primary";
-    const borderClass=pct>=80?"border border-success/20":st.total>0?"border border-primary/15":"";
-
-    const card=document.createElement("div");
-    card.className=`card bg-base-200 cursor-pointer hover:bg-base-300 transition-colors shadow-sm ${borderClass}`;
-    card.innerHTML=`
+  const grid = document.getElementById("modules-grid");
+  grid.innerHTML = "";
+  MODULES.forEach(m => {
+    const st = modStats(m.key);
+    const pct = st.total > 0 ? Math.round((st.correct / st.total) * 100) : 0;
+    const statusLabel = st.total === 0 ? "Not started" : pct >= 80 ? "▲ Mastered" : "● In progress";
+    const statusClass = st.total === 0 ? "badge-ghost" : pct >= 80 ? "badge-success badge-outline" : "badge-primary badge-outline";
+    const progColor = pct >= 80 ? "progress-success" : "progress-primary";
+    const borderClass = pct >= 80 ? "border border-success/20" : st.total > 0 ? "border border-primary/15" : "";
+    const card = document.createElement("div");
+    card.className = `card bg-base-200 cursor-pointer hover:bg-base-300 transition-colors shadow-sm ${borderClass}`;
+    card.innerHTML = `
       <div class="card-body p-4">
         <div class="bebas text-primary leading-none mb-1" style="font-size:30px">${m.key}</div>
         <div class="text-xs font-semibold text-base-content leading-snug mb-3">${m.name}</div>
         <div class="badge ${statusClass} badge-xs font-semibold mb-2 self-start">${statusLabel}</div>
         <progress class="progress ${progColor} h-1.5 w-full" value="${pct}" max="100"></progress>
-        <div class="text-xs text-base-content/35 mt-1.5">${st.total>0?pct+"% · "+st.correct+"/"+st.total:m.sub}</div>
+        <div class="text-xs text-base-content/35 mt-1.5">${st.total > 0 ? pct + "% · " + st.correct + "/" + st.total : m.sub}</div>
       </div>`;
-    card.addEventListener("click",()=>startModule(m.key));
+    card.addEventListener("click", () => openSetup(m.key));
     grid.appendChild(card);
   });
 }
 
-function showStats(){
-  let totalC=0,totalT=0;
-  const s=store();
-  MODULES.forEach(m=>{const st=modStats(m.key);totalC+=st.correct;totalT+=st.total;});
-  const oPct=totalT>0?Math.round((totalC/totalT)*100):0;
-  document.getElementById("stats-overall-pct").textContent=oPct+"%";
-  document.getElementById("stats-overall-desc").textContent=totalT+" questions answered";
-  document.getElementById("stats-streak").textContent="🔥 "+(s.streak||0);
+function updateFlagBadge() {
+  const f = getFlagged();
+  const badge = document.getElementById("flag-badge");
+  if (f.length > 0) {
+    badge.textContent = f.length;
+    badge.classList.remove("hidden");
+  } else {
+    badge.classList.add("hidden");
+  }
+}
 
-  const bd=document.getElementById("stats-breakdown");
-  bd.innerHTML="";
-  MODULES.forEach(m=>{
-    const st=modStats(m.key);
-    const pct=st.total>0?Math.round((st.correct/st.total)*100):0;
-    const sessions=st.sessions?st.sessions.length:0;
-    const progColor=pct>=80?"progress-success":"progress-primary";
-    const pctColor=pct>=80?"text-success":st.total>0?"text-primary":"text-base-content/25";
-    const card=document.createElement("div");
-    card.className="card bg-base-200 shadow-sm";
-    card.innerHTML=`
+// ═══════════════════════════════════════════════════════════
+// SETUP SCREEN
+// ═══════════════════════════════════════════════════════════
+function openSetup(preselectedKey) {
+  SETUP_SELECTED_MODS = new Set(preselectedKey ? [preselectedKey] : []);
+  SETUP_COUNT = 10;
+
+  const s = store();
+  SETUP_TIMER = s.settings ? (s.settings.timer || false) : false;
+  SETUP_CONFIDENCE = s.settings ? (s.settings.confidence !== false) : true;
+
+  renderSetupModList();
+
+  document.getElementById("setup-timer").checked = SETUP_TIMER;
+  document.getElementById("setup-confidence").checked = SETUP_CONFIDENCE;
+
+  document.querySelectorAll(".count-chip").forEach(c => c.classList.remove("selected"));
+  const def = document.querySelector('.count-chip[data-count="10"]');
+  if (def) def.classList.add("selected");
+
+  switchTo("screen-setup");
+}
+
+function renderSetupModList() {
+  const list = document.getElementById("setup-mod-list");
+  list.innerHTML = "";
+  MODULES.forEach(m => {
+    const st = modStats(m.key);
+    const pct = st.total > 0 ? Math.round((st.correct / st.total) * 100) : 0;
+    const isChecked = SETUP_SELECTED_MODS.has(m.key);
+    const lbl = document.createElement("label");
+    lbl.className = "mod-cb-label" + (isChecked ? " checked" : "");
+    lbl.innerHTML = `
+      <input type="checkbox" class="checkbox checkbox-primary checkbox-sm" ${isChecked ? "checked" : ""} onchange="toggleMod('${m.key}',this)">
+      <div class="flex-1">
+        <span class="bebas text-primary" style="font-size:17px">${m.key}</span>
+        <span class="text-xs text-base-content/50 ml-1.5">${m.name}</span>
+      </div>
+      <span class="text-xs text-base-content/30">${st.total > 0 ? pct + "%" : "—"}</span>`;
+    list.appendChild(lbl);
+  });
+}
+
+function toggleMod(key, cb) {
+  if (cb.checked) SETUP_SELECTED_MODS.add(key);
+  else SETUP_SELECTED_MODS.delete(key);
+  const lbl = cb.closest("label");
+  if (lbl) lbl.classList.toggle("checked", cb.checked);
+}
+
+function toggleSelectAll() {
+  if (SETUP_SELECTED_MODS.size === MODULES.length) {
+    SETUP_SELECTED_MODS.clear();
+  } else {
+    MODULES.forEach(m => SETUP_SELECTED_MODS.add(m.key));
+  }
+  renderSetupModList();
+}
+
+function setCount(btn, n) {
+  document.querySelectorAll(".count-chip").forEach(c => c.classList.remove("selected"));
+  btn.classList.add("selected");
+  SETUP_COUNT = n;
+}
+
+// ═══════════════════════════════════════════════════════════
+// QUICK START
+// ═══════════════════════════════════════════════════════════
+function quickStart(mode) {
+  // Grab current toggle values from setup screen if visible
+  const timerEl = document.getElementById("setup-timer");
+  const confEl  = document.getElementById("setup-confidence");
+  SETUP_TIMER      = timerEl ? timerEl.checked : false;
+  SETUP_CONFIDENCE = confEl  ? confEl.checked  : true;
+
+  if (mode === "weak") {
+    const weakMods = MODULES.filter(m => {
+      const st = modStats(m.key);
+      return st.total === 0 || Math.round((st.correct / st.total) * 100) < 70;
+    });
+    const targetMods = weakMods.length > 0 ? weakMods : MODULES;
+    let pool = [];
+    targetMods.forEach(m => { pool = pool.concat(QUESTIONS[m.key] || []); });
+    shuffle(pool);
+    pool = pool.slice(0, 20);
+    launchFromPool(pool, "Weak Areas");
+
+  } else if (mode === "mix") {
+    let pool = [];
+    MODULES.forEach(m => { pool = pool.concat(QUESTIONS[m.key] || []); });
+    shuffle(pool);
+    pool = pool.slice(0, 20);
+    launchFromPool(pool, "Mix All");
+
+  } else if (mode === "missed") {
+    if (LAST_RESULTS.length === 0) { alert("No session data yet — complete a drill first."); return; }
+    const wrongIds = LAST_RESULTS.filter(r => !r.correct).map(r => r.id);
+    if (wrongIds.length === 0) { alert("You got everything right last time!"); return; }
+    launchFromIds(wrongIds, "Missed Only");
+
+  } else if (mode === "flagged") {
+    const flagged = getFlagged();
+    if (flagged.length === 0) { alert("No flagged questions yet."); return; }
+    launchFromIds(flagged, "Flagged");
+  }
+}
+
+function launchFromIds(ids, label) {
+  const allQs = MODULES.flatMap(m => QUESTIONS[m.key] || []);
+  const pool = allQs.filter(q => ids.includes(q.id));
+  if (pool.length === 0) { alert("No matching questions found."); return; }
+  launchFromPool(pool, label);
+}
+
+function launchFromPool(pool, label) {
+  if (pool.length === 0) { alert("No questions available."); return; }
+  shuffle(pool);
+  CUR_MOD   = "MIXED";
+  CUR_QS    = pool;
+  CUR_IDX   = 0;
+  RESULTS   = [];
+  CUR_LABEL = label;
+  document.getElementById("drill-mod-name").textContent = label;
+  switchTo("screen-drill");
+  loadQ(0);
+}
+
+function launchDrill() {
+  const timerEl = document.getElementById("setup-timer");
+  const confEl  = document.getElementById("setup-confidence");
+  SETUP_TIMER      = timerEl ? timerEl.checked : false;
+  SETUP_CONFIDENCE = confEl  ? confEl.checked  : true;
+
+  // Persist settings
+  const s = store();
+  s.settings = {timer: SETUP_TIMER, timerSecs: 90, confidence: SETUP_CONFIDENCE};
+  save(s);
+
+  if (SETUP_SELECTED_MODS.size === 0) { alert("Select at least one module."); return; }
+
+  let pool = [];
+  SETUP_SELECTED_MODS.forEach(key => { pool = pool.concat(QUESTIONS[key] || []); });
+  shuffle(pool);
+  if (SETUP_COUNT > 0) pool = pool.slice(0, SETUP_COUNT);
+  if (pool.length === 0) { alert("No questions available."); return; }
+
+  CUR_MOD = SETUP_SELECTED_MODS.size === 1 ? [...SETUP_SELECTED_MODS][0] : "MIXED";
+  CUR_QS  = pool;
+  CUR_IDX = 0;
+  RESULTS = [];
+
+  if (SETUP_SELECTED_MODS.size === 1) {
+    const mod = MODULES.find(m => m.key === CUR_MOD);
+    CUR_LABEL = mod ? mod.key + " — " + mod.name : CUR_MOD;
+  } else {
+    CUR_LABEL = "Mix Mode";
+  }
+
+  document.getElementById("drill-mod-name").textContent = CUR_LABEL;
+  CUR_LABEL = "";
+  switchTo("screen-drill");
+  loadQ(0);
+}
+
+// ═══════════════════════════════════════════════════════════
+// DRILL — HELPERS
+// ═══════════════════════════════════════════════════════════
+function shuffle(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [arr[i], arr[j]] = [arr[j], arr[i]];
+  }
+}
+
+function clearTimer() {
+  if (TIMER_INTERVAL !== null) {
+    clearInterval(TIMER_INTERVAL);
+    TIMER_INTERVAL = null;
+  }
+}
+
+function startTimer() {
+  if (!SETUP_TIMER) return;
+  clearTimer();
+  TIME_LEFT = 90;
+  const bar     = document.getElementById("timer-bar");
+  const display = document.getElementById("timer-display");
+  const wrap    = document.getElementById("timer-bar-wrap");
+  wrap.style.display    = "block";
+  display.style.display = "block";
+
+  function tick() {
+    TIME_LEFT--;
+    const pct = (TIME_LEFT / 90) * 100;
+    bar.style.width = pct + "%";
+    bar.classList.toggle("danger", TIME_LEFT < 20);
+    const m = Math.floor(TIME_LEFT / 60);
+    const sec = TIME_LEFT % 60;
+    display.textContent = m + ":" + String(sec).padStart(2, "0");
+    if (TIME_LEFT <= 0) {
+      clearTimer();
+      autoSubmitWrong();
+    }
+  }
+  tick();
+  TIMER_INTERVAL = setInterval(tick, 1000);
+}
+
+function autoSubmitWrong() {
+  if (ANSWERED) return;
+  ANSWERED = true;
+  clearTimer();
+  const q = CUR_QS[CUR_IDX];
+  document.querySelectorAll(".opt").forEach((b, idx) => {
+    b.disabled = true;
+    const l = String.fromCharCode(65 + idx);
+    if (q.correct.includes(l)) b.classList.add("correct-ans");
+  });
+  const banner = document.getElementById("result-banner");
+  banner.classList.remove("hidden");
+  banner.classList.add("lose");
+  banner.innerHTML = `<div class="result-icon">⏱</div><div class="result-label">Time's up — Incorrect</div>`;
+  document.getElementById("intel-text").textContent = q.rationale;
+  document.getElementById("trap-text").textContent  = q.trap;
+  document.getElementById("intel-box").classList.remove("hidden");
+  RESULTS.push({id: q.id, concept: q.concept, correct: false, type: q.type || "MCQ", predicted: CUR_CONFIDENCE});
+  const ab = document.getElementById("action-btn");
+  ab.disabled = false;
+  if (CUR_IDX + 1 < CUR_QS.length) {
+    ab.textContent = "Next Question →";
+    ab.className   = "action-btn secondary";
+    ab.onclick     = () => { CUR_IDX++; loadQ(CUR_IDX); };
+  } else {
+    ab.textContent = "View Results";
+    ab.className   = "action-btn primary";
+    ab.onclick     = showSummary;
+  }
+}
+
+// ═══════════════════════════════════════════════════════════
+// DRILL — LOAD QUESTION
+// ═══════════════════════════════════════════════════════════
+function loadQ(i) {
+  clearTimer();
+  const q = CUR_QS[i];
+  SEL_OPTS      = new Set();
+  ANSWERED      = false;
+  CUR_CONFIDENCE = null;
+  CONF_ACTIVE   = SETUP_CONFIDENCE;
+
+  document.getElementById("q-concept").textContent = q.concept;
+  document.getElementById("q-stem").textContent    = q.stem;
+  document.getElementById("enc-counter").textContent = `${i + 1} / ${CUR_QS.length}`;
+  document.getElementById("drill-pbar").value = Math.round((i / CUR_QS.length) * 100);
+
+  // Timer bar reset
+  const wrap    = document.getElementById("timer-bar-wrap");
+  const bar     = document.getElementById("timer-bar");
+  const display = document.getElementById("timer-display");
+  if (!SETUP_TIMER) {
+    wrap.style.display    = "none";
+    display.style.display = "none";
+  } else {
+    wrap.style.display    = "block";
+    display.style.display = "block";
+    bar.style.width       = "100%";
+    bar.classList.remove("danger");
+    display.textContent   = "1:30";
+  }
+
+  // Chain scenario
+  const chainEl = document.getElementById("chain-scenario");
+  if (q.type === "CHAIN" && q.chain_scenario) {
+    document.getElementById("chain-text").textContent = q.chain_scenario;
+    chainEl.classList.remove("hidden");
+  } else {
+    chainEl.classList.add("hidden");
+  }
+
+  // SATA instruction
+  document.getElementById("sata-instr").classList.toggle("hidden", q.type !== "SATA");
+
+  // Confidence panel
+  const confPanel = document.getElementById("conf-panel");
+  if (CONF_ACTIVE) {
+    confPanel.classList.remove("hidden");
+    confPanel.style.opacity = "";
+    document.querySelectorAll(".conf-chip").forEach(c => c.classList.remove("active"));
+  } else {
+    confPanel.classList.add("hidden");
+  }
+
+  // Flag button state
+  const flagged = getFlagged();
+  document.getElementById("flag-btn").style.opacity = flagged.includes(q.id) ? "1" : "0.4";
+
+  // Render options
+  const opts = document.getElementById("options");
+  opts.innerHTML = "";
+  q.options.forEach((o, idx) => {
+    const b = document.createElement("button");
+    b.className = "opt" + (CONF_ACTIVE ? " opt-locked" : "");
+    b.dataset.idx = idx;
+    b.innerHTML = `
+      <span class="opt-letter">${o.charAt(0)}</span>
+      <span class="opt-text">${o.slice(3)}</span>
+      <button class="opt-strike-btn" tabindex="-1" onclick="toggleStrike(event,this)">✕</button>`;
+    b.addEventListener("click", () => selectOpt(b, idx));
+    opts.appendChild(b);
+  });
+
+  // Result/intel reset
+  const banner = document.getElementById("result-banner");
+  banner.classList.add("hidden");
+  banner.classList.remove("win", "lose");
+  document.getElementById("intel-box").classList.add("hidden");
+
+  const ab = document.getElementById("action-btn");
+  ab.disabled    = true;
+  ab.textContent = "Submit";
+  ab.className   = "action-btn primary";
+  ab.onclick     = submitAnswer;
+
+  // If confidence not required, start timer immediately
+  if (!CONF_ACTIVE && SETUP_TIMER) startTimer();
+}
+
+// ═══════════════════════════════════════════════════════════
+// DRILL — INTERACTIONS
+// ═══════════════════════════════════════════════════════════
+function setConfidence(val) {
+  CUR_CONFIDENCE = val;
+  CONF_ACTIVE    = false;
+  document.querySelectorAll(".conf-chip").forEach(c => c.classList.remove("active"));
+  if (val != null) {
+    const chip = document.querySelector(`.conf-chip[data-v="${val}"]`);
+    if (chip) chip.classList.add("active");
+  }
+  // Unlock options
+  document.querySelectorAll(".opt").forEach(b => b.classList.remove("opt-locked"));
+  // Fade and hide panel
+  const panel = document.getElementById("conf-panel");
+  panel.style.transition = "opacity .25s";
+  panel.style.opacity    = "0";
+  setTimeout(() => {
+    panel.classList.add("hidden");
+    panel.style.opacity    = "";
+    panel.style.transition = "";
+  }, 250);
+  // Start timer after confidence set
+  if (SETUP_TIMER) startTimer();
+}
+
+function toggleStrike(e, btn) {
+  e.stopPropagation();
+  const opt = btn.closest(".opt");
+  if (!opt || opt.disabled) return;
+  const wasStruck = opt.classList.contains("struck");
+  opt.classList.toggle("struck", !wasStruck);
+  // If un-striking, that's it. If striking a selected option, deselect it.
+  if (!wasStruck) {
+    const idx = parseInt(opt.dataset.idx);
+    if (opt.classList.contains("sel") || opt.classList.contains("sata-sel")) {
+      opt.classList.remove("sel", "sata-sel");
+      SEL_OPTS.delete(idx);
+      document.getElementById("action-btn").disabled = SEL_OPTS.size === 0;
+    }
+  }
+}
+
+function selectOpt(btn, idx) {
+  if (ANSWERED || CONF_ACTIVE) return;
+  if (btn.disabled) return;
+  // Clicking a struck option un-strikes and selects
+  if (btn.classList.contains("struck")) btn.classList.remove("struck");
+  const q = CUR_QS[CUR_IDX];
+  if (q.type === "SATA") {
+    if (SEL_OPTS.has(idx)) {
+      SEL_OPTS.delete(idx);
+      btn.classList.remove("sata-sel");
+    } else {
+      SEL_OPTS.add(idx);
+      btn.classList.add("sata-sel");
+    }
+    document.getElementById("action-btn").disabled = SEL_OPTS.size === 0;
+  } else {
+    document.querySelectorAll(".opt").forEach(b => b.classList.remove("sel"));
+    btn.classList.add("sel");
+    SEL_OPTS = new Set([idx]);
+    document.getElementById("action-btn").disabled = false;
+  }
+}
+
+function submitAnswer() {
+  if (SEL_OPTS.size === 0 || ANSWERED) return;
+  ANSWERED = true;
+  clearTimer();
+  const q = CUR_QS[CUR_IDX];
+  let isCorrect;
+  if (q.type === "SATA") {
+    const correctSet = new Set(q.correct);
+    const selLetters = new Set([...SEL_OPTS].map(i => String.fromCharCode(65 + i)));
+    isCorrect = correctSet.size === selLetters.size && [...correctSet].every(l => selLetters.has(l));
+  } else {
+    isCorrect = q.correct.includes(String.fromCharCode(65 + [...SEL_OPTS][0]));
+  }
+
+  document.querySelectorAll(".opt").forEach((b, idx) => {
+    b.disabled = true;
+    const l = String.fromCharCode(65 + idx);
+    if (q.correct.includes(l)) b.classList.add("correct-ans");
+    else if (SEL_OPTS.has(idx) && !q.correct.includes(l)) b.classList.add("wrong-ans");
+  });
+
+  const banner = document.getElementById("result-banner");
+  banner.classList.remove("hidden");
+  banner.classList.add(isCorrect ? "win" : "lose");
+  banner.innerHTML = `<div class="result-icon">${isCorrect ? "✓" : "✗"}</div><div class="result-label">${isCorrect ? "Correct" : "Incorrect"}</div>`;
+
+  document.getElementById("intel-text").textContent = q.rationale;
+  document.getElementById("trap-text").textContent  = q.trap;
+  document.getElementById("intel-box").classList.remove("hidden");
+
+  RESULTS.push({id: q.id, concept: q.concept, correct: isCorrect, type: q.type || "MCQ", predicted: CUR_CONFIDENCE});
+
+  const ab = document.getElementById("action-btn");
+  ab.disabled = false;
+  if (CUR_IDX + 1 < CUR_QS.length) {
+    ab.textContent = "Next Question →";
+    ab.className   = "action-btn secondary";
+    ab.onclick     = () => { CUR_IDX++; loadQ(CUR_IDX); };
+  } else {
+    ab.textContent = "View Results";
+    ab.className   = "action-btn primary";
+    ab.onclick     = showSummary;
+  }
+}
+
+function toggleFlag() {
+  if (!CUR_QS[CUR_IDX]) return;
+  const qId = CUR_QS[CUR_IDX].id;
+  let flagged = getFlagged();
+  const idx = flagged.indexOf(qId);
+  if (idx >= 0) {
+    flagged.splice(idx, 1);
+    document.getElementById("flag-btn").style.opacity = "0.4";
+  } else {
+    flagged.push(qId);
+    document.getElementById("flag-btn").style.opacity = "1";
+  }
+  setFlagged(flagged);
+  updateFlagBadge();
+}
+
+// ═══════════════════════════════════════════════════════════
+// SUMMARY
+// ═══════════════════════════════════════════════════════════
+function showSummary() {
+  LAST_RESULTS = [...RESULTS];
+
+  if (CUR_MOD === "MIXED") {
+    const byMod = {};
+    RESULTS.forEach(r => {
+      const match = r.id.match(/^m(\d+)/i);
+      const key = match ? "M" + match[1] : "M7";
+      if (!byMod[key]) byMod[key] = [];
+      byMod[key].push(r);
+    });
+    Object.keys(byMod).forEach(k => saveSession(k, byMod[k]));
+  } else {
+    saveSession(CUR_MOD, RESULTS);
+  }
+
+  const correct = RESULTS.filter(r => r.correct).length;
+  const total   = RESULTS.length;
+  const pct     = Math.round((correct / total) * 100);
+
+  const scoreEl = document.getElementById("sum-score");
+  scoreEl.textContent = correct + "/" + total;
+  scoreEl.className = "bebas mb-1 " + (pct === 100 ? "score-perfect" : pct >= 75 ? "score-good" : pct >= 50 ? "score-avg" : "score-low");
+
+  document.getElementById("sum-pct").textContent    = pct + "% accurate this session";
+  document.getElementById("sum-modname").textContent = document.getElementById("drill-mod-name").textContent;
+
+  let quote = REIGEN_QUOTES[0];
+  for (const [thr, q] of Object.entries(REIGEN_QUOTES).sort((a, b) => Number(a[0]) - Number(b[0]))) {
+    if (pct >= parseInt(thr)) quote = q;
+  }
+  document.getElementById("reigen-quote").textContent = `"${quote}"`;
+
+  const bd = document.getElementById("sum-breakdown");
+  bd.innerHTML = "";
+  RESULTS.forEach(r => {
+    const row = document.createElement("div");
+    row.className = "flex items-start justify-between gap-3 py-2.5 border-b border-base-300 last:border-0 last:pb-0";
+    let confBadge = "";
+    if (r.predicted != null) {
+      const warned = !r.correct && r.predicted >= 4;
+      confBadge = ` <span class="badge badge-xs badge-ghost ml-1 font-mono" style="${warned ? "color:oklch(var(--wa));border-color:oklch(var(--wa)/0.4)" : ""}">C${r.predicted}</span>`;
+    }
+    row.innerHTML = `<div class="text-sm text-base-content leading-snug flex-1">${r.concept}${confBadge}</div><div class="badge ${r.correct ? "badge-success" : "badge-error"} badge-outline badge-sm font-bold whitespace-nowrap">${r.correct ? "✓ Correct" : "✗ Wrong"}</div>`;
+    bd.appendChild(row);
+  });
+
+  buildSM2();
+
+  document.getElementById("retry-btn").onclick = () => openSetup(CUR_MOD !== "MIXED" ? CUR_MOD : null);
+
+  const wrongCount  = RESULTS.filter(r => !r.correct).length;
+  const retryWrong  = document.getElementById("retry-wrong-btn");
+  if (wrongCount > 0) {
+    retryWrong.textContent = `Retry Wrong (${wrongCount})`;
+    retryWrong.classList.remove("hidden");
+    retryWrong.onclick = () => {
+      const wrongIds = RESULTS.filter(r => !r.correct).map(r => r.id);
+      launchFromIds(wrongIds, `Retry Wrong (${wrongCount})`);
+    };
+  } else {
+    retryWrong.classList.add("hidden");
+  }
+
+  switchTo("screen-summary");
+  setGauge(overallPct());
+}
+
+function buildSM2() {
+  const dateStr = new Date().toLocaleDateString("en-US", {month:"short", day:"numeric", year:"numeric"});
+  const c   = RESULTS.filter(r => r.correct).length;
+  const t   = RESULTS.length;
+  const pct = Math.round((c / t) * 100);
+  const lines = [];
+  lines.push(`SESSION: ${dateStr} | ${document.getElementById("drill-mod-name").textContent}`);
+  lines.push(`SCORE: ${c}/${t} (${pct}%)`);
+  lines.push(`─────────────────────────────────────`);
+  lines.push(`CONCEPT RESULTS:`);
+  RESULTS.forEach(r => lines.push(`  ${r.correct ? "✓" : "✗"} ${r.concept}${r.predicted != null ? " [C" + r.predicted + "]" : ""}`));
+  lines.push(`─────────────────────────────────────`);
+  const wrongs = RESULTS.filter(r => !r.correct);
+  const rights = RESULTS.filter(r => r.correct);
+  if (wrongs.length > 0) {
+    lines.push(`WRONG → lower confidence, reset interval to 1 day:`);
+    wrongs.forEach(r => lines.push(`  · ${r.concept}`));
+  }
+  if (rights.length > 0) {
+    lines.push(`CORRECT → advance SM-2 per current EF:`);
+    rights.forEach(r => lines.push(`  · ${r.concept}`));
+  }
+  lines.push(`─────────────────────────────────────`);
+  lines.push(`PASTE TO CLAUDE → update weakness-tracker.md`);
+  document.getElementById("sm2-block").textContent = lines.join("\n");
+}
+
+function copyBlock() {
+  navigator.clipboard.writeText(document.getElementById("sm2-block").textContent).then(() => {
+    const b = document.getElementById("copy-btn");
+    b.textContent = "✓ Copied";
+    b.classList.replace("btn-primary", "btn-success");
+    setTimeout(() => { b.textContent = "📋 Copy Block"; b.classList.replace("btn-success", "btn-primary"); }, 2000);
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// STATS
+// ═══════════════════════════════════════════════════════════
+function showStats() {
+  let totalC = 0, totalT = 0;
+  const s = store();
+  MODULES.forEach(m => { const st = modStats(m.key); totalC += st.correct; totalT += st.total; });
+  const oPct = totalT > 0 ? Math.round((totalC / totalT) * 100) : 0;
+
+  document.getElementById("stats-overall-pct").textContent  = oPct + "%";
+  document.getElementById("stats-overall-desc").textContent = totalT + " questions answered";
+  document.getElementById("stats-streak").textContent       = "🔥 " + (s.streak || 0);
+
+  // Module breakdown
+  const bd = document.getElementById("stats-breakdown");
+  bd.innerHTML = "";
+  MODULES.forEach(m => {
+    const st       = modStats(m.key);
+    const pct      = st.total > 0 ? Math.round((st.correct / st.total) * 100) : 0;
+    const sessions = st.sessions ? st.sessions.length : 0;
+    const progColor = pct >= 80 ? "progress-success" : "progress-primary";
+    const pctColor  = pct >= 80 ? "text-success" : st.total > 0 ? "text-primary" : "text-base-content/25";
+    const card = document.createElement("div");
+    card.className = "card bg-base-200 shadow-sm";
+    card.innerHTML = `
       <div class="card-body p-4">
         <div class="flex items-center justify-between mb-2">
           <div class="flex items-baseline gap-2">
             <span class="bebas text-primary" style="font-size:18px">${m.key}</span>
             <span class="text-xs text-base-content/50">${m.name}</span>
           </div>
-          <span class="text-sm font-bold ${pctColor}">${st.total>0?pct+"%":"—"}</span>
+          <span class="text-sm font-bold ${pctColor}">${st.total > 0 ? pct + "%" : "—"}</span>
         </div>
         <progress class="progress ${progColor} h-1.5 w-full" value="${pct}" max="100"></progress>
-        <div class="text-xs text-base-content/35 mt-1.5">${st.total>0?st.correct+"/"+st.total+" correct · "+sessions+" session"+(sessions!==1?"s":""):"Not started"}</div>
+        <div class="text-xs text-base-content/35 mt-1.5">${st.total > 0 ? st.correct + "/" + st.total + " correct · " + sessions + " session" + (sessions !== 1 ? "s" : "") : "Not started"}</div>
       </div>`;
     bd.appendChild(card);
   });
+
+  // Trend chips
+  const chips = document.getElementById("trend-mod-chips");
+  chips.innerHTML = "";
+  MODULES.forEach(m => {
+    const btn = document.createElement("button");
+    btn.className  = "count-chip" + (TREND_MOD === m.key ? " selected" : "");
+    btn.textContent = m.key;
+    btn.onclick    = () => {
+      TREND_MOD = m.key;
+      document.querySelectorAll("#trend-mod-chips .count-chip").forEach(c => c.classList.remove("selected"));
+      btn.classList.add("selected");
+      renderTrendChart();
+    };
+    chips.appendChild(btn);
+  });
+
+  renderTrendChart();
+  renderHeatmap();
+  renderConceptMastery();
+  renderConfCalibration();
   switchTo("screen-stats");
 }
 
-function startModule(key){
-  CUR_MOD=key; CUR_IDX=0; RESULTS=[];
-  CUR_QS=[...(QUESTIONS[key]||[])];
-  for(let i=CUR_QS.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[CUR_QS[i],CUR_QS[j]]=[CUR_QS[j],CUR_QS[i]];}
-  const mod=MODULES.find(m=>m.key===key);
-  document.getElementById("drill-mod-name").textContent=mod?mod.key+" — "+mod.name:key;
-  switchTo("screen-drill");
-  loadQ(0);
-}
-
-function loadQ(i){
-  const q=CUR_QS[i];
-  SEL_OPTS=new Set(); ANSWERED=false;
-  document.getElementById("q-concept").textContent=q.concept;
-  document.getElementById("q-stem").textContent=q.stem;
-  document.getElementById("enc-counter").textContent=`${i+1} / ${CUR_QS.length}`;
-  document.getElementById("drill-pbar").value=Math.round((i/CUR_QS.length)*100);
-
-  const chainEl=document.getElementById("chain-scenario");
-  if(q.type==="CHAIN"&&q.chain_scenario){
-    document.getElementById("chain-text").textContent=q.chain_scenario;
-    chainEl.classList.remove("hidden");
-  } else { chainEl.classList.add("hidden"); }
-
-  const sataEl=document.getElementById("sata-instr");
-  if(q.type==="SATA") sataEl.classList.remove("hidden");
-  else sataEl.classList.add("hidden");
-
-  const opts=document.getElementById("options");
-  opts.innerHTML="";
-  q.options.forEach((o,idx)=>{
-    const b=document.createElement("button");
-    b.className="opt";
-    b.innerHTML=`<span class="opt-letter">${o.charAt(0)}</span><span class="opt-text">${o.slice(3)}</span>`;
-    b.dataset.idx=idx;
-    b.addEventListener("click",()=>selectOpt(b,idx));
-    opts.appendChild(b);
+function renderTrendChart() {
+  const svg = document.getElementById("trend-svg");
+  if (!TREND_MOD) {
+    svg.innerHTML = `<text x="160" y="75" text-anchor="middle" fill="grey" font-size="12" font-family="Inter,sans-serif">Select a module above</text>`;
+    return;
+  }
+  const st = modStats(TREND_MOD);
+  const sessions = (st.sessions || []).slice(-10);
+  if (sessions.length < 2) {
+    svg.innerHTML = `<text x="160" y="75" text-anchor="middle" fill="grey" font-size="12" font-family="Inter,sans-serif">Not enough sessions yet (need 2+)</text>`;
+    return;
+  }
+  const W = 320, H = 120, PAD = 24;
+  const plotW = W - PAD * 2;
+  const plotH = H - PAD * 2;
+  const pcts  = sessions.map(s => s.total > 0 ? Math.round((s.correct / s.total) * 100) : 0);
+  const pts   = pcts.map((p, i) => {
+    const x = PAD + (i / (sessions.length - 1)) * plotW;
+    const y = PAD + (1 - p / 100) * plotH;
+    return x + "," + y;
   });
 
-  const banner=document.getElementById("result-banner");
-  banner.classList.add("hidden"); banner.classList.remove("win","lose");
-  document.getElementById("intel-box").classList.add("hidden");
-
-  const ab=document.getElementById("action-btn");
-  ab.disabled=true; ab.textContent="Submit";
-  ab.className="action-btn primary"; ab.onclick=submitAnswer;
+  let html = "";
+  // Grid lines
+  [0, 25, 50, 75, 100].forEach(v => {
+    const y = PAD + (1 - v / 100) * plotH;
+    html += `<line x1="${PAD}" y1="${y}" x2="${W - PAD}" y2="${y}" stroke="#333" stroke-width="1" stroke-dasharray="3,3"/>`;
+    html += `<text x="${PAD - 4}" y="${y + 4}" text-anchor="end" font-size="8" fill="#666" font-family="Inter,sans-serif">${v}</text>`;
+  });
+  // Polyline
+  html += `<polyline points="${pts.join(" ")}" fill="none" stroke="#818cf8" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>`;
+  // Dots + labels
+  pcts.forEach((p, i) => {
+    const x = PAD + (i / (sessions.length - 1)) * plotW;
+    const y = PAD + (1 - p / 100) * plotH;
+    html += `<circle cx="${x}" cy="${y}" r="4" fill="#818cf8"/>`;
+    html += `<text x="${x}" y="${y - 8}" text-anchor="middle" font-size="9" fill="#aaa" font-family="Inter,sans-serif">${p}%</text>`;
+  });
+  svg.innerHTML = html;
 }
 
-function selectOpt(btn,idx){
-  if(ANSWERED) return;
-  const q=CUR_QS[CUR_IDX];
-  if(q.type==="SATA"){
-    if(SEL_OPTS.has(idx)){SEL_OPTS.delete(idx);btn.classList.remove("sata-sel");}
-    else{SEL_OPTS.add(idx);btn.classList.add("sata-sel");}
-    document.getElementById("action-btn").disabled=SEL_OPTS.size===0;
-  } else {
-    document.querySelectorAll(".opt").forEach(b=>b.classList.remove("sel"));
-    btn.classList.add("sel");
-    SEL_OPTS=new Set([idx]);
-    document.getElementById("action-btn").disabled=false;
+function renderHeatmap() {
+  const grid = document.getElementById("heatmap-grid");
+  grid.innerHTML = "";
+  const studiedDates = new Set();
+  MODULES.forEach(m => {
+    (modStats(m.key).sessions || []).forEach(sess => studiedDates.add(sess.date));
+  });
+  const todayStr = today();
+  for (let i = 69; i >= 0; i--) {
+    const d    = new Date(Date.now() - i * 86400000).toISOString().slice(0, 10);
+    const cell = document.createElement("div");
+    if (d === todayStr)        cell.className = "heatmap-cell today-cell";
+    else if (studiedDates.has(d)) cell.className = "heatmap-cell active";
+    else                       cell.className = "heatmap-cell";
+    cell.title = d;
+    grid.appendChild(cell);
   }
 }
 
-function submitAnswer(){
-  if(SEL_OPTS.size===0||ANSWERED) return;
-  ANSWERED=true;
-  const q=CUR_QS[CUR_IDX];
-  let isCorrect;
-  if(q.type==="SATA"){
-    const correctSet=new Set(q.correct);
-    const selLetters=new Set([...SEL_OPTS].map(i=>String.fromCharCode(65+i)));
-    isCorrect=correctSet.size===selLetters.size&&[...correctSet].every(l=>selLetters.has(l));
-  } else {
-    isCorrect=q.correct.includes(String.fromCharCode(65+[...SEL_OPTS][0]));
+function renderConceptMastery() {
+  const s       = store();
+  const concepts = s.concepts || {};
+  const list    = document.getElementById("concept-mastery-list");
+  const entries = Object.entries(concepts)
+    .filter(([, v]) => v.total >= 2)
+    .map(([name, v]) => ({name, pct: Math.round((v.correct / v.total) * 100), correct: v.correct, total: v.total}))
+    .sort((a, b) => a.pct - b.pct)
+    .slice(0, 15);
+  if (entries.length === 0) {
+    list.innerHTML = `<div class="text-xs text-base-content/30 text-center py-4">No concept data yet — answer some questions first.</div>`;
+    return;
   }
-
-  document.querySelectorAll(".opt").forEach((b,idx)=>{
-    b.disabled=true;
-    const l=String.fromCharCode(65+idx);
-    if(q.correct.includes(l)) b.classList.add("correct-ans");
-    else if(SEL_OPTS.has(idx)&&!q.correct.includes(l)) b.classList.add("wrong-ans");
-  });
-
-  const banner=document.getElementById("result-banner");
-  banner.classList.remove("hidden");
-  banner.classList.add(isCorrect?"win":"lose");
-  banner.innerHTML=`<div class="result-icon">${isCorrect?"✓":"✗"}</div><div class="result-label">${isCorrect?"Correct":"Incorrect"}</div>`;
-
-  document.getElementById("intel-text").textContent=q.rationale;
-  document.getElementById("trap-text").textContent=q.trap;
-  document.getElementById("intel-box").classList.remove("hidden");
-
-  RESULTS.push({id:q.id,concept:q.concept,correct:isCorrect,type:q.type||"MCQ"});
-
-  const ab=document.getElementById("action-btn");
-  ab.disabled=false;
-  if(CUR_IDX+1<CUR_QS.length){
-    ab.textContent="Next Question →";
-    ab.className="action-btn secondary";
-    ab.onclick=()=>{CUR_IDX++;loadQ(CUR_IDX);};
-  } else {
-    ab.textContent="View Results";
-    ab.className="action-btn primary";
-    ab.onclick=showSummary;
-  }
-}
-
-function showSummary(){
-  saveSession(CUR_MOD,RESULTS);
-  const correct=RESULTS.filter(r=>r.correct).length;
-  const total=RESULTS.length;
-  const pct=Math.round((correct/total)*100);
-  const mod=MODULES.find(m=>m.key===CUR_MOD);
-
-  const scoreEl=document.getElementById("sum-score");
-  scoreEl.textContent=correct+"/"+total;
-  scoreEl.className="bebas mb-1 "+(pct===100?"score-perfect":pct>=75?"score-good":pct>=50?"score-avg":"score-low");
-
-  document.getElementById("sum-pct").textContent=pct+"% accurate this session";
-  document.getElementById("sum-modname").textContent=mod?mod.key+" — "+mod.name:CUR_MOD;
-
-  let quote=REIGEN_QUOTES[0];
-  for(const[thr,q] of Object.entries(REIGEN_QUOTES).sort((a,b)=>a[0]-b[0])){
-    if(pct>=parseInt(thr)) quote=q;
-  }
-  document.getElementById("reigen-quote").textContent=`"${quote}"`;
-
-  const bd=document.getElementById("sum-breakdown");
-  bd.innerHTML="";
-  RESULTS.forEach(r=>{
-    const row=document.createElement("div");
-    row.className="flex items-start justify-between gap-3 py-2.5 border-b border-base-300 last:border-0 last:pb-0";
-    row.innerHTML=`<div class="text-sm text-base-content leading-snug flex-1">${r.concept}</div><div class="badge ${r.correct?"badge-success":"badge-error"} badge-outline badge-sm font-bold whitespace-nowrap">${r.correct?"✓ Correct":"✗ Wrong"}</div>`;
-    bd.appendChild(row);
-  });
-
-  buildSM2();
-  document.getElementById("retry-btn").onclick=()=>startModule(CUR_MOD);
-  switchTo("screen-summary");
-  setGauge(overallPct());
-}
-
-function buildSM2(){
-  const dateStr=new Date().toLocaleDateString("en-US",{month:"short",day:"numeric",year:"numeric"});
-  const mod=MODULES.find(m=>m.key===CUR_MOD);
-  const c=RESULTS.filter(r=>r.correct).length;
-  const t=RESULTS.length;
-  const pct=Math.round((c/t)*100);
-  const wrongs=RESULTS.filter(r=>!r.correct);
-  const rights=RESULTS.filter(r=>r.correct);
-  let lines=[];
-  lines.push(`SESSION: ${dateStr} | ${CUR_MOD} — ${mod?mod.name:CUR_MOD}`);
-  lines.push(`SCORE: ${c}/${t} (${pct}%)`);
-  lines.push(`─────────────────────────────────────`);
-  lines.push(`CONCEPT RESULTS:`);
-  RESULTS.forEach(r=>lines.push(`  ${r.correct?"✓":"✗"} ${r.concept}`));
-  lines.push(`─────────────────────────────────────`);
-  if(wrongs.length>0){lines.push(`WRONG → lower confidence, reset interval to 1 day:`);wrongs.forEach(r=>lines.push(`  · ${r.concept}`));}
-  if(rights.length>0){lines.push(`CORRECT → advance SM-2 per current EF:`);rights.forEach(r=>lines.push(`  · ${r.concept}`));}
-  lines.push(`─────────────────────────────────────`);
-  lines.push(`PASTE TO CLAUDE → update weakness-tracker.md`);
-  document.getElementById("sm2-block").textContent=lines.join("\n");
-}
-
-function copyBlock(){
-  navigator.clipboard.writeText(document.getElementById("sm2-block").textContent).then(()=>{
-    const b=document.getElementById("copy-btn");
-    b.textContent="✓ Copied";
-    b.classList.replace("btn-primary","btn-success");
-    setTimeout(()=>{b.textContent="📋 Copy Block";b.classList.replace("btn-success","btn-primary");},2000);
+  list.innerHTML = "";
+  entries.forEach(e => {
+    const row = document.createElement("div");
+    row.className = "mastery-row";
+    const color = e.pct < 50 ? "text-error" : e.pct < 75 ? "text-warning" : "text-success";
+    row.innerHTML = `
+      <div class="flex-1 text-xs text-base-content/70 leading-snug">${e.name}</div>
+      <div class="text-xs font-bold ${color} w-10 text-right tabular-nums">${e.pct}%</div>
+      <div class="text-xs text-base-content/30 w-14 text-right tabular-nums">${e.correct}/${e.total}</div>`;
+    list.appendChild(row);
   });
 }
 
-function switchTo(id){
-  document.querySelectorAll(".screen").forEach(s=>s.classList.remove("active"));
+function renderConfCalibration() {
+  const s       = store();
+  const hist    = s.confidenceHistory || [];
+  const list    = document.getElementById("conf-calibration-list");
+  const overconf = hist.filter(h => h.predicted >= 4 && h.actual === 0);
+  if (overconf.length === 0) {
+    list.innerHTML = `<div class="text-xs text-base-content/30 text-center py-4">No overconfident-wrong items yet.</div>`;
+    return;
+  }
+  const counts = {};
+  overconf.forEach(h => { counts[h.concept] = (counts[h.concept] || 0) + 1; });
+  const sorted = Object.entries(counts).sort((a, b) => b[1] - a[1]).slice(0, 10);
+  list.innerHTML = "";
+  sorted.forEach(([concept, count]) => {
+    const row = document.createElement("div");
+    row.className = "mastery-row";
+    row.innerHTML = `
+      <div class="flex-1 text-xs text-base-content/70 leading-snug">${concept}</div>
+      <div class="badge badge-warning badge-xs font-bold">${count}x</div>`;
+    list.appendChild(row);
+  });
+}
+
+function exportCSV() {
+  const rows = ["date,module,correct,total,accuracy_pct"];
+  MODULES.forEach(m => {
+    (modStats(m.key).sessions || []).forEach(sess => {
+      const pct = sess.total > 0 ? Math.round((sess.correct / sess.total) * 100) : 0;
+      rows.push(`${sess.date},${m.key},${sess.correct},${sess.total},${pct}`);
+    });
+  });
+  const blob = new Blob([rows.join("\n")], {type:"text/csv"});
+  const a    = document.createElement("a");
+  a.href     = URL.createObjectURL(blob);
+  a.download = "nur425_sessions.csv";
+  document.body.appendChild(a);
+  a.click();
+  document.body.removeChild(a);
+}
+
+// ═══════════════════════════════════════════════════════════
+// BOOKMARKS
+// ═══════════════════════════════════════════════════════════
+function showBookmarks() {
+  const flagged = getFlagged();
+  const content = document.getElementById("bookmarks-content");
+  content.innerHTML = "";
+
+  if (flagged.length === 0) {
+    content.innerHTML = `
+      <div class="text-center py-16 text-base-content/30">
+        <div class="text-4xl mb-4">🔖</div>
+        <div class="text-sm">No flagged questions yet.</div>
+        <div class="text-xs mt-2">Tap 🔖 during a drill to bookmark questions.</div>
+      </div>`;
+    switchTo("screen-bookmarks");
+    return;
+  }
+
+  // Build a lookup map
+  const allQs = {};
+  MODULES.forEach(m => {
+    (QUESTIONS[m.key] || []).forEach(q => { allQs[q.id] = {q, modKey: m.key}; });
+  });
+
+  // Group by module
+  const grouped = {};
+  flagged.forEach(qId => {
+    const entry = allQs[qId];
+    if (!entry) return;
+    const key = entry.modKey;
+    if (!grouped[key]) grouped[key] = [];
+    grouped[key].push(entry.q);
+  });
+
+  MODULES.forEach(m => {
+    const qs = grouped[m.key];
+    if (!qs || qs.length === 0) return;
+    const section = document.createElement("div");
+    section.className = "mb-5";
+    section.innerHTML = `<div class="text-xs font-bold tracking-widest uppercase text-base-content/30 mb-3" style="font-size:9px;letter-spacing:2px">${m.key} — ${m.name}</div>`;
+    qs.forEach(q => {
+      const item = document.createElement("div");
+      item.className = "bookmark-item";
+      item.innerHTML = `
+        <div class="flex-1">
+          <div class="badge badge-outline badge-xs text-primary border-primary/30 mb-1">${m.key}</div>
+          <div class="text-sm font-semibold text-base-content/80 leading-snug">${q.concept}</div>
+          <div class="text-xs text-base-content/40 mt-0.5" style="display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden">${q.stem.slice(0, 110)}…</div>
+        </div>
+        <button class="btn btn-ghost btn-xs text-error ml-2" onclick="unflagFromBookmarks('${q.id}')">✕</button>`;
+      section.appendChild(item);
+    });
+    content.appendChild(section);
+  });
+
+  const startBtn = document.createElement("button");
+  startBtn.className = "action-btn primary mt-2";
+  startBtn.textContent = `Start Flagged Drill (${flagged.length})`;
+  startBtn.onclick = () => launchFromIds(flagged, "Flagged");
+  content.appendChild(startBtn);
+
+  switchTo("screen-bookmarks");
+}
+
+function unflagFromBookmarks(qId) {
+  let flagged = getFlagged().filter(id => id !== qId);
+  setFlagged(flagged);
+  updateFlagBadge();
+  showBookmarks();
+}
+
+// ═══════════════════════════════════════════════════════════
+// LAB MODAL
+// ═══════════════════════════════════════════════════════════
+function openLabModal() {
+  document.getElementById("lab-modal").classList.add("open");
+}
+function closeLabModal() {
+  document.getElementById("lab-modal").classList.remove("open");
+}
+function switchLabTab(btn, tabId) {
+  document.querySelectorAll(".lab-tab").forEach(t => t.classList.remove("active"));
+  btn.classList.add("active");
+  ["bmp","cbc","coags","cardiac","peds"].forEach(id => {
+    const el = document.getElementById("lab-" + id);
+    if (el) el.style.display = id === tabId ? "block" : "none";
+  });
+}
+
+// ═══════════════════════════════════════════════════════════
+// NAVIGATION
+// ═══════════════════════════════════════════════════════════
+function switchTo(id) {
+  document.querySelectorAll(".screen").forEach(s => s.classList.remove("active"));
   document.getElementById(id).classList.add("active");
-  window.scrollTo(0,0);
-  const nav=document.getElementById("main-nav");
-  if(id==="screen-drill") nav.classList.add("hidden");
-  else nav.classList.remove("hidden");
-  document.getElementById("nav-home").classList.toggle("active",id==="screen-home");
-  document.getElementById("nav-stats").classList.toggle("active",id==="screen-stats");
+  window.scrollTo(0, 0);
+  const nav      = document.getElementById("main-nav");
+  const hiddenOn = ["screen-drill", "screen-setup"];
+  nav.classList.toggle("hidden", hiddenOn.includes(id));
+  document.getElementById("nav-home").classList.toggle("active",      id === "screen-home");
+  document.getElementById("nav-stats").classList.toggle("active",     id === "screen-stats");
+  document.getElementById("nav-bookmarks").classList.toggle("active", id === "screen-bookmarks");
 }
 
-function goHome(){ renderHome(); switchTo("screen-home"); }
+function goHome() {
+  clearTimer();
+  renderHome();
+  switchTo("screen-home");
+}
 
+// ═══════════════════════════════════════════════════════════
+// KEYBOARD SHORTCUTS
+// ═══════════════════════════════════════════════════════════
+document.addEventListener("keydown", function(e) {
+  const drillActive = document.getElementById("screen-drill").classList.contains("active");
+  if (!drillActive) return;
+  const tag = document.activeElement ? document.activeElement.tagName : "";
+  if (tag === "INPUT" || tag === "TEXTAREA" || tag === "SELECT") return;
+
+  const key = e.key.toLowerCase();
+
+  if (e.key === "Escape") { e.preventDefault(); goHome(); return; }
+  if (key === "f")        { e.preventDefault(); toggleFlag(); return; }
+
+  if (CONF_ACTIVE) {
+    if (key >= "1" && key <= "5") { e.preventDefault(); setConfidence(parseInt(key)); return; }
+    if (key === "s")               { e.preventDefault(); setConfidence(null); return; }
+    return;
+  }
+
+  if (!ANSWERED) {
+    const optMap = {a:0, b:1, c:2, d:3, e:4};
+    if (optMap[key] !== undefined) {
+      e.preventDefault();
+      const opts = document.querySelectorAll("#options .opt");
+      const idx  = optMap[key];
+      if (opts[idx] && !opts[idx].disabled) selectOpt(opts[idx], idx);
+      return;
+    }
+    if (key >= "1" && key <= "5") {
+      e.preventDefault();
+      const idx  = parseInt(key) - 1;
+      const opts = document.querySelectorAll("#options .opt");
+      if (opts[idx] && !opts[idx].disabled) selectOpt(opts[idx], idx);
+      return;
+    }
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      const ab = document.getElementById("action-btn");
+      if (ab && !ab.disabled) submitAnswer();
+      return;
+    }
+  } else {
+    if (e.key === "Enter" || e.key === " ") {
+      e.preventDefault();
+      const ab = document.getElementById("action-btn");
+      if (ab && !ab.disabled && typeof ab.onclick === "function") ab.onclick();
+      return;
+    }
+  }
+});
+
+// ═══════════════════════════════════════════════════════════
+// SERVICE WORKER
+// ═══════════════════════════════════════════════════════════
+if ("serviceWorker" in navigator) {
+  navigator.serviceWorker.register("./sw.js").catch(function() {});
+}
+
+// ═══════════════════════════════════════════════════════════
+// INIT
+// ═══════════════════════════════════════════════════════════
 renderHome();
 </script>
 </body>
