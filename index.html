@@ -484,9 +484,31 @@ body { font-family: 'Inter', system-ui, sans-serif; }
       </div>
     </div>
 
-    <button class="btn btn-outline btn-sm w-full font-bold" onclick="exportCSV()">📥 Export CSV</button>
+    <div class="flex gap-2 mb-2">
+      <button class="btn btn-primary btn-sm flex-1 font-bold" onclick="exportData()">📤 Export</button>
+      <button class="btn btn-outline btn-sm flex-1 font-bold" onclick="showImportModal()">📥 Import</button>
+    </div>
+    <button class="btn btn-ghost btn-sm w-full font-bold text-base-content/40" onclick="exportCSV()">Export CSV</button>
   </div>
 </div>
+
+<!-- Import / Export modal -->
+<div id="data-modal" style="display:none" class="fixed inset-0 z-50 flex flex-col justify-end" onclick="if(event.target===this)closeDataModal()">
+  <div class="absolute inset-0 bg-black/60"></div>
+  <div class="relative bg-base-200 rounded-t-2xl p-5 max-h-[70vh] flex flex-col">
+    <div class="text-sm font-bold mb-1" id="data-modal-title">Import Data</div>
+    <div class="text-xs text-base-content/40 mb-3" id="data-modal-hint">Paste your exported data below, then tap Apply.</div>
+    <textarea id="data-modal-ta" class="textarea textarea-bordered w-full text-xs flex-1 min-h-[120px]" placeholder="Paste JSON here..."></textarea>
+    <div id="data-modal-msg" class="text-xs text-error mt-2" style="display:none"></div>
+    <div class="flex gap-2 mt-3">
+      <button class="btn btn-primary flex-1 font-bold" id="data-modal-action">Apply</button>
+      <button class="btn btn-ghost flex-1" onclick="closeDataModal()">Cancel</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toast -->
+<div id="app-toast" style="display:none;position:fixed;top:16px;left:50%;transform:translateX(-50%);z-index:999;pointer-events:none" class="bg-success text-success-content text-sm font-bold px-5 py-2.5 rounded-full shadow-xl"></div>
 
 <!-- ══════════════════════════════════════════════════════════
      BOOKMARKS SCREEN
@@ -1517,6 +1539,73 @@ function renderConfCalibration() {
       <div class="badge badge-warning badge-xs font-bold">${count}x</div>`;
     list.appendChild(row);
   });
+}
+
+function showToast(msg, isError) {
+  const t = document.getElementById("app-toast");
+  t.textContent = msg;
+  t.style.background = isError ? "oklch(var(--er))" : "oklch(var(--su))";
+  t.style.color = "white";
+  t.style.display = "block";
+  t.style.opacity = "1";
+  clearTimeout(t._tid);
+  t._tid = setTimeout(() => { t.style.opacity = "0"; setTimeout(() => { t.style.display = "none"; }, 300); }, 2200);
+}
+
+function exportData() {
+  const data = localStorage.getItem("mob_v2") || "{}";
+  if (navigator.clipboard && navigator.clipboard.writeText) {
+    navigator.clipboard.writeText(data)
+      .then(() => showToast("Copied to clipboard!"))
+      .catch(() => showExportFallback(data));
+  } else {
+    showExportFallback(data);
+  }
+}
+
+function showExportFallback(data) {
+  const ta = document.getElementById("data-modal-ta");
+  ta.value = data;
+  ta.readOnly = true;
+  document.getElementById("data-modal-title").textContent = "Export Data";
+  document.getElementById("data-modal-hint").textContent = "Copy everything below and paste it on your other device.";
+  document.getElementById("data-modal-action").textContent = "Done";
+  document.getElementById("data-modal-action").onclick = closeDataModal;
+  document.getElementById("data-modal-msg").style.display = "none";
+  document.getElementById("data-modal").style.display = "flex";
+  setTimeout(() => { ta.select(); }, 100);
+}
+
+function showImportModal() {
+  const ta = document.getElementById("data-modal-ta");
+  ta.value = "";
+  ta.readOnly = false;
+  document.getElementById("data-modal-title").textContent = "Import Data";
+  document.getElementById("data-modal-hint").textContent = "Paste your exported data below, then tap Apply.";
+  document.getElementById("data-modal-action").textContent = "Apply";
+  document.getElementById("data-modal-action").onclick = applyImport;
+  document.getElementById("data-modal-msg").style.display = "none";
+  document.getElementById("data-modal").style.display = "flex";
+}
+
+function closeDataModal() {
+  document.getElementById("data-modal").style.display = "none";
+}
+
+function applyImport() {
+  const raw = document.getElementById("data-modal-ta").value.trim();
+  const msg = document.getElementById("data-modal-msg");
+  try {
+    const parsed = JSON.parse(raw);
+    if (typeof parsed !== "object" || parsed === null) throw new Error();
+    localStorage.setItem("mob_v2", JSON.stringify(parsed));
+    closeDataModal();
+    showStats();
+    showToast("Data imported!");
+  } catch {
+    msg.textContent = "Invalid data — paste the full export without changes.";
+    msg.style.display = "block";
+  }
 }
 
 function exportCSV() {
