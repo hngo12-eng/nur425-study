@@ -564,6 +564,143 @@ const M7_QUESTIONS = [
     correct: ["B"],
     rationale: "For this 8-kg infant, minimum urine output = 1.5–2 mL/kg/hr. Over 4 hours, the expected minimum is 8 kg × 1.5 × 4 = 48 mL minimum; at 2 mL/kg/hr = 64 mL. The infant produced 24 mL — well below both thresholds, indicating ongoing oliguria and inadequate rehydration response despite ORT. Option A applies the older-child standard (1 mL/kg/hr = 32 mL over 4 hours), which is incorrect for infants. Option C (recovery target >1 mL/kg/hr) = 32 mL over 4 hours; 24 mL does not meet this either. Option D is wrong — the volume and rate of output matter, not just any measurable output.",
     trap: "24 mL of urine sounds like a successful response — but applying the infant standard (1.5–2 mL/kg/hr × 8 kg × 4 hours = 48–64 mL expected minimum) reveals it is significantly below target."
+  },
+  {
+    id: "m7_31",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "ORT volume by dehydration severity",
+    stem: "A nurse is discharging a family with a 10-kg toddler who has mild dehydration from gastroenteritis and can tolerate oral intake. The nurse calculates the correct oral rehydration volume as:",
+    options: [
+      "A. 100 mL/kg of ORS over 4–6 hours — the standard dehydration replacement volume",
+      "B. 50 mL/kg of ORS over 4–6 hours — the mild dehydration ORT volume",
+      "C. 20 mL/kg of ORS over 30 minutes — same as the IV bolus volume",
+      "D. Unlimited ORS ad lib — there is no set volume for mild dehydration"
+    ],
+    correct: ["B"],
+    rationale: "For mild dehydration, the correct ORT volume is 50 mL/kg over 4–6 hours. For moderate dehydration with intact ability to drink, the volume increases to 100 mL/kg over 4–6 hours. Option A (100 mL/kg) is the moderate dehydration dose — using this for mild overestimates the deficit. Option C (20 mL/kg over 30 min) is the IV NS bolus volume and rate — not an ORT volume. Option D is incorrect; structured volumes are used to match the calculated deficit and prevent too-rapid rehydration.",
+    trap: "Students frequently invert the mild vs. moderate volumes — 50 mL/kg = mild, 100 mL/kg = moderate. Both are delivered over 4–6 hours."
+  },
+  {
+    id: "m7_32",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Maximum total NS bolus for severe dehydration",
+    stem: "A nurse has administered two sequential 20 mL/kg NS boluses to a 12-kg infant with severe dehydration. After the second bolus, HR is 168 bpm, BP remains 72/44 mmHg, and capillary refill is 3 seconds. What is the NEXT appropriate action?",
+    options: [
+      "A. Stop IV fluids — the maximum safe bolus volume of 40 mL/kg has been reached",
+      "B. Switch to oral rehydration — IV bolus therapy is complete after two boluses",
+      "C. Administer a third 20 mL/kg NS bolus — total bolus may reach up to 60 mL/kg",
+      "D. Switch to hypotonic maintenance fluids to continue rehydration at a slower rate"
+    ],
+    correct: ["C"],
+    rationale: "NS boluses can be repeated and totaled up to 60 mL/kg for severe dehydration with ongoing hemodynamic compromise. This infant has received 40 mL/kg (two boluses) and still has tachycardia, delayed cap refill, and hypotension — perfusion has not been restored. A third 20 mL/kg bolus is appropriate. Option A is incorrect — 40 mL/kg is not the ceiling; 60 mL/kg is the total limit. Option B is wrong — ongoing shock signs contraindicate switching to ORT. Option D is wrong — hypotonic fluids are never used for emergency bolus resuscitation.",
+    trap: "Students treat two boluses as the ceiling — the guideline allows up to 60 mL/kg total; each bolus is reassessed before the next is given, but a third is appropriate when hemodynamics remain compromised."
+  },
+  {
+    id: "m7_33",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Skin turgor assessment — site and normal finding",
+    stem: "A nurse is assessing hydration status in a 4-month-old infant. When testing skin turgor, the nurse should pinch the skin at which location, and what constitutes a NORMAL finding?",
+    options: [
+      "A. Pinch the dorsum of the hand; skin returning in ≤ 2 seconds is normal",
+      "B. Pinch the abdominal skin; skin returning in ≤ 1 second is normal",
+      "C. Pinch the forearm; skin returning in ≤ 3 seconds is normal",
+      "D. Pinch the skin over the sternum; recoil time is not relevant in infants"
+    ],
+    correct: ["B"],
+    rationale: "Skin turgor is assessed by pinching abdominal skin. Normal return is ≤ 1 second — indicating adequate hydration. Tenting (skin stays peaked > 2 seconds) indicates dehydration. The abdomen is the preferred site in pediatrics because it has less subcutaneous fat variation than extremities. Option A uses the dorsum of the hand — a valid adult technique but less reliable in infants. Options C and D use incorrect sites and time thresholds.",
+    trap: "In well-nourished infants with significant subcutaneous fat, skin turgor may appear normal even during significant dehydration — the exam fine print notes this as a specific limitation of the test in well-nourished infants."
+  },
+  {
+    id: "m7_34",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Body surface area to weight ratio — increased evaporative losses",
+    stem: "A nursing instructor explains why infants lose proportionally more insensible fluid through the skin than adults. The physiologic basis of this increased evaporative loss is:",
+    options: [
+      "A. Infants have thicker skin with more sweat glands per kilogram, increasing active perspiration",
+      "B. Infants have a greater body surface area relative to body weight, exposing more skin surface per kilogram to evaporation",
+      "C. Infants have a lower metabolic rate, reducing core heat production and limiting evaporative drive",
+      "D. Infants have denser subcutaneous fat that traps moisture and prevents fluid conservation"
+    ],
+    correct: ["B"],
+    rationale: "Infants have a significantly greater body surface area (BSA) to body weight ratio than older children and adults. This means proportionally more skin surface is exposed per kilogram of body mass, increasing passive evaporative water loss through the skin. Combined with a higher metabolic rate, infants are at much greater risk for fluid deficit. Option A is incorrect — it is the high BSA:weight ratio that drives evaporation, not sweat gland density. Option C is wrong — infants have a HIGHER metabolic rate. Option D is incorrect — subcutaneous fat does not trap moisture.",
+    trap: "Students may focus on metabolic rate alone and miss the BSA:weight ratio as a distinct, separately testable mechanism for insensible loss in infants."
+  },
+  {
+    id: "m7_35",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "BRAT diet — not recommended by current guidelines",
+    stem: "A parent of a recovering 18-month-old asks if they should follow the BRAT diet (bananas, rice, applesauce, toast) since the child has diarrhea. The nurse's BEST response is:",
+    options: [
+      "A. Yes — BRAT diet reduces stool frequency and is recommended until diarrhea resolves completely",
+      "B. The BRAT diet is no longer recommended; resume the child's normal age-appropriate diet as tolerated",
+      "C. BRAT diet is appropriate for the first 24 hours only, then advance to full diet",
+      "D. The BRAT diet should be continued until two consecutive normal stools are produced"
+    ],
+    correct: ["B"],
+    rationale: "Current pediatric guidelines do NOT recommend the BRAT diet for diarrhea recovery. The BRAT diet is low in protein and fat and may prolong nutritional recovery. Children should resume their normal age-appropriate diet as soon as they can tolerate it — food supports intestinal repair and recovery. Options A, C, and D are all incorrect — there is no evidence-based role for the BRAT diet at any duration in current guidelines.",
+    trap: "BRAT diet is deeply embedded in parental memory and older teaching materials — the exam-tested guideline is to resume normal age-appropriate diet."
+  },
+  {
+    id: "m7_36",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Urine specific gravity as hydration assessment",
+    stem: "A nurse is evaluating hydration status in a 2-year-old with suspected dehydration. A urinalysis returns a specific gravity of 1.032. The nurse correctly interprets this as indicating:",
+    options: [
+      "A. Adequate hydration — a specific gravity above 1.025 reflects normal kidney function",
+      "B. Dilute urine — specific gravity above 1.030 indicates overhydration",
+      "C. Concentrated urine consistent with dehydration — the kidneys are maximally conserving water",
+      "D. Hematuria — high specific gravity values indicate blood in the urine"
+    ],
+    correct: ["C"],
+    rationale: "Normal urine specific gravity ranges from approximately 1.001 to 1.030. A value of 1.032 is at the upper end, indicating concentrated urine — the kidneys are maximally reabsorbing water in response to low intravascular volume, consistent with dehydration. Option A is incorrect — > 1.025 trends toward concentrated, not normal. Option B incorrectly inverts the relationship — overhydration produces low specific gravity (dilute urine); dehydration produces high specific gravity. Option D is incorrect — specific gravity measures solute concentration, not blood content.",
+    trap: "High specific gravity = concentrated = dehydrated (kidneys conserving water); low specific gravity = dilute = well-hydrated. Students frequently reverse this relationship."
+  },
+  {
+    id: "m7_37",
+    type: "SATA",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Evaluating ORT success — reassessment findings",
+    stem: "A nurse is reassessing a 10-month-old, 9-kg infant 2 hours after initiating oral rehydration therapy for moderate dehydration. Which findings indicate the ORT is working? SELECT ALL THAT APPLY.",
+    options: [
+      "A. Heart rate has decreased from 168 to 142 bpm",
+      "B. Urine output is 20 mL over the past 2 hours (1.1 mL/kg/hr)",
+      "C. Anterior fontanelle remains sunken without change",
+      "D. Mucous membranes are now slightly moist compared to dry on admission",
+      "E. Capillary refill has improved from 3 seconds to 1.5 seconds"
+    ],
+    correct: ["A", "D", "E"],
+    rationale: "Improving tachycardia (A) indicates increasing intravascular volume and reduced sympathetic compensation. Improving mucous membrane moisture (D) reflects early cellular rehydration. Improving capillary refill (E) confirms better peripheral perfusion. Option B (20 mL over 2 hours = 1.1 mL/kg/hr) falls below the 1.5–2 mL/kg/hr infant minimum — a 9-kg infant should produce at least 27–36 mL over 2 hours; 20 mL indicates ongoing oliguria, not success. Option C (unchanged sunken fontanelle) suggests no improvement in dehydration status.",
+    trap: "1.1 mL/kg/hr sounds like a reasonable output — but this is below the 1.5–2 mL/kg/hr infant minimum. Students applying the adult (0.5 mL/kg/hr) or older-child (1 mL/kg/hr) standard incorrectly mark this as a positive response."
+  },
+  {
+    id: "m7_38",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Reassessment and repeat NS bolus decision",
+    stem: "After administering a 20 mL/kg NS IV bolus to a 7-kg infant with severe dehydration, the nurse reassesses: HR 178 bpm (down from 194), BP 72/48 mmHg, capillary refill 3.5 seconds, infant remains lethargic. What is the nurse's PRIORITY action?",
+    options: [
+      "A. Document the mild improvement and begin transition to maintenance fluids",
+      "B. Administer a second 20 mL/kg NS bolus and reassess perfusion again",
+      "C. Switch to ORT — the initial bolus has stabilized the patient enough for oral intake",
+      "D. Administer D5W to provide energy substrate with the second fluid bolus"
+    ],
+    correct: ["B"],
+    rationale: "Despite some HR improvement, this infant has persistent hypotension, prolonged capillary refill, and altered LOC — ongoing signs of circulatory compromise requiring a second bolus. Total bolus may reach up to 60 mL/kg. Option A incorrectly treats mild HR improvement as adequate — hypotension and altered LOC indicate ongoing severe dehydration. Option C is wrong — ORT is contraindicated in a patient with altered LOC and ongoing shock. Option D is wrong — D5W is contraindicated in emergency bolus resuscitation; it does not stay intravascular and causes cellular swelling.",
+    trap: "Any improvement after the first bolus tempts students to downgrade severity or switch to ORT — persistent hypotension and altered LOC require continued aggressive IV management regardless of partial improvement."
   }
 ];
 
@@ -1133,6 +1270,143 @@ const M8_QUESTIONS = [
     correct: ["B"],
     rationale: "Post-strep AGN carries an excellent prognosis — fewer than 1% progress to ESRD and most resolve completely within 6–12 months. The 8-week C3 follow-up is a specific clinical milestone: if C3 has not normalized by 8 weeks, it suggests an ongoing or different glomerular process requiring further investigation. Option A dramatically overstates the risk. Option C is dangerous — normalization of acute symptoms does not confirm complete resolution; follow-up is required and C3 monitoring is specifically indicated. Option D is wrong — prednisone is not indicated for AGN management; corticosteroids are the treatment for nephrotic syndrome.",
     trap: "Because the child is clinically improved, families want to hear 'all done' — but the 8-week C3 follow-up is a non-negotiable monitoring point; dismissing follow-up misses the window to identify a more serious underlying diagnosis."
+  },
+  {
+    id: "m8_31",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "AGN seasonality by strep source",
+    stem: "A nurse educator is teaching about the seasonal pattern of post-streptococcal AGN. Which relationship between season and strep source is CORRECT?",
+    options: [
+      "A. AGN peaks in spring and summer following strep throat, which is more prevalent in warm months",
+      "B. AGN peaks in fall and winter following strep throat season, and in spring and summer following strep impetigo season",
+      "C. AGN has no seasonal pattern because it follows both throat and skin strep equally throughout the year",
+      "D. AGN peaks only in winter because cold weather suppresses immune clearance of streptococcal immune complexes"
+    ],
+    correct: ["B"],
+    rationale: "AGN follows a bimodal seasonal pattern that tracks its trigger infection. Strep pharyngitis peaks in fall and winter — AGN cases following throat infections peak in these months. Strep impetigo peaks in spring and summer — AGN cases following impetigo peak in these months. The 10–21 day lag period applies to both sources. Option A incorrectly associates throat strep with warm weather. Option C is incorrect — the seasonality is a recognized clinical pattern. Option D is incorrect and fabricates a cold-weather immune mechanism.",
+    trap: "Students know strep throat is a winter illness and assume all AGN peaks in winter — strep impetigo (summer skin infection) also causes AGN, creating a second seasonal peak in spring and summer."
+  },
+  {
+    id: "m8_32",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Antibiotics treat strep but do not prevent AGN",
+    stem: "Parents of a child newly diagnosed with post-streptococcal AGN ask if prompt antibiotic treatment for strep 2 weeks ago would have prevented the kidney disease. The nurse's MOST accurate response is:",
+    options: [
+      "A. Yes — prompt antibiotic treatment within 24 hours of strep onset prevents AGN in almost all cases",
+      "B. Antibiotics treat the acute strep infection and can prevent rheumatic fever, but they cannot prevent AGN once the immune response has been triggered",
+      "C. Antibiotics are only effective if given within 48 hours of strep onset to prevent kidney complications",
+      "D. AGN develops regardless of antibiotic treatment because it is caused by strep bacteria directly infecting the kidney"
+    ],
+    correct: ["B"],
+    rationale: "Unlike rheumatic fever, where prompt antibiotics can prevent cardiac complications, AGN cannot be prevented by antibiotics. Once strep triggers the immune response, the antigen-antibody complexes have formed and will deposit in the glomeruli regardless. Antibiotics are still given to eliminate remaining strep and reduce communicability, but they do not alter the course of AGN. Options A and C are incorrect — they describe rheumatic fever prevention, not AGN. Option D is incorrect — AGN is immune-mediated, not direct bacterial invasion.",
+    trap: "The comparison with rheumatic fever is a classic exam trap — rheumatic fever CAN be prevented with antibiotics; AGN CANNOT. These often appear together in SATA questions asking which complications are antibiotic-preventable."
+  },
+  {
+    id: "m8_33",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Nephrotic syndrome relapse triggers",
+    stem: "A 4-year-old with nephrotic syndrome achieved remission 3 months ago. The parents call reporting the child developed a runny nose 5 days ago and now has puffy eyes and decreased appetite. The nurse suspects:",
+    options: [
+      "A. Steroid side effects — Cushingoid features present as facial puffiness during tapering",
+      "B. A nephrotic relapse triggered by the respiratory infection — the return of edema suggests proteinuria has resumed",
+      "C. New onset AGN from post-infectious immune complex deposition following the respiratory illness",
+      "D. Allergic rhinitis — a common coincidence in steroid-treated children due to immune suppression"
+    ],
+    correct: ["B"],
+    rationale: "Nephrotic syndrome relapses are commonly triggered by upper respiratory infections, allergies, and immunizations. The child had a URI 5 days ago and the return of periorbital puffiness strongly suggests a relapse with renewed massive proteinuria. Parents should perform a urine dipstick check and return for evaluation. Option A is incorrect — Cushingoid features develop gradually and are not triggered by acute illness. Option C is wrong — AGN causes tea-colored urine and elevated BP, not frothy edema, and follows strep specifically. Option D is incorrect — allergic rhinitis does not cause generalized edema.",
+    trap: "The URI is the red herring — it looks like a simple cold, but in a child with nephrotic history, an intercurrent illness is the classic relapse trigger and should raise immediate suspicion."
+  },
+  {
+    id: "m8_34",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Nephrotic syndrome — infection risk from IgG loss",
+    stem: "A parent asks why their child with nephrotic syndrome is 'more vulnerable to infections.' The nurse's MOST accurate explanation involves which pathophysiologic mechanism?",
+    options: [
+      "A. Hyperalbuminemia impairs white blood cell function, reducing immune response to pathogens",
+      "B. Massive proteinuria includes loss of immunoglobulins (IgG) in the urine, lowering antibody levels and creating an immunocompromised state",
+      "C. Corticosteroid therapy directly destroys neutrophils, eliminating innate immune defenses",
+      "D. The hyperlipidemia in nephrotic syndrome coats bacteria and prevents phagocytosis"
+    ],
+    correct: ["B"],
+    rationale: "In nephrotic syndrome, the glomerular barrier loses size selectivity — large proteins including immunoglobulins (IgG) are lost in the urine along with albumin. Low IgG creates humoral immunodeficiency, making the child susceptible to encapsulated bacterial infections (pneumococcal peritonitis, cellulitis, pneumonia). Corticosteroid therapy further suppresses the immune response. Option A is incorrect — the problem is LOW albumin (hypoalbuminemia), not high. Option C is incorrect — steroids suppress T-cell and inflammatory responses but do not destroy neutrophils. Option D is fabricated.",
+    trap: "Students focus only on steroids as the infection risk — the protein loss mechanism (IgG wasted in urine) is independently testable and must be known separately from the drug effect."
+  },
+  {
+    id: "m8_35",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "UTI — pyelonephritis clinical signs",
+    stem: "A 7-year-old girl being treated for a confirmed lower UTI develops a fever of 39.8°C, begins complaining of pain in her right side and back, and cries when the nurse taps the costovertebral angle. These findings indicate the nurse should suspect:",
+    options: [
+      "A. Upper UTI (pyelonephritis) — flank pain and CVA tenderness indicate upper urinary tract involvement",
+      "B. Renal calculi — CVA tenderness is specific to kidney stones and not associated with UTI",
+      "C. Bladder spasm from antibiotic therapy — a common side effect of nitrofurantoin",
+      "D. Appendicitis — right-sided abdominal pain with fever in a school-age girl requires appendicitis workup first"
+    ],
+    correct: ["A"],
+    rationale: "High fever, flank pain, and costovertebral angle (CVA) tenderness are the hallmarks of ascending upper tract infection — pyelonephritis. This child had a known lower UTI that has ascended to the kidneys. Pyelonephritis in children requires IV antibiotics and may warrant imaging to evaluate for structural abnormalities (VUR). Option B is incorrect — CVA tenderness occurs with both kidney stones and pyelonephritis; in this context (known UTI + fever) the diagnosis is pyelonephritis. Option C is incorrect — nitrofurantoin side effects do not include flank pain. Option D is incorrect — right-sided flank/back pain + CVA tenderness localizes to the kidney, not the appendix.",
+    trap: "CVA tenderness is not unique to pyelonephritis — but in a child with a confirmed UTI who develops high fever and flank pain, pyelonephritis is the diagnosis until proven otherwise."
+  },
+  {
+    id: "m8_36",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "VUR — most common cause of pyelonephritis in children",
+    stem: "A 2-year-old girl has had two episodes of pyelonephritis in 6 months. The nurse anticipates which diagnostic imaging will be ordered to evaluate for the most common structural cause of recurrent pyelonephritis in children?",
+    options: [
+      "A. CT of the abdomen and pelvis — best identifies structural kidney abnormalities",
+      "B. Voiding cystourethrogram (VCUG) — evaluates for vesicoureteral reflux, the most common structural cause of recurrent pyelonephritis in children",
+      "C. Renal ultrasound — identifies hydronephrosis as the primary cause of recurrent UTI",
+      "D. Intravenous pyelogram (IVP) — gold standard for detecting all urinary tract defects"
+    ],
+    correct: ["B"],
+    rationale: "Vesicoureteral reflux (VUR) is the most common structural abnormality underlying recurrent pyelonephritis in children. VUR allows urine to reflux from the bladder back to the kidneys, carrying bacteria with it. VCUG directly visualizes urine reflux by watching contrast travel during voiding. Renal ultrasound (Option C) is used as a first-line anatomical screen but cannot directly visualize reflux. CT (Option A) uses significant radiation and is not first-line for recurrent UTI. IVP (Option D) is largely replaced by ultrasound and VCUG in pediatric practice.",
+    trap: "Renal ultrasound is correct as an initial screen — but VCUG is the study that specifically tests for VUR (the most common cause); when asked about evaluating the most common structural cause, the answer is VCUG."
+  },
+  {
+    id: "m8_37",
+    type: "SATA",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "UTI — urinalysis dipstick findings",
+    stem: "A nurse is reviewing a urine dipstick result for a 5-year-old with suspected UTI. Which findings on dipstick are MOST consistent with UTI? SELECT ALL THAT APPLY.",
+    options: [
+      "A. Positive leukocyte esterase",
+      "B. Positive nitrites",
+      "C. Specific gravity 1.028",
+      "D. Positive blood",
+      "E. pH 5.0"
+    ],
+    correct: ["A", "B"],
+    rationale: "Positive leukocyte esterase (A) indicates white blood cells (pyuria) in the urine — a hallmark of infection. Positive nitrites (B) indicate gram-negative bacteria (like E. coli) converting urinary nitrates to nitrites — highly specific for UTI. Together, positive leukocytes + positive nitrites have high predictive value for UTI. Option C (specific gravity 1.028) indicates concentrated urine but is not specific for infection. Option D (positive blood) may occur with UTI but also with kidney stones, trauma, and other conditions — supportive but not diagnostic. Option E (pH 5.0 = acidic) is a normal urinary pH and is not specific for UTI.",
+    trap: "Positive blood on dipstick is tempting because hematuria can occur in UTI — but it is not diagnostic. The specific combination for UTI diagnosis is positive leukocyte esterase + positive nitrites."
+  },
+  {
+    id: "m8_38",
+    type: "Priority",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Priority — AGN with oliguria and rising potassium",
+    stem: "A 7-year-old with post-streptococcal AGN has had no urine output for 4 hours. Serum potassium returns at 6.1 mEq/L. The nurse notices new-onset leg weakness and the cardiac monitor shows peaked T waves. What is the PRIORITY nursing action?",
+    options: [
+      "A. Encourage oral fluid intake to stimulate urine production and potassium excretion",
+      "B. Place the child on a potassium-restricted diet starting with the next meal",
+      "C. Notify the provider immediately — peaked T waves and weakness indicate dangerous hyperkalemia requiring urgent treatment",
+      "D. Administer furosemide per the standing order to promote diuresis and K+ excretion"
+    ],
+    correct: ["C"],
+    rationale: "Peaked T waves with muscle weakness and a potassium of 6.1 mEq/L indicate life-threatening hyperkalemia — a medical emergency requiring immediate provider notification for urgent interventions (calcium gluconate for cardiac membrane stabilization, bicarbonate or insulin/glucose to shift K+ intracellularly, or dialysis). Option A is dangerous — encouraging fluids in an anuric child with hyperkalemia and peaked T waves could worsen fluid overload. Option B (dietary restriction) is appropriate preventively but is wholly insufficient when cardiac manifestations are present. Option D (furosemide) requires a provider order and is inadequate as a first response to impending cardiac arrest.",
+    trap: "Furosemide is correct chronic management for AGN oliguria — but when T waves are peaked and weakness is present, this is cardiac hyperkalemia requiring IMMEDIATE notification, not an independent nursing action."
   }
 ];
 
@@ -1701,6 +1975,142 @@ const M9_QUESTIONS = [
     correct: ["B"],
     rationale: "The infundibulum (subpulmonary outflow tract) contains smooth muscle that can go into spasm during a TET spell, dynamically worsening the pulmonary stenosis. Propranolol, a non-selective beta blocker, inhibits sympathetic stimulation of this muscle, reducing infundibular spasm and thereby reducing dynamic RV outflow obstruction. This allows more blood to flow through the pulmonary vasculature and be oxygenated. Propranolol does NOT increase heart rate — it slows it. Propranolol does NOT decrease SVR — beta blockade at peripheral vessels has minimal SVR effect and nitroglycerin-class drugs do that. Propranolol does not directly vasodilate pulmonary arteries — that is sildenafil's mechanism.",
     trap: "Students may think beta blockers are contraindicated in cardiac emergencies (remembering not to use them in cardiogenic shock) — in TOF, reducing infundibular spasm is exactly why they are used."
+  },
+  {
+    id: "m9_31",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "VSD murmur — location and character",
+    stem: "A nurse auscultates a heart murmur in a 2-month-old infant with a known VSD. Where is the murmur MOST characteristically heard, and what is its type?",
+    options: [
+      "A. A diastolic murmur best heard at the right upper sternal border",
+      "B. A holosystolic murmur best heard at the left lower sternal border (LLSB)",
+      "C. A continuous machine-like murmur heard at the left infraclavicular area",
+      "D. A systolic murmur best heard between the shoulder blades on the back"
+    ],
+    correct: ["B"],
+    rationale: "VSD produces a holosystolic (pansystolic) murmur loudest at the left lower sternal border. The murmur occurs throughout systole because the pressure gradient between the left ventricle (high pressure) and right ventricle (lower pressure) persists for the entire systolic phase, creating turbulent L→R shunting. Option A describes an aortic regurgitation pattern — diastolic at the right upper sternal border. Option C describes a PDA — continuous machine-like murmur at the left infraclavicular area. Option D describes COA — murmur heard posteriorly at the interscapular area.",
+    trap: "Machine-like continuous murmur = PDA; holosystolic LLSB murmur = VSD. These are the two most commonly confused murmur descriptions on exams."
+  },
+  {
+    id: "m9_32",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "PDA risk factors — prematurity and maternal rubella",
+    stem: "A nurse is reviewing the chart of a 28-week premature infant with a patent ductus arteriosus. Which two risk factors are MOST strongly associated with PDA?",
+    options: [
+      "A. Prematurity and maternal rubella infection during the first trimester",
+      "B. Down syndrome and male sex",
+      "C. Maternal diabetes and polyhydramnios",
+      "D. Fetal alcohol syndrome and folate deficiency"
+    ],
+    correct: ["A"],
+    rationale: "Prematurity is the most common risk factor for PDA because preterm infants have underdeveloped lungs that cannot achieve adequate oxygenation — the ductus remains open in response to lower oxygen tension. Maternal rubella infection is a classic, well-documented teratogen associated with PDA as part of congenital rubella syndrome. Option B: Down syndrome is associated with septal defects (ASD, VSD) but not primarily PDA. Options C and D are not established PDA risk factors.",
+    trap: "Rubella is a classic exam item that students may overlook — it has a direct documented association with PDA specifically (not just CHD in general), and prematurity is the most common PDA risk factor in NICU patients."
+  },
+  {
+    id: "m9_33",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "COA murmur — posterior auscultation site",
+    stem: "A nurse is auscultating a 6-week-old infant with suspected coarctation of the aorta. Where is the murmur of COA MOST characteristically heard?",
+    options: [
+      "A. Right upper sternal border — consistent with aortic outflow obstruction",
+      "B. Left lower sternal border — consistent with ventricular septal turbulence",
+      "C. Left infraclavicular area — consistent with continuous ductal flow",
+      "D. Left interscapular area on the back — heard posteriorly between the shoulder blades"
+    ],
+    correct: ["D"],
+    rationale: "COA produces a murmur heard posteriorly at the left interscapular area (between the shoulder blades) — a distinguishing feature unique among common CHDs, most of which produce precordial murmurs. Blood flowing past the narrowed aortic segment generates turbulence that radiates posteriorly. Option A (right upper sternal border) is characteristic of aortic stenosis. Option B (left lower sternal border) is characteristic of VSD. Option C (left infraclavicular) is characteristic of PDA.",
+    trap: "COA is the only common CHD where the murmur is best heard on the BACK — if an exam question mentions a murmur at the left interscapular area or between shoulder blades, COA is the answer."
+  },
+  {
+    id: "m9_34",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "TOF — TET spell triggers",
+    stem: "A nurse is teaching parents of a 3-month-old with TOF about hypercyanotic (TET) spell prevention. Which activities are MOST likely to trigger a TET spell and should be minimized?",
+    options: [
+      "A. Quiet feeding, sleeping, and calm play — routine activities should be avoided entirely",
+      "B. Prolonged crying, vigorous feeding, and activities immediately after morning waking — these trigger sudden increases in oxygen demand and decreased pulmonary blood flow",
+      "C. High altitude activities only — TET spells occur exclusively from barometric pressure changes",
+      "D. Cold exposure — temperature drops cause ductal contraction that triggers spells"
+    ],
+    correct: ["B"],
+    rationale: "TET spells are triggered by any event that suddenly increases systemic oxygen demand or causes infundibular spasm, reducing pulmonary outflow and worsening R→L shunting. Classic triggers include prolonged crying (most common), vigorous or prolonged feeding (exertion), and morning waking (physiologic arousal with catecholamine surge). Option A is incorrect — routine quiet activities are well-tolerated; avoidance of all activity is inappropriate. Option C is incorrect — altitude is a risk factor but spells occur in any context. Option D is incorrect — temperature/ductal contraction is not the mechanism for TET spells.",
+    trap: "Morning waking as a TET spell trigger surprises students — physiologic arousal from sleep creates a catecholamine surge that can trigger infundibular spasm, making it a recognized clinical trigger alongside crying and feeding."
+  },
+  {
+    id: "m9_35",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Antacid side effects — aluminum vs. magnesium",
+    stem: "A nurse is reviewing antacid therapy with a patient. Which statement about antacid side effects by composition is CORRECT?",
+    options: [
+      "A. Aluminum-containing antacids (e.g., Amphojel) cause diarrhea; magnesium-containing antacids (e.g., MOM) cause constipation",
+      "B. Aluminum-containing antacids cause constipation; magnesium-containing antacids cause diarrhea",
+      "C. All antacids cause the same GI side effects regardless of their composition",
+      "D. Calcium-containing antacids (e.g., Tums) cause diarrhea; all others are constipating"
+    ],
+    correct: ["B"],
+    rationale: "Aluminum-containing antacids cause constipation by reducing intestinal motility. Magnesium-containing antacids cause diarrhea through osmotic effects in the GI tract — which is why milk of magnesia (magnesium hydroxide) is also used as a laxative. Combination antacids (Maalox = aluminum + magnesium) balance these competing effects. Option A directly inverts the relationship — a classic exam trap. Option C is incorrect — side effects are composition-dependent. Option D is incorrect — calcium-containing antacids also cause constipation, not diarrhea.",
+    trap: "Always confirm: Al = constipation (aluminum blocks the pipes); Mg = diarrhea (milk of magnesia is a laxative). These are directly invertible and frequently tested."
+  },
+  {
+    id: "m9_36",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "H2 blocker timing — antacids reduce absorption",
+    stem: "A patient taking cimetidine (Tagamet) for a gastric ulcer asks if it is safe to take their aluminum hydroxide antacid at the same time for immediate heartburn relief. The nurse's BEST response is:",
+    options: [
+      "A. Yes — antacids and H2 blockers work by different mechanisms and do not interact",
+      "B. Take them together for maximum acid suppression — the two drugs are synergistic",
+      "C. Do not take antacids within 1 hour of cimetidine — antacids reduce H2 blocker absorption and decrease drug effectiveness",
+      "D. Antacids can be taken at any time as long as cimetidine is taken with food"
+    ],
+    correct: ["C"],
+    rationale: "Antacids raise gastric pH, which reduces the absorption of H2 receptor antagonists by altering the acidic GI environment needed for their absorption. Standard teaching is to separate H2 blockers and antacids by at least 1 hour. Option A is incorrect — the interaction reduces drug effectiveness, so simultaneous administration is not safe. Option B is incorrect — they are not synergistic when taken together; the antacid paradoxically impairs H2 blocker absorption. Option D is incorrect — the timing relative to other medications matters regardless of food.",
+    trap: "Students assume two acid-reducing drugs taken together would be more effective — the interaction is paradoxically in the opposite direction (antacid impairs H2 blocker absorption)."
+  },
+  {
+    id: "m9_37",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Metoclopramide — decreases digoxin absorption",
+    stem: "A 4-month-old with congenital heart disease on digoxin is started on metoclopramide for gastroparesis. The nurse is MOST concerned about which drug interaction?",
+    options: [
+      "A. Metoclopramide elevates serum digoxin levels by inhibiting hepatic metabolism",
+      "B. Metoclopramide increases gastric emptying, moving digoxin out of the stomach faster and reducing its absorption",
+      "C. Metoclopramide blocks the renal excretion of digoxin, increasing toxicity risk",
+      "D. The combination causes QT prolongation because both drugs affect cardiac conduction"
+    ],
+    correct: ["B"],
+    rationale: "Digoxin is primarily absorbed in the stomach. Metoclopramide is a prokinetic that increases gastric motility and speeds emptying — when given with digoxin, the drug moves out of the stomach faster, resulting in decreased absorption and potentially subtherapeutic serum levels. The clinical concern is under-treatment: digoxin may no longer achieve adequate concentration for its cardiac effect. Option A reverses the interaction — digoxin levels go DOWN with metoclopramide, not up. Option C is incorrect — metoclopramide acts on GI motility, not renal excretion. Option D describes the ondansetron + digoxin interaction (QT prolongation), not metoclopramide's primary concern.",
+    trap: "Students expect drug interactions to increase drug levels and cause toxicity — this interaction does the opposite; metoclopramide DECREASES digoxin absorption, risking undertreatment rather than toxicity."
+  },
+  {
+    id: "m9_38",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "COA repair timing — within first 2 years to prevent permanent HTN",
+    stem: "A parent asks why the cardiologist recommends surgical repair of coarctation of the aorta within the first 2 years of life rather than waiting until the child is older. The nurse's BEST explanation is:",
+    options: [
+      "A. The surgical technique used in infants is simpler — waiting increases technical difficulty",
+      "B. Early repair prevents permanent residual hypertension — if aortic obstruction persists beyond the first 2 years, upper body hypertension can become irreversible even after correction",
+      "C. Waiting increases the risk of spontaneous closure — surgery before age 2 must be performed before the ductus permanently seals",
+      "D. Surgical repair is covered by insurance only before age 2 in most pediatric cardiac programs"
+    ],
+    correct: ["B"],
+    rationale: "If COA is left uncorrected beyond the first 2 years of life, the sustained upper body hypertension triggers vascular remodeling — the blood vessels above the obstruction adapt to chronically elevated pressures. Even after surgical correction, this remodeling can cause residual hypertension that persists for life. Early repair prevents this irreversible change. Option A is incorrect — neonatal surgery is technically more challenging, not simpler. Option C is incorrect — the ductus arteriosus normally closes within days of birth; spontaneous COA closure does not occur. Option D is a fabricated distractor.",
+    trap: "Students may not connect 'permanent hypertension' to timing of repair — the mechanism (vascular remodeling from sustained HTN) is what makes early repair a clinical urgency, not just a technical preference."
   }
 ];
 const M10_QUESTIONS = [
@@ -2216,6 +2626,143 @@ const M10_QUESTIONS = [
     correct: ["B"],
     rationale: "Before restarting digoxin after a toxicity episode driven partly by hypokalemia, the potassium level must be confirmed to be within normal limits. Even though potassium was 3.6 mEq/L 6 hours ago, potassium shifts can recur — especially if furosemide is still being given (even at adjusted doses). A repeat potassium check immediately before the next digoxin dose ensures the electrolyte environment is safe for reintroduction. The apical rate must also be checked. Option A is insufficient — checking level and HR alone doesn't confirm the electrolyte environment is safe. Option C is a clinical decision for the provider, not a nursing action — if the original dose and concurrent diuretic combination caused the problem, that is a medical management decision. Option D (24-hour monitoring before restart) is overly conservative and not standard practice when the patient has clinically improved and levels are therapeutic.",
     trap: "Checking the digoxin level and HR seem like sufficient safety checks — but the entire toxicity episode was driven by hypokalemia, making potassium the most critical safety check before restart."
+  },
+  {
+    id: "m10_28",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Digoxin infant dose — 1 mL maximum per dose",
+    stem: "A nurse is preparing a digoxin dose for a 4-month-old infant. The order reads digoxin 50 mcg IV. The available concentration is 100 mcg/2 mL. The nurse draws up 1 mL. Which action should the nurse take NEXT?",
+    options: [
+      "A. Administer the 1 mL dose after verifying with a second RN — this is within safe parameters",
+      "B. Discard the drawn dose and prepare a new 2 mL dose — the full 100 mcg ampule should be used",
+      "C. Refuse to administer — digoxin should never be given IV to infants",
+      "D. Administer 0.5 mL and discard the rest to avoid giving too much volume"
+    ],
+    correct: ["A"],
+    rationale: "The ordered dose is 50 mcg. From a 100 mcg/2 mL (50 mcg/mL) concentration, 50 mcg = 1 mL. This is within the safe maximum of 1 mL per dose for infant digoxin — a dose requiring MORE than 1 mL should trigger a stop-and-recheck because it may indicate a calculation or order error. The nurse should verify with a second RN (HIGH ALERT medication) and then administer. Option B is wrong — 2 mL would deliver 100 mcg, double the ordered dose. Option C is incorrect — IV digoxin is used in pediatric HF management. Option D delivers only 25 mcg (half the ordered dose), which is under-treatment.",
+    trap: "The 1 mL maximum is a safety checkpoint: if you need MORE than 1 mL to deliver a digoxin dose to an infant, stop and recheck the order and your math. 1 mL is the threshold, not the automatic dose."
+  },
+  {
+    id: "m10_29",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Expected SpO2 in cyanotic defects — do not auto-increase O2",
+    stem: "A nurse is caring for a 2-month-old with known Tetralogy of Fallot admitted for pre-operative care. The infant's SpO2 is 76% on room air. The infant is alert, feeding adequately, and color is baseline for this child. What is the MOST appropriate nursing action?",
+    options: [
+      "A. Immediately apply high-flow oxygen via non-rebreather mask to bring SpO2 above 95%",
+      "B. Verify this is the child's known baseline SpO2, document, and continue monitoring per orders",
+      "C. Notify the provider — an SpO2 below 80% requires urgent intervention regardless of cardiac diagnosis",
+      "D. Place the infant in the knee-chest position — a TET spell is imminent with this SpO2"
+    ],
+    correct: ["B"],
+    rationale: "In TOF and other cyanotic defects with R→L shunting, the expected resting SpO2 is 70–80% — this represents the child's physiologic baseline, not an emergency. Administering supplemental O2 indiscriminately can paradoxically worsen shunting in some cyanotic defects. The correct response is to verify the value represents the established baseline and continue monitoring per the care plan. Option A is incorrect — supplemental O2 is not automatically applied without a provider order in cyanotic CHD. Option C is incorrect — 76% with a known diagnosis and no acute deterioration is expected. Option D is incorrect — a TET spell involves ACUTE deterioration with agitation and hyperpnea, not stable baseline cyanosis.",
+    trap: "SpO2 of 76% looks like an emergency in any other patient — in TOF, it may be the established normal. Always review the cardiac diagnosis before intervening on a low SpO2 reading."
+  },
+  {
+    id: "m10_30",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Daily weight — fluid retention reporting threshold",
+    stem: "A nurse is tracking daily weight on an infant with congenital heart disease and HF. The infant weighed 4,420 g yesterday. Today's weight is 4,480 g. Which interpretation and action are CORRECT?",
+    options: [
+      "A. A gain of 60 g/day is within normal infant growth expectations — document and continue monitoring",
+      "B. A gain of 60 g/day exceeds the 50 g/day fluid retention threshold for infants — notify the provider",
+      "C. Only weight gains over 100 g/day are clinically significant in infants with HF",
+      "D. Weight should only be tracked weekly in infants with HF — daily fluctuations are unreliable"
+    ],
+    correct: ["B"],
+    rationale: "In infants with HF, daily weight gain greater than 50 g/day indicates fluid retention rather than normal growth and warrants provider notification to adjust diuretic therapy. Normal healthy infant growth averages about 20–30 g/day. A 60 g gain in one day is above 50 g and is attributable to fluid, not growth. Option A is incorrect — 60 g in a single day is not normal infant growth. Option C sets the threshold too high — 50 g/day is the clinical criterion for infants. Option D is incorrect — daily weight is essential and standard in pediatric HF management.",
+    trap: "60 g total looks small — but the threshold is 50 g PER DAY, not per week; in HF where the goal is tight fluid balance, 60 g in a single day is above the reporting line."
+  },
+  {
+    id: "m10_31",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Infective endocarditis risk from CHD turbulent flow",
+    stem: "A parent asks why their child with a repaired VSD needs prophylactic antibiotics before certain dental procedures. The nurse's BEST explanation is:",
+    options: [
+      "A. The antibiotics prevent strep throat, which could retrigger the VSD to reopen",
+      "B. Turbulent blood flow across abnormal or surgically repaired cardiac structures creates a site where bacteria from the bloodstream can adhere and cause infective endocarditis",
+      "C. Children who had cardiac surgery are universally immunocompromised and require prophylaxis for all invasive procedures",
+      "D. The antibiotics prevent post-streptococcal AGN, which is a complication of dental infections in children with CHD"
+    ],
+    correct: ["B"],
+    rationale: "Children with CHD — including those with repaired defects — have abnormal or surgically altered cardiac structures that create turbulent blood flow. Bacteremia during dental or surgical procedures can seed these turbulent areas; bacteria adhere to the endocardium and cause infective endocarditis, a potentially fatal infection. The American Heart Association recommends prophylactic antibiotics before specific dental procedures for children with certain high-risk cardiac conditions. Option A is incorrect — antibiotics don't prevent VSD reopening. Option C is incorrect — surgical history alone does not cause universal immunocompromise. Option D is incorrect — AGN is a renal post-strep complication; it is not the target of endocarditis prophylaxis.",
+    trap: "Students may not realize that REPAIRED defects still carry endocarditis risk — the turbulence from surgical materials and altered anatomy persists even after correction."
+  },
+  {
+    id: "m10_32",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "CHD long-term prognosis — 85% survive to adulthood",
+    stem: "Parents of an infant with complex CHD ask about their child's chances of reaching adulthood. Which statement BEST reflects current outcomes data for children with CHD?",
+    options: [
+      "A. Only children with mild, isolated defects such as small VSDs are expected to survive to adulthood",
+      "B. With current surgical advances, approximately 85% of infants with CHD survive into adulthood",
+      "C. CHD is uniformly fatal in childhood — surgical intervention extends life by years but not to adulthood",
+      "D. Survival to adulthood is guaranteed with early surgical repair — CHD children have the same life expectancy as unaffected peers"
+    ],
+    correct: ["B"],
+    rationale: "Due to advances in congenital heart surgery — including neonatal and infant repair — approximately 85% of infants born with CHD (including complex lesions) now survive into adulthood. This population requires lifelong cardiology follow-up because complications (arrhythmias, residual shunts, pulmonary hypertension) continue to emerge in adulthood. Option A is incorrect — even children with complex CHD benefit from surgical repair. Option C was historically true before surgical repair existed but is no longer accurate. Option D is incorrect — survival to adulthood is not guaranteed, and life expectancy may still differ from unaffected peers depending on lesion complexity.",
+    trap: "Students may underestimate outcomes because CHD sounds serious — the 85% survival figure reflects modern surgical capability; the follow-up piece (lifelong cardiology, adult manifestations) is equally testable."
+  },
+  {
+    id: "m10_33",
+    type: "SATA",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "ACE inhibitor monitoring — enalapril in pediatric HF",
+    stem: "A child with HF from an unrepaired VSD is started on enalapril (ACE inhibitor) for afterload reduction. Which nursing monitoring interventions are appropriate? SELECT ALL THAT APPLY.",
+    options: [
+      "A. Monitor blood pressure before and after each dose for hypotension",
+      "B. Monitor serum potassium — ACE inhibitors inhibit aldosterone and can cause hyperkalemia",
+      "C. Monitor for a persistent dry cough — a class side effect of ACE inhibitors",
+      "D. Monitor sodium levels — ACE inhibitors cause profound hypernatremia in infants",
+      "E. Hold the dose if the child develops a fever — ACE inhibitors cause fever as a first-dose reaction"
+    ],
+    correct: ["A", "B", "C"],
+    rationale: "ACE inhibitors (enalapril, captopril) reduce afterload by blocking angiotensin II-mediated vasoconstriction. BP monitoring (A) is essential as first doses can cause significant hypotension. ACE inhibitors inhibit aldosterone secretion → potassium retention → hyperkalemia risk (B), especially important when combined with K+-sparing diuretics like spironolactone. A persistent dry cough (C) is a well-known class effect from bradykinin accumulation in the lungs. Option D is incorrect — ACE inhibitors do not cause hypernatremia as a primary effect. Option E is incorrect — ACE inhibitors do not cause fever; a first-dose reaction causes hypotension.",
+    trap: "The dry cough side effect of ACE inhibitors is well-known in adults — it is the same mechanism (bradykinin accumulation) in children and is a reason for switching to an ARB; it must be reported but is not dangerous."
+  },
+  {
+    id: "m10_34",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Sodium restriction in pediatric HF — different from adult approach",
+    stem: "A nurse is planning nutritional care for an infant with HF from a large VSD. Which statement about sodium restriction in this infant is MOST accurate?",
+    options: [
+      "A. Strict sodium restriction (< 1 mEq/kg/day) is the first-line nutritional intervention and should be started immediately",
+      "B. Sodium restriction is used sparingly in infants because it affects appetite and growth — unlike adults where strict restriction is standard",
+      "C. Sodium restriction is contraindicated in infants with HF because low sodium causes dangerous hyponatremia",
+      "D. Fluid restriction is the priority intervention; sodium content is irrelevant in exclusively formula-fed infants"
+    ],
+    correct: ["B"],
+    rationale: "Sodium restriction in pediatric HF is approached more conservatively than in adult HF. In adults, strict sodium limitation is a first-line intervention. In infants, sodium restriction must be used sparingly because it reduces feed palatability, decreasing oral intake in patients who already need high caloric density for growth. Sodium is not eliminated, just reduced if clinically necessary. Fluid restriction is rarely needed in infants as they cannot drink enough to self-overload. Option A is incorrect — strict adult-level sodium restriction is not applied first-line to infants. Option C overstates the risk — hyponatremia is not the primary concern with moderate sodium reduction. Option D is incorrect — both sodium and fluid balance are relevant.",
+    trap: "Students apply adult HF management rules to infants — the pediatric approach is more conservative about sodium restriction because infants need to eat enough to grow, and unpalatable feeds reduce intake."
+  },
+  {
+    id: "m10_35",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Carvedilol — beta-blocker for cardiac remodeling in HF",
+    stem: "A child with HF from a large unrepaired VSD is prescribed carvedilol. The parent asks what this medication does. The nurse explains that carvedilol is used to:",
+    options: [
+      "A. Increase heart rate and contractility to improve cardiac output during decompensation",
+      "B. Reduce cardiac remodeling by blocking harmful sympathetic nervous system activation on the failing heart muscle over time",
+      "C. Eliminate excess fluid through the kidneys to relieve pulmonary congestion",
+      "D. Vasodilate the pulmonary arteries to reduce right ventricular afterload"
+    ],
+    correct: ["B"],
+    rationale: "Carvedilol is a non-selective beta-blocker (and alpha-1 blocker) used in pediatric HF to reduce adverse cardiac remodeling. In chronic HF, the sympathetic nervous system chronically activates beta-1 adrenergic receptors on the myocardium — initially compensatory, but over time this leads to hypertrophy, fibrosis, and apoptosis. Carvedilol blocks these receptors, slowing or reversing the harmful remodeling process. It is titrated slowly and used long-term. Option A is incorrect — carvedilol reduces heart rate and is negatively inotropic; it is not used for acute decompensation. Option C describes diuretics (furosemide), not beta-blockers. Option D describes pulmonary vasodilators (sildenafil), not carvedilol.",
+    trap: "Students expect cardiac medications to work by increasing contractility — beta-blockers in HF seem counterintuitive because they reduce HR and contractility acutely, but long-term they prevent the harmful structural changes of chronic SNS overstimulation."
   }
 ];
 
@@ -2785,6 +3332,160 @@ const M11_QUESTIONS = [
     correct: ["B"],
     rationale: "The first-line response to rising ICP post-operatively is to ensure positioning is optimal: HOB 15-30 degrees, head midline, minimize stimulation. These are the foundational non-pharmacologic interventions. Dexamethasone is contraindicated for traumatic/surgical cerebral edema. Barbiturate coma is a last resort used only after all other measures have failed. Hyperventilation can lower ICP acutely but causes cerebral vasoconstriction and ischemia — it is used only as a last resort bridge to surgery, not as a routine nursing intervention.",
     trap: "Students select hyperventilation because they know CO2 drives cerebral vasodilation — hyperventilation causes vasoconstriction which reduces ICP transiently but causes ischemia and is not a first-line nursing intervention."
+  },
+  {
+    id: "m11_34",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Infant-specific ICP manifestations — sunset sign and Macewen's sign",
+    stem: "A nurse assesses a 4-month-old with suspected hydrocephalus. The infant's eyes appear to gaze persistently downward with sclera visible above each iris. When the nurse lightly percusses the skull, a hollow 'cracked pot' sound is noted. The nurse recognizes these findings as:",
+    options: [
+      "A. Normal findings — downward gaze and hollow skull percussion are common in infants under 6 months",
+      "B. Sunset sign (downward ocular deviation from ICP pressing on the midbrain) and Macewen's sign (cracked-pot skull percussion from hydrocephalus with open sutures)",
+      "C. Signs of bacterial meningitis — downward gaze indicates Brudzinski's sign and skull percussion indicates Kernig's sign",
+      "D. Findings consistent with hypocalcemia — eye deviation and skull resonance reflect neuromuscular irritability"
+    ],
+    correct: ["B"],
+    rationale: "The sunset sign is the downward deviation of the eyes in infants with increased ICP — pressure pushes on the midbrain, forcing the eyes downward and exposing the sclera above the iris. It is associated specifically with hydrocephalus in infants. Macewen's sign is the cracked-pot sound produced when the skull is percussed in infants with separated sutures from hydrocephalus — the hollow resonance reflects suture separation. These are unique pediatric ICP findings not seen in older children whose fontanelles are closed. Option C is incorrect — Brudzinski's is passive neck flexion causing involuntary knee flexion; Kernig's is inability to extend the knee. Option D is fabricated.",
+    trap: "Sunset sign and Macewen's sign are infant-specific ICP findings — older children cannot exhibit these because their fontanelles are closed and sutures fused; they present with headache, vomiting, and papilledema instead."
+  },
+  {
+    id: "m11_35",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Monroe-Kellie doctrine",
+    stem: "A nurse educator explains why a child with a rapidly growing brain tumor develops increased intracranial pressure. Which explanation correctly applies the Monroe-Kellie doctrine?",
+    options: [
+      "A. Tumor cells produce excess CSF, overloading the absorption system and raising ICP nonlinearly",
+      "B. The skull is a fixed, non-expandable vault containing brain (~80%), blood (~10%), and CSF (~10%) — when the tumor increases brain volume, the other components must compensate or ICP rises",
+      "C. After age 12, suture fusion means any new mass causes immediate and proportional ICP increase with no compensatory phase",
+      "D. CSF production increases to dilute tumor cells, raising ICP as a protective mechanism"
+    ],
+    correct: ["B"],
+    rationale: "The Monroe-Kellie doctrine states the intracranial vault contains a fixed total volume: brain (~80%), blood (~10%), and CSF (~10%). Any increase in one component must be offset by a decrease in another or ICP rises. For a brain tumor, as it grows, CSF is displaced and venous blood is displaced from dural sinuses to compensate — ICP rises when these compensatory mechanisms are exhausted. In children with open sutures, the skull can expand (measured as increasing head circumference), delaying ICP rise. Option A is incorrect — not all tumors cause excess CSF production. Option C is incorrect — compensatory mechanisms exist beyond age 12, but are more limited. Option D is a fabricated mechanism.",
+    trap: "The Monroe-Kellie doctrine is about fixed total volume and compensatory reserve — the reserve buys clinical time before ICP spikes; children with open sutures have more reserve than adults, which can mask early ICP elevation."
+  },
+  {
+    id: "m11_36",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Head circumference measured until age 36 months",
+    stem: "A nurse is performing well-child assessments. The nurse routinely measures head circumference at every visit for children in which age range?",
+    options: [
+      "A. Birth through 12 months — once the anterior fontanelle closes, head circumference is no longer clinically relevant",
+      "B. Birth through 36 months (3 years) — the most reliable early indicator of ICP changes in this window",
+      "C. Birth through 24 months — standard stops after the first two years",
+      "D. Birth through 18 months — head circumference monitoring stops when the anterior fontanelle closes"
+    ],
+    correct: ["B"],
+    rationale: "Head circumference is measured at every well-child visit from birth through 36 months. During this period, cranial sutures are still open, allowing the head to expand in response to increased ICP — making rising head circumference the most reliable early indicator of intracranial pathology in infants and toddlers. After age 3, sutures are more fused and head growth slows significantly. Option A (12 months) is too early — the anterior fontanelle closes at 18 months–2 years, not 12 months. Option D (18 months) corresponds to anterior fontanelle closure timing but HC measurement continues to age 36 months regardless.",
+    trap: "Students anchor the cutoff to anterior fontanelle closure (18 months–2 years) — but HC measurement continues to 36 months as the standard; the two milestones have different ages."
+  },
+  {
+    id: "m11_37",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "VP shunt — infection risk highest in first 6 months",
+    stem: "Parents of a 6-week-old who underwent VP shunt placement 10 days ago ask when the greatest infection risk occurs. The nurse correctly teaches:",
+    options: [
+      "A. The greatest risk is in the first 24 hours post-operatively — after that, the wound seals and risk drops to near zero",
+      "B. The greatest risk is in the first 6 months post-placement — the most common organisms are skin flora introduced at surgery",
+      "C. The greatest risk is at age 2 when suture fusion restricts CSF flow, creating stagnation and infection risk",
+      "D. Shunt infection risk is uniform throughout the device's lifespan — there is no specific high-risk period"
+    ],
+    correct: ["B"],
+    rationale: "VP shunt infection is most likely in the first 6 months after placement. The most common organisms are skin flora (Staphylococcus epidermidis, S. aureus) introduced at surgery. Serious complications include sepsis, bacterial endocarditis, shunt nephritis, and ventriculitis. Parents should monitor for signs of infection throughout the first 6 months especially — fever, irritability, wound redness, and return of ICP symptoms. Option A is incorrect — the 24-hour window is not the full risk period; contamination at surgery can manifest days to weeks later with slow-growing organisms. Option C is a fabricated mechanism. Option D is incorrect — the highest risk is specifically post-operative.",
+    trap: "Students may think surgical wound infection peaks in the first 24–72 hours — CNS device infections have a longer incubation and highest risk window (first 6 months), reflecting slow-growing organisms like S. epidermidis."
+  },
+  {
+    id: "m11_38",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Viral meningitis — not spread by direct contact with patient or CSF",
+    stem: "Parents of a school-age child diagnosed with viral meningitis are worried about infecting siblings. The nurse's BEST reassurance and guidance is:",
+    options: [
+      "A. Isolate the child at home for 2 weeks — viral meningitis is highly contagious through any contact",
+      "B. Contact isolation precautions are required because viral meningitis spreads through direct contact with CSF",
+      "C. Viral meningitis is self-limiting and not spread by direct contact with the patient or CSF — the causative enterovirus spreads via respiratory droplets, but viral meningitis itself does not require strict home isolation",
+      "D. All family members should receive prophylactic antiviral medication because viral meningitis spreads through shared items"
+    ],
+    correct: ["C"],
+    rationale: "Viral (aseptic) meningitis is most commonly caused by enteroviruses. The virus may spread through respiratory droplets or fecal-oral routes, but viral meningitis is not transmitted by direct contact with the patient's CSF — standard home hygiene (handwashing) is appropriate; strict isolation is not required. The illness is self-limiting (7–14 days) with supportive treatment. Option A is incorrect — strict isolation is not required for viral meningitis. Option B is incorrect — CSF contact transmission is not how viral meningitis spreads. Option D is incorrect — antiviral prophylaxis is not indicated for household contacts of viral meningitis.",
+    trap: "Bacterial meningitis (meningococcal) requires contact prophylaxis (rifampin, ciprofloxacin) for close contacts — viral meningitis does not; confusing the two types leads to incorrect transmission and prophylaxis teaching."
+  },
+  {
+    id: "m11_39",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Febrile seizure — rapid temperature rise, not absolute temperature",
+    stem: "A parent reports their 18-month-old had a febrile seizure with a temperature of 38.6°C and asks why their child seized at such a 'low' fever when other children run higher temperatures without seizing. The nurse's BEST explanation is:",
+    options: [
+      "A. Children with febrile seizures have a lower seizure threshold that is activated by any fever above 37.5°C",
+      "B. Febrile seizures are triggered by the RATE of temperature rise, not the absolute temperature — a rapid rise at 38.6°C can trigger a seizure more reliably than a slow rise to 40°C",
+      "C. The absolute temperature at time of seizure is irrelevant — febrile seizures occur only during the first febrile illness of a child's life",
+      "D. A temperature of 38.6°C is within normal febrile range — the child likely had an underlying brain abnormality unrelated to the fever"
+    ],
+    correct: ["B"],
+    rationale: "Febrile seizures are triggered by the rapid rise in body temperature, not the absolute temperature value. The sudden thermal stimulus disrupts neuronal membrane stability, triggering the seizure. This also explains why giving antipyretics at fever onset does not reliably prevent febrile seizures — the temperature rise often occurs before medication takes effect. Option A is incorrect — a fixed low threshold below which seizures cannot occur is not the mechanism. Option C is incorrect — febrile seizures can recur with subsequent illnesses in about 1/3 of children. Option D is incorrect — febrile seizures in otherwise normal children are not evidence of underlying brain pathology.",
+    trap: "This concept explains why antipyretic prophylaxis doesn't prevent febrile seizures — the temperature rise often happens before the medication takes effect, reinforcing why parents should not expect Tylenol or ibuprofen to prevent recurrence."
+  },
+  {
+    id: "m11_40",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Glass test — non-blanching purpura as meningococcemia sign",
+    stem: "A nurse assesses a 2-year-old with sudden high fever, irritability, and a spreading purple rash. The nurse presses a clear glass firmly against the rash and observes the spots do NOT blanch. Which interpretation and action are CORRECT?",
+    options: [
+      "A. The non-blanching result confirms allergic urticaria — administer diphenhydramine",
+      "B. Non-blanching purpura indicates blood trapped outside vessels in the skin, consistent with meningococcemia — this is an emergency requiring immediate IV antibiotics",
+      "C. The glass test is unreliable — a non-blanching result simply means the rash has been present for more than 24 hours",
+      "D. Non-blanching rash indicates thrombocytopenia from viral illness — administer platelet transfusion"
+    ],
+    correct: ["B"],
+    rationale: "The glass test distinguishes vasodilated rash (allergic, viral — blanches when pressed because blood remains within vessels) from petechial/purpuric rash (does not blanch because blood has extravasated into skin). Non-blanching purpura in a febrile child with altered behavior is a hallmark of meningococcemia (Neisseria meningitidis) — a fulminant, rapidly fatal infection requiring immediate IV antibiotics without delay for any diagnostic test. Option A is incorrect — allergic rash blanches. Option C is incorrect — the glass test is a validated clinical tool; the result is not time-dependent. Option D is incorrect — ITP purpura does not cause this acute febrile constellation.",
+    trap: "A non-blanching rash in a sick child with fever requires 'antibiotics before anything else' — waiting for a blood culture or LP in this presentation is a potentially fatal delay; the glass test finding alone is sufficient to act."
+  },
+  {
+    id: "m11_41",
+    type: "SATA",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "CSF analysis — bacterial meningitis findings",
+    stem: "A lumbar puncture result returns for a child with suspected meningitis. The CSF is cloudy in appearance. Which additional findings are consistent with BACTERIAL meningitis? SELECT ALL THAT APPLY.",
+    options: [
+      "A. Glucose 28 mg/dL (normal CSF glucose 40–80 mg/dL)",
+      "B. Protein 210 mg/dL (normal CSF protein < 45 mg/dL)",
+      "C. WBC count 1,400 cells/µL with predominantly neutrophils",
+      "D. Glucose 72 mg/dL (within normal range)",
+      "E. WBC count 48 cells/µL with predominantly lymphocytes"
+    ],
+    correct: ["A", "B", "C"],
+    rationale: "Bacterial meningitis produces: low glucose (A) because bacteria consume glucose; elevated protein (B) because bacteria excrete protein as metabolic waste (memory aid: 'bacteria eat glucose and poop protein'); markedly elevated WBC with neutrophil predominance (C) reflecting acute bacterial inflammation. The appearance is cloudy/turbid due to high protein and cell content. Option D (normal glucose) would favor viral meningitis. Option E (lymphocyte predominance with mildly elevated WBC) is consistent with viral meningitis — which produces a milder, lymphocyte-driven pleocytosis without the glucose drop.",
+    trap: "Neutrophil vs. lymphocyte predominance is the key WBC discriminator — bacterial = neutrophils (PMNs); viral = lymphocytes. The cell count alone is insufficient; the differential matters."
+  },
+  {
+    id: "m11_42",
+    type: "Priority",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Barbiturate coma — refractory ICP management as last resort",
+    stem: "A 9-year-old with severe TBI has been in the PICU for 24 hours. Despite HOB at 30°, head midline, IV mannitol every 6 hours, sedation, continuous EVD drainage, and mechanical ventilation, ICP continues at 24–28 mmHg and CPP has fallen to 38 mmHg. Which intervention does the nurse anticipate the provider will order NEXT?",
+    options: [
+      "A. High-dose IV corticosteroids to reduce traumatic cerebral edema",
+      "B. Barbiturate coma induction — a last-resort intervention to reduce cerebral metabolic oxygen demand when all other measures have failed",
+      "C. Increase mannitol dose to administer every 2 hours without reassessing osmolality",
+      "D. Discontinue sedation to allow neurological assessment and reduce medication burden"
+    ],
+    correct: ["B"],
+    rationale: "When ICP remains refractory despite all first- and second-line interventions, barbiturate-induced coma is considered a last resort. Barbiturates suppress CNS metabolic demand — reducing oxygen consumption lowers cerebral blood volume and ICP. This requires ICU-level monitoring, vasopressors to maintain MAP (and therefore CPP), and continuous EEG. Option A is incorrect — corticosteroids are CONTRAINDICATED for traumatic cerebral edema. Option C is incorrect — increasing mannitol frequency without monitoring osmolality risks hypernatremia and renal failure. Option D is incorrect — discontinuing sedation in a patient with refractory ICP will cause ICP to spike dangerously from stimulation.",
+    trap: "Barbiturate coma appearing on the same list as corticosteroids is a classic trap — both sound like broad anti-inflammatory/metabolic suppressants, but corticosteroids are specifically contraindicated in TBI while barbiturate coma is the last-resort that is used."
   }
 ];
 
@@ -3353,6 +4054,195 @@ const M12_QUESTIONS = [
     correct: ["C"],
     rationale: "Native American infants have the highest incidence of cleft lip and palate at approximately 1 in 300 births. The prevalence by group: Native American 1:300 (highest), Asian 1:500, Caucasian 1:750, African American 1:2,500 (lowest). The overall incidence is approximately 1 in 800 births. Option A incorrectly assigns highest prevalence to African Americans, who actually have the lowest rate. Option D confuses population size with incidence rate — a large population does not mean higher disease rate per births.",
     trap: "Students select Caucasian (Option D) because they think of it as the most common demographic — population size does not determine incidence rate."
+  },
+  {
+    id: "m12_34",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Pyloric stenosis — hungry after vomiting",
+    stem: "A 5-week-old male is brought to the clinic for projectile vomiting after every feeding. The parents report the infant immediately tries to feed again after vomiting. Which interpretation is most consistent with this finding?",
+    options: [
+      "A. The vomiting is likely from gastroesophageal reflux, since reflux infants also want to feed frequently",
+      "B. This feeding behavior after vomiting suggests pyloric stenosis — the obstruction prevents absorption, so hunger persists",
+      "C. The infant's continued hunger indicates the vomiting is not causing dehydration",
+      "D. This behavior is consistent with sepsis, where infants become hyperactive and feed more aggressively"
+    ],
+    correct: ["B"],
+    rationale: "Pyloric stenosis causes a gastric outlet obstruction — food cannot pass through the pylorus, so it is forcefully vomited back. Because no absorption occurs, the infant never receives nutrients and remains hungry immediately after vomiting. This distinguishes pyloric stenosis from other causes of vomiting (infection, overfeeding, HF) where the infant becomes disinterested in feeding after vomiting due to discomfort or satiety. The hungry-after-vomiting sign is a key clinical differentiator.",
+    trap: "Students select option A (reflux) because they know reflux causes vomiting in infants — but reflux infants typically arch their back and become irritable with feeding, not hungry and eager to feed again."
+  },
+  {
+    id: "m12_35",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Cleft lip/palate — teratogens",
+    stem: "A nurse is teaching a prenatal class about risk factors for cleft lip and palate. Which substances are known teratogens associated with cleft lip and palate formation? Select the most complete accurate answer.",
+    options: [
+      "A. Alcohol, cigarettes, antiepileptic drugs, retinoids, and steroids",
+      "B. Alcohol and caffeine only — the evidence is strongest for these two substances",
+      "C. Antiepileptic drugs only, as all other substances have been disproven as teratogens for cleft defects",
+      "D. Retinoids and NSAIDs — COX inhibitors cross the placenta and disrupt palatal fusion"
+    ],
+    correct: ["A"],
+    rationale: "Five known teratogenic exposures are associated with cleft lip and palate: alcohol, cigarettes, antiepileptic drugs (AEDs), retinoids (Vitamin A derivatives, including isotretinoin), and corticosteroids. Folate deficiency is an additional maternal risk factor. These disrupt the embryonic facial process fusion that occurs during weeks 4–10 of gestation. Caffeine has not been confirmed as a cause. NSAIDs are not among the established teratogens for this defect.",
+    trap: "Students miss steroids (corticosteroids) as a teratogen — it is easy to remember alcohol and cigarettes but steroids and retinoids are frequently omitted from lists."
+  },
+  {
+    id: "m12_36",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Cleft lip/palate — prenatal detection rate",
+    stem: "During a prenatal education session, a parent asks: 'If I had an ultrasound at 20 weeks, would cleft lip or palate definitely be found?' Which response is most accurate?",
+    options: [
+      "A. 'Yes — a 20-week anatomy scan reliably detects all cleft lip and palate cases'",
+      "B. 'Only about 20–30% of cleft lip and palate cases are diagnosed prenatally — cleft palate in particular is difficult to visualize on ultrasound'",
+      "C. 'Cleft lip is very difficult to detect but cleft palate is easily visible on all ultrasounds'",
+      "D. 'Ultrasound cannot detect any structural facial abnormalities until the third trimester'"
+    ],
+    correct: ["B"],
+    rationale: "Only 20–30% of cleft lip and palate cases are diagnosed prenatally. Cleft lip may be visible on a detailed ultrasound, but isolated cleft palate is especially difficult to detect because the palate sits at an angle that is poorly visualized on standard imaging. This means most families do not learn about the diagnosis until after birth. The low detection rate is why neonatal assessment at birth must include direct visualization of the palate — it cannot be assumed that a normal anatomy scan rules out cleft palate.",
+    trap: "Students select option A (reliably detected) because anatomy scans are thorough — but the palate is structurally difficult to image, and standard screening does not reliably detect isolated palatal defects."
+  },
+  {
+    id: "m12_37",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Intussusception — Dance sign",
+    stem: "A 14-month-old is being evaluated for intermittent severe abdominal pain. On abdominal palpation, the right lower quadrant feels unusually empty compared to the rest of the abdomen. The nurse knows this finding has a specific name. What does this finding represent?",
+    options: [
+      "A. Rovsing's sign — indicates referred pain from appendiceal inflammation",
+      "B. Dance sign — the right lower quadrant feels empty because the intussuscepted bowel has moved out of its normal location near the ileocecal valve",
+      "C. McBurney's point tenderness — the classic finding for appendicitis in young children",
+      "D. Cullen's sign — periumbilical ecchymosis from mesenteric ischemia"
+    ],
+    correct: ["B"],
+    rationale: "Dance sign is the clinical finding of an empty right lower quadrant on palpation in intussusception. The proximal bowel telescopes into the distal segment at or near the ileocecal valve, displacing the bowel out of the RLQ. The RLQ, which normally contains the cecum and terminal ileum, becomes palpably empty. This finding, combined with a sausage-shaped mass in the RUQ and episodic colicky pain with the infant drawing knees to chest, is part of the classic intussusception presentation.",
+    trap: "Students confuse Dance sign with appendicitis signs (Rovsing's, McBurney's) — in intussusception, the RLQ is empty, while in appendicitis the RLQ has maximal tenderness."
+  },
+  {
+    id: "m12_38",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Intussusception — initial diagnostic test",
+    stem: "A 13-month-old is brought to the ED with a 4-hour history of episodic severe abdominal pain. The nurse suspects intussusception. What is the most appropriate initial diagnostic investigation to order?",
+    options: [
+      "A. CT scan of the abdomen and pelvis with contrast",
+      "B. Abdominal X-ray to look for free air under the diaphragm",
+      "C. Ultrasound of the abdomen — it is the initial investigation of choice for suspected intussusception",
+      "D. Barium enema — it both diagnoses and treats intussusception in a single step"
+    ],
+    correct: ["C"],
+    rationale: "Ultrasound is the initial investigation of choice for suspected intussusception. It can identify the characteristic telescoped bowel (target sign or pseudokidney sign) without radiation and without the risks associated with contrast enemas. If ultrasound confirms intussusception, pneumatic or saline enema can then be performed as both the definitive diagnostic confirmation and therapeutic reduction. Barium enema is no longer the first step because it delivers a radiation dose and barium is dangerous if perforation occurs. CT scan delivers significant radiation to a toddler and is not indicated as the first test.",
+    trap: "Students select barium enema because they know it can treat intussusception — but ultrasound must come first to confirm the diagnosis before any enema procedure is attempted."
+  },
+  {
+    id: "m12_39",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Intussusception — Meckel's diverticulum as lead point",
+    stem: "A 7-year-old is diagnosed with intussusception. The surgical team notes this is unusual given the child's age and orders additional imaging to identify a lead point. Which lead point is most commonly found in older children and adolescents with intussusception?",
+    options: [
+      "A. Lymphoid tissue hyperplasia following a viral illness",
+      "B. Meckel's diverticulum",
+      "C. Intestinal polyp from juvenile polyposis syndrome",
+      "D. Mesenteric adenitis"
+    ],
+    correct: ["B"],
+    rationale: "Meckel's diverticulum is the most common structural (pathologic) lead point for intussusception in older children and adolescents. In infants under 2 years, intussusception most often follows viral illness where lymphoid tissue hyperplasia in the terminal ileum acts as the lead point — this is idiopathic and not a structural abnormality. In older children (> 2–3 years), intussusception is uncommon and when it occurs, a structural lead point is usually present, most commonly Meckel's diverticulum. The age shift in lead point type is a classic exam differentiator.",
+    trap: "Students select lymphoid hyperplasia because they know it is the most common cause overall — but lymphoid hyperplasia is the most common in INFANTS following viral illness; in older children, Meckel's diverticulum is the structural lead point to identify."
+  },
+  {
+    id: "m12_40",
+    type: "SATA",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Post-operative assessment priorities — pediatric GI surgery",
+    stem: "A 3-week-old infant has just returned from the PACU following pyloromyotomy for pyloric stenosis. Which nursing actions are priority in the immediate post-operative period? Select all that apply.",
+    options: [
+      "A. Assess level of consciousness and return from anesthesia",
+      "B. Begin full-strength formula feeding immediately to assess pyloric patency",
+      "C. Assess the surgical wound site for signs of bleeding or dehiscence",
+      "D. Auscultate bowel sounds in all four quadrants",
+      "E. Assess bladder distention or urine output",
+      "F. Reorder preoperative maintenance medications, especially cardiac or seizure medications"
+    ],
+    correct: ["A", "C", "D", "E", "F"],
+    rationale: "The BSSL post-operative assessment framework applies: Bleeding (wound), Skin integrity, LOC (level of consciousness/anesthesia recovery), Bowel sounds, and Bladder/urine output. Reordering preoperative maintenance medications (especially seizure, cardiac, and other critical meds) is a mandatory step because all medications are held before surgery and must be specifically re-entered in the post-op period. Option B is incorrect — full-strength feeding does NOT begin immediately after pyloromyotomy. Protocol is electrolyte/clear solution feedings 4–6 hours post-op, then breast milk or formula at 24 hours. Post-operative vomiting is expected and common.",
+    trap: "Students include full-strength formula (Option B) because feeding success is the goal of the surgery — but immediate feeding after pyloromyotomy causes vomiting; the feeding protocol requires a stepwise progression starting with electrolyte solution."
+  },
+  {
+    id: "m12_41",
+    type: "MCQ",
+    chain_id: null,
+    chain_scenario: null,
+    concept: "Hirschsprung — total colonic aganglionosis",
+    stem: "A family is told their newborn has the most severe form of Hirschsprung disease. The nurse explains what this means. Which description is accurate?",
+    options: [
+      "A. The aganglionic segment involves only the rectum and distal sigmoid colon — the most common form",
+      "B. The entire colon lacks ganglion cells (total colonic aganglionosis) — this is the most severe form and typically requires a temporary ileostomy",
+      "C. The aganglionic segment extends into the small bowel in all cases of Hirschsprung disease",
+      "D. Total colonic aganglionosis means both the colon and stomach are affected, requiring a gastrectomy"
+    ],
+    correct: ["B"],
+    rationale: "Total colonic aganglionosis (TCA) is the most severe form of Hirschsprung disease, in which the entire colon lacks ganglion cells. TCA accounts for a minority of Hirschsprung cases. The most common form (80% of cases) affects only the rectum and distal sigmoid colon (short-segment disease). TCA typically requires a temporary ileostomy to allow bowel preparation and staged repair, as a primary pull-through may not be feasible. Option A describes the most COMMON form, not the most severe. The stomach is not involved in Hirschsprung disease.",
+    trap: "Students confuse most common with most severe — 80% of Hirschsprung cases are short-segment (rectum/sigmoid), which is the most common, not the most severe. Total colonic aganglionosis is rare but most severe."
+  },
+  {
+    id: "m12_chain2_q1",
+    type: "CHAIN",
+    chain_id: "m12_chain2",
+    chain_scenario: "A 13-month-old male is brought to the ED. The parents report sudden onset of severe abdominal pain 4 hours ago — the infant screams and draws his knees to his chest, then appears completely comfortable between episodes. Temperature is 38.0°C, HR 128, BP 88/54. No stool has been passed today. Abdominal examination reveals a sausage-shaped mass palpated in the right upper quadrant. The right lower quadrant feels unusually empty on palpation.",
+    concept: "Intussusception — recognition",
+    stem: "The nurse identifies the clinical presentation and suspects a specific condition. Which statement best reflects the nurse's clinical reasoning?",
+    options: [
+      "A. The episodic pain pattern suggests appendicitis, which causes intermittent cramping in toddlers before progressing to constant pain",
+      "B. The episodic colicky pain with a pain-free interval, sausage-shaped RUQ mass, and empty RLQ (Dance sign) are consistent with intussusception",
+      "C. This is most consistent with Hirschsprung disease presenting in infancy with sudden onset of obstruction",
+      "D. The presentation is most consistent with pyloric stenosis — the sausage mass is the hypertrophied pylorus"
+    ],
+    correct: ["B"],
+    rationale: "The classic intussusception triad is present: episodic colicky pain (infant screams, draws knees to chest, then has pain-free interval), a sausage-shaped palpable mass in the RUQ, and Dance sign (empty RLQ from bowel displacement at the ileocecal valve). Appendicitis in young children causes constant, progressive right lower quadrant pain — not episodic. Hirschsprung presents in neonates with failure to pass meconium and ribbon stools, not acute episodic pain in a toddler. Pyloric stenosis presents at 2–8 weeks with projectile vomiting, not at 13 months with abdominal pain.",
+    trap: "Students select appendicitis (Option A) because episodic pain seems like 'coming and going cramps' — but appendicitis pain is constant once inflammation begins, while intussusception pain is truly episodic (peristaltic waves trying to push telescoped bowel cause intermittent spasms with normal periods between)."
+  },
+  {
+    id: "m12_chain2_q2",
+    type: "CHAIN",
+    chain_id: "m12_chain2",
+    chain_scenario: "A 13-month-old male is brought to the ED. The parents report sudden onset of severe abdominal pain 4 hours ago — the infant screams and draws his knees to his chest, then appears completely between episodes. Temperature is 38.0°C, HR 128, BP 88/54. No stool has been passed today. Abdominal examination reveals a sausage-shaped mass palpated in the right upper quadrant. The right lower quadrant feels unusually empty on palpation.",
+    concept: "Intussusception — treatment sequence",
+    stem: "Ultrasound confirms intussusception. The physician explains the treatment plan to the parents. Which sequence of interventions is most accurate?",
+    options: [
+      "A. Immediate surgical reduction — intussusception always requires operating room intervention",
+      "B. Pneumatic (air) enema or ultrasound-guided saline enema as the first-line treatment; successful in 65–75% of cases; surgical reduction reserved for failure or perforation",
+      "C. Barium enema first, then surgery if the barium enema fails to reduce the intussusception",
+      "D. Corticosteroids to reduce bowel wall inflammation, followed by observation for 24 hours before attempting any reduction"
+    ],
+    correct: ["B"],
+    rationale: "Pneumatic (air) enema or ultrasound-guided saline enema is the first-line nonoperative treatment for intussusception and is successful in 65–75% of cases. Surgery is reserved for cases where the enema fails to reduce the intussusception or when bowel perforation is suspected. Barium enema is no longer preferred because barium is dangerous if perforation occurs during the procedure. Corticosteroids have no role in intussusception management — it is a mechanical obstruction requiring mechanical reduction.",
+    trap: "Students select immediate surgery (Option A) because intussusception sounds like a surgical emergency — it is urgent but nonoperative reduction with pneumatic or saline enema is attempted first, with 65–75% success, before surgery is considered."
+  },
+  {
+    id: "m12_chain2_q3",
+    type: "CHAIN",
+    chain_id: "m12_chain2",
+    chain_scenario: "A 13-month-old male is brought to the ED. The parents report sudden onset of severe abdominal pain 4 hours ago — the infant screams and draws his knees to his chest, then appears completely comfortable between episodes. Temperature is 38.0°C, HR 128, BP 88/54. No stool has been passed today. Abdominal examination reveals a sausage-shaped mass palpated in the right upper quadrant. The right lower quadrant feels unusually empty on palpation.",
+    concept: "Intussusception — recurrence teaching",
+    stem: "The infant's intussusception is successfully reduced with pneumatic enema. The nurse is preparing the family for discharge. Which teaching point is most important to include?",
+    options: [
+      "A. 'Intussusception never recurs after a successful enema reduction — your infant is cured'",
+      "B. 'Intussusception may recur in approximately 10% of cases after enema reduction. Return to the ED immediately if your infant has the same episodic screaming, knee-to-chest posturing, or passes bloody or mucousy stools'",
+      "C. 'You should return to the ED in exactly 72 hours for a follow-up abdominal X-ray to confirm complete resolution'",
+      "D. 'Your infant will need a special low-fiber diet for the next 3 months to prevent recurrence'"
+    ],
+    correct: ["B"],
+    rationale: "Intussusception recurs in approximately 10% of cases following enema reduction. Parents must be taught the signs of recurrence — the same episodic colicky pain, infant drawing knees to chest, and crying with pain-free intervals between episodes — and instructed to return to the ED immediately if recurrence is suspected. Early recognition prevents the progression to bowel ischemia and perforation. Option A is incorrect — recurrence is a real risk. Option C is not standard practice. Option D has no evidence basis.",
+    trap: "Students select option A (never recurs) because successful reduction feels like a resolution — but the 10% recurrence rate makes discharge teaching about warning signs a mandatory patient safety intervention."
   }
 ]
 
